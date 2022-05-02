@@ -6,12 +6,8 @@ module.exports = {
   plugins: [
     ['module-resolver', {
       alias: {
-        "@entities": "./src/entities",
-        "@repositories": "./src/repositories",
-        "@providers": "./src/providers",
-        "@controllers": "./src/controllers",
         "@config": "./src/config",
-        "@services": "./src/services",
+        "@modules": "./src/modules",
       }
     }],
     'babel-plugin-transform-typescript-metadata',

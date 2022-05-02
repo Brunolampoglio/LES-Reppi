@@ -10,11 +10,7 @@
     "baseUrl": ".",
     "paths": {
       "@config/*": ["src/config/*"],
-      "@entities/*": ["src/entities/*"],
-      "@repositories/*": ["src/repositories/*"],
-      "@services/*": ["src/services/*"],
-      "@controllers/*": ["src/controllers/*"],
-      "@providers/*": ["src/providers/*"],
+      "@modules/*": ["src/modules/*"],
     },
     "esModuleInterop": true,
     "experimentalDecorators": true,

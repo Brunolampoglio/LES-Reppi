@@ -3,7 +3,7 @@ import { CelebrateError } from 'celebrate';
 import { Request, Response, NextFunction } from 'express';
 
 import { logger } from '@config/winston';
-import { AppError } from '../services/error/AppError';
+import { AppError } from '../error/AppError';
 
 export async function globalErrorHandler(
   err: Error,

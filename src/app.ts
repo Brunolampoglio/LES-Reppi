@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import express, { json, Request } from 'express';
 import morgan from 'morgan';
 import 'express-async-errors';
+import 'reflect-metadata';
 import cors from 'cors';
 
 import { LoggerStream } from '@config/winston';
