@@ -1,6 +1,8 @@
+import { IPaginatedRequest } from 'src/shared/interfaces/IPaginatedRequest';
+import { IPaginatedResponse } from 'src/shared/interfaces/IPaginatedResponse';
 import { getRepository, Repository } from 'typeorm';
 import { User } from '../entities/User';
-import { IUser } from './dto/UserRepositoryDTO';
+import { IUserCreate } from './dto/UserRepositoryDTO';
 import { IUserRepository } from './UserRepository.interface';
 
 class UserRepository implements IUserRepository {
@@ -10,10 +12,43 @@ class UserRepository implements IUserRepository {
     this.ormRepository = getRepository(User);
   }
 
-  create({ email, password }: IUser): User {
+  async findBy(filter: Partial<User>): Promise<User | undefined> {
+    const user = await this.ormRepository.findOne(filter);
+
+    return user;
+  }
+
+  public async listBy({
+    page = 1,
+    limit = 10,
+    filters,
+  }: IPaginatedRequest<User>): Promise<IPaginatedResponse<User>> {
+    const jsonFilter = JSON.stringify(filters);
+
+    const users = await this.ormRepository.find({
+      where: jsonFilter,
+      skip: (page - 1) * limit,
+      take: limit,
+    });
+
+    const userTotal = await this.ormRepository.count({
+      where: jsonFilter,
+    });
+
+    return {
+      results: users,
+      total: userTotal,
+      page,
+      limit,
+    };
+  }
+
+  create({ name, email, password, role }: IUserCreate): User {
     const user = this.ormRepository.create({
+      name,
       email,
       password,
+      role,
     });
 
     return user;
@@ -25,12 +60,8 @@ class UserRepository implements IUserRepository {
     return newUser;
   }
 
-  async findByEmail(email: string): Promise<User | undefined> {
-    const user = await this.ormRepository.findOne({
-      where: { email },
-    });
-
-    return user;
+  async remove(user: User): Promise<void> {
+    await this.ormRepository.remove(user);
   }
 }
 

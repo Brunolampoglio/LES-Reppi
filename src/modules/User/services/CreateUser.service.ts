@@ -1,3 +1,5 @@
+import { Roles } from '@shared/enum/Roles';
+import { instanceToInstance } from 'class-transformer';
 import { inject, injectable } from 'tsyringe';
 import { User } from '../entities/User';
 import { IUserRepository } from '../repositories/UserRepository.interface';
@@ -10,12 +12,17 @@ class CreateUserService {
     private userRepository: IUserRepository,
   ) {}
 
-  public async execute({ email, password }: ICreateUserDTO): Promise<User> {
-    const user = this.userRepository.create({ email, password });
+  public async execute({
+    name,
+    email,
+    password,
+    role = Roles.user,
+  }: ICreateUserDTO): Promise<User> {
+    const user = this.userRepository.create({ name, email, password, role });
 
     await this.userRepository.save(user);
 
-    return user;
+    return instanceToInstance(user);
   }
 }
 

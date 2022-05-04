@@ -1,6 +1,10 @@
-interface IUser {
+import { Roles } from 'src/shared/enum/Roles';
+
+interface IUserCreate {
+  name: string;
   email: string;
   password: string;
+  role: Roles;
 }
 
-export { IUser };
+export { IUserCreate };
