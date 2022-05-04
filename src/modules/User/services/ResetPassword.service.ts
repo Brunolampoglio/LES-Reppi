@@ -21,12 +21,12 @@ class ResetPasswordService {
     new_password,
   }: IResetPasswordDTO): Promise<void> {
     const user_id = await this.redisProvider.get(
-      `${password_forget.base_token}${token}`,
+      `${password_forget.prefix}${token}`,
     );
 
     if (!user_id) throw new AppError('Token inválido');
 
-    await this.redisProvider.del(`${password_forget.base_token}${token}`);
+    await this.redisProvider.del(`${password_forget.prefix}${token}`);
 
     const user = await this.userRepository.findBy({
       id: user_id,

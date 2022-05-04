@@ -18,7 +18,7 @@ passwordRouter.post(
 );
 
 passwordRouter.post(
-  'rest/:token',
+  '/reset/:token',
   resetPasswordMiddleware,
   passwordController.reset,
 );
@@ -26,7 +26,7 @@ passwordRouter.post(
 passwordRouter.use(ensureAuthenticated);
 
 passwordRouter.post(
-  'change/user_id',
+  '/change/:user_id',
   changePasswordMiddleware,
   passwordController.change,
 );

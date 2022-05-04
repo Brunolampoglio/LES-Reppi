@@ -32,6 +32,10 @@ class UpdateUserAvatarService {
 
     const filename = await this.storageProvider.saveFile(avatarFilename);
 
+    if (user.avatar) {
+      await this.storageProvider.deleteFile(user.avatar);
+    }
+
     user.avatar = filename;
 
     const newUser = await this.userRepository.save(user);

@@ -23,17 +23,13 @@ class UserRepository implements IUserRepository {
     limit = 10,
     filters,
   }: IPaginatedRequest<User>): Promise<IPaginatedResponse<User>> {
-    const jsonFilter = JSON.stringify(filters);
-
     const users = await this.ormRepository.find({
-      where: jsonFilter,
+      where: filters,
       skip: (page - 1) * limit,
       take: limit,
     });
 
-    const userTotal = await this.ormRepository.count({
-      where: jsonFilter,
-    });
+    const userTotal = await this.ormRepository.count(filters);
 
     return {
       results: users,

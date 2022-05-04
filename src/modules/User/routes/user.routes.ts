@@ -14,6 +14,7 @@ import {
   deleteUserMiddleware,
   listUserMiddleware,
   showUserMiddleware,
+  updateUserAvatarMiddleware,
   updateUserMiddleware,
 } from './validators/user.validation';
 
@@ -33,6 +34,7 @@ userRouter.use(ensureAuthenticated);
 
 userRouter.patch(
   '/:user_id/avatar',
+  updateUserAvatarMiddleware,
   uploadMulter.single('avatar'),
   userAvatarController.update,
 );

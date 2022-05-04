@@ -10,7 +10,7 @@ module.exports = {
   database: process.env.DB_NAME,
   entities: [`./${mode}/modules/**/entities/*{.js,.ts}`],
   migrations: [`./${mode}/shared/database/migrations/*{.js,.ts}`],
-  seeds: [`./${mode}/database/seeds/*{.js,.ts}`],
+  seeds: [`./${mode}/shared/database/seeds/*{.js,.ts}`],
   factories: [`./${mode}/shared/database/factories/*{.ts,.js}`],
   cli: {
     migrationsDir: './src/shared/database/migrations',

@@ -38,6 +38,12 @@ export const deleteUserMiddleware = celebrate({
   },
 });
 
+export const updateUserAvatarMiddleware = celebrate({
+  [Segments.PARAMS]: {
+    user_id: Joi.string().uuid().required(),
+  },
+});
+
 export const deleteUserAvatarMiddleware = celebrate({
   [Segments.PARAMS]: {
     user_id: Joi.string().uuid().required(),

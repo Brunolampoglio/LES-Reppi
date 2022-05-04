@@ -1,6 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 
 import { AppError } from '@shared/error/AppError';
+import { IStorageProvider } from '@shared/container/providers/StorageProvider/models/IStorageProvider';
 import { User } from '../entities/User';
 import { IUserRepository } from '../repositories/UserRepository.interface';
 import { IDeleteUserAvatarDTO } from './DeleteUserAvatarDTO';
@@ -10,6 +11,9 @@ class DeleteUserAvatarService {
   constructor(
     @inject('UserRepository')
     private userRepository: IUserRepository,
+
+    @inject('StorageProvider')
+    private storageProvider: IStorageProvider,
   ) {}
 
   public async execute({
@@ -24,6 +28,10 @@ class DeleteUserAvatarService {
     });
 
     if (!user) throw new AppError('Usuário não encontrado', 404);
+
+    if (user.avatar) {
+      await this.storageProvider.deleteFile(user.avatar);
+    }
 
     user.avatar = null;
 

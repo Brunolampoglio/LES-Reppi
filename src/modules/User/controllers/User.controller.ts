@@ -29,8 +29,8 @@ class UserController {
     const listUserService = container.resolve(ListUserService);
 
     const users = await listUserService.execute({
-      page: Number(page),
-      limit: Number(limit),
+      page: page ? Number(page) : undefined,
+      limit: limit ? Number(limit) : undefined,
     });
 
     return res.json(users);
