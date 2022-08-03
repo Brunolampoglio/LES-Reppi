@@ -3,8 +3,9 @@ import { inject, injectable } from 'tsyringe';
 import { AppError } from '@shared/error/AppError';
 import { IRedisProvider } from '@shared/container/providers/RedisProvider/model/IRedisProvider';
 import { password_forget } from '@config/password';
+import { IHashProvider } from '@shared/container/providers/HashProvider/model/IHashProvider';
 import { IUserRepository } from '../repositories/UserRepository.interface';
-import { IResetPasswordDTO } from './ResetPasswordDTO';
+import { IResetPasswordDTO } from './dto/ResetPasswordDTO';
 
 @injectable()
 class ResetPasswordService {
@@ -14,6 +15,9 @@ class ResetPasswordService {
 
     @inject('RedisProvider')
     private redisProvider: IRedisProvider,
+
+    @inject('HashProvider')
+    private hashProvider: IHashProvider,
   ) {}
 
   public async execute({
@@ -34,7 +38,9 @@ class ResetPasswordService {
 
     if (!user) throw new AppError('Usuário não encontrado');
 
-    user.password = new_password;
+    const hash_password = await this.hashProvider.generateHash(new_password);
+
+    user.password = hash_password;
 
     await this.userRepository.save(user);
   }

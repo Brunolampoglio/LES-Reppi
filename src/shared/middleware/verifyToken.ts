@@ -11,7 +11,7 @@ interface ITokenPayload {
   isMaster: boolean;
 }
 
-function ensureAuthenticated(
+function verifyToken(
   request: Request,
   response: Response,
   next: NextFunction,
@@ -40,4 +40,4 @@ function ensureAuthenticated(
   }
 }
 
-export { ensureAuthenticated };
+export { verifyToken };

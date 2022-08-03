@@ -1,3 +1,4 @@
+import { AppError } from '@shared/error/AppError';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
@@ -6,6 +7,10 @@ import { UpdateUserAvatarService } from '../services/UpdateUserAvatar.service';
 
 class UserAvatarController {
   public async update(request: Request, response: Response): Promise<Response> {
+    if (!request.file) {
+      throw new AppError('Nenhum arquivo enviado', 400);
+    }
+
     const { id: request_id } = request.user;
     const { user_id } = request.params;
     const { filename } = request.file;

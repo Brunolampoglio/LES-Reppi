@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 import { PasswordController } from '@modules/User/controllers/Password.controller';
-import { ensureAuthenticated } from '@shared/middleware/ensureAuthenticated';
+import { verifyToken } from '@shared/middleware/verifyToken';
 import {
   changePasswordMiddleware,
   forgotPasswordMiddleware,
@@ -23,7 +23,7 @@ passwordRouter.post(
   passwordController.reset,
 );
 
-passwordRouter.use(ensureAuthenticated);
+passwordRouter.use(verifyToken);
 
 passwordRouter.post(
   '/change/:user_id',

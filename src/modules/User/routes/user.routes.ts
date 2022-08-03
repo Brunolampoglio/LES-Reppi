@@ -1,9 +1,8 @@
 import { Router } from 'express';
 import multer from 'multer';
 
-import { ensureAuthenticated } from '@shared/middleware/ensureAuthenticated';
-import { ensureMaster } from '@shared/middleware/ensureMaster';
 import { uploadConfig } from '@config/upload';
+import { verifyToken } from '@shared/middleware/verifyToken';
 import { UserController } from '../controllers/User.controller';
 import { UserAvatarController } from '../controllers/UserAvatar.controller';
 import { passwordRouter } from './password.routes';
@@ -12,7 +11,6 @@ import {
   createUserMiddleware,
   deleteUserAvatarMiddleware,
   deleteUserMiddleware,
-  listUserMiddleware,
   showUserMiddleware,
   updateUserAvatarMiddleware,
   updateUserMiddleware,
@@ -26,11 +24,12 @@ const userAvatarController = new UserAvatarController();
 const uploadMulter = multer(uploadConfig.multer);
 
 userRouter.use('/password', passwordRouter);
+
 userRouter.use('/session', sessionRouter);
 
 userRouter.post('/', createUserMiddleware, userController.create);
 
-userRouter.use(ensureAuthenticated);
+userRouter.use(verifyToken);
 
 userRouter.patch(
   '/:user_id/avatar',
@@ -50,9 +49,5 @@ userRouter.get('/:user_id', showUserMiddleware, userController.show);
 userRouter.put('/:user_id', updateUserMiddleware, userController.update);
 
 userRouter.delete('/:user_id', deleteUserMiddleware, userController.delete);
-
-userRouter.use(ensureMaster);
-
-userRouter.get('/', listUserMiddleware, userController.index);
 
 export { userRouter };

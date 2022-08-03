@@ -3,7 +3,7 @@ import { inject, injectable } from 'tsyringe';
 
 import { User } from '../entities/User';
 import { IUserRepository } from '../repositories/UserRepository.interface';
-import { IShowUserDTO } from './ShowUserDTO';
+import { IShowUserDTO } from './dto/ShowUserDTO';
 
 @injectable()
 class ShowUserService {

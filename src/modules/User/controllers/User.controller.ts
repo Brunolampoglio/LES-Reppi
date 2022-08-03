@@ -3,7 +3,6 @@ import { container } from 'tsyringe';
 
 import { CreateUserService } from '../services/CreateUser.service';
 import { DeleteUserService } from '../services/DeleteUser.service';
-import { ListUserService } from '../services/ListUser.service';
 import { ShowUserService } from '../services/ShowUser.service';
 import { UpdateUserService } from '../services/UpdateUser.service';
 
@@ -21,19 +20,6 @@ class UserController {
     });
 
     return res.status(201).json(user);
-  }
-
-  async index(req: Request, res: Response): Promise<Response> {
-    const { page, limit } = req.query;
-
-    const listUserService = container.resolve(ListUserService);
-
-    const users = await listUserService.execute({
-      page: page ? Number(page) : undefined,
-      limit: limit ? Number(limit) : undefined,
-    });
-
-    return res.json(users);
   }
 
   async show(req: Request, res: Response): Promise<Response> {

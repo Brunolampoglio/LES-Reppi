@@ -8,7 +8,10 @@ import { refreshToken_config } from '@config/auth';
 import { Roles } from '@shared/enum/Roles';
 import { jwtGenerate } from '@shared/util/jwtGenerate';
 import { IUserRepository } from '../repositories/UserRepository.interface';
-import { IRefreshResponseDTO, IRefreshSessionDTO } from './RefreshSessionDTO';
+import {
+  IRefreshResponseDTO,
+  IRefreshSessionDTO,
+} from './dto/RefreshSessionDTO';
 
 @injectable()
 class RefreshSessionService {

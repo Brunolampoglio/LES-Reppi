@@ -12,7 +12,7 @@ import { IUserRepository } from '../repositories/UserRepository.interface';
 import {
   ICreateSessionDTO,
   ICreateSessionResponseDTO,
-} from './CreateSessionDTO';
+} from './dto/CreateSessionDTO';
 
 @injectable()
 class CreateSessionService {

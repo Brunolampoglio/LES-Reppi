@@ -4,7 +4,7 @@ import { AppError } from '@shared/error/AppError';
 import { IRedisProvider } from '@shared/container/providers/RedisProvider/model/IRedisProvider';
 import { refreshToken_config } from '@config/auth';
 import { IUserRepository } from '../repositories/UserRepository.interface';
-import { IDestroySessionDTO } from './DestroySessionDTO';
+import { IDestroySessionDTO } from './dto/DestroySessionDTO';
 
 @injectable()
 class DestroySessionService {

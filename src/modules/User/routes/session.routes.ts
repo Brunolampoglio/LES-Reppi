@@ -12,7 +12,9 @@ const sessionRouter = Router();
 const sessionController = new SessionController();
 
 sessionRouter.post('/', createSessionMiddleware, sessionController.create);
+
 sessionRouter.put('/', refreshTokenMiddleware, sessionController.refresh);
+
 sessionRouter.delete(
   '/:user_id',
   destroySessionMiddleware,

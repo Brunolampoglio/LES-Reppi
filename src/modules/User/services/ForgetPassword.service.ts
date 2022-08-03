@@ -7,7 +7,7 @@ import { AppError } from '@shared/error/AppError';
 import { IRedisProvider } from '@shared/container/providers/RedisProvider/model/IRedisProvider';
 import { password_forget } from '@config/password';
 import { IUserRepository } from '../repositories/UserRepository.interface';
-import { IForgotPasswordDTO } from './ForgotPasswordDTO';
+import { IForgotPasswordDTO } from './dto/ForgotPasswordDTO';
 
 @injectable()
 class ForgotPasswordService {

@@ -4,7 +4,7 @@ import { AppError } from '@shared/error/AppError';
 import { IStorageProvider } from '@shared/container/providers/StorageProvider/models/IStorageProvider';
 import { User } from '../entities/User';
 import { IUserRepository } from '../repositories/UserRepository.interface';
-import { IDeleteUserAvatarDTO } from './DeleteUserAvatarDTO';
+import { IDeleteUserAvatarDTO } from './dto/DeleteUserAvatarDTO';
 
 @injectable()
 class DeleteUserAvatarService {

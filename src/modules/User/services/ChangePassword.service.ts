@@ -3,8 +3,9 @@ import { instanceToInstance } from 'class-transformer';
 import { compare } from 'bcrypt';
 
 import { AppError } from '@shared/error/AppError';
+import { IHashProvider } from '@shared/container/providers/HashProvider/model/IHashProvider';
 import { IUserRepository } from '../repositories/UserRepository.interface';
-import { IChangePasswordDTO } from './ChangePasswordDTO';
+import { IChangePasswordDTO } from './dto/ChangePasswordDTO';
 import { User } from '../entities/User';
 
 @injectable()
@@ -12,6 +13,9 @@ class ChangePasswordService {
   constructor(
     @inject('UserRepository')
     private userRepository: IUserRepository,
+
+    @inject('HashProvider')
+    private hashProvider: IHashProvider,
   ) {}
 
   public async execute({
@@ -31,7 +35,9 @@ class ChangePasswordService {
 
     if (!passwordMatched) throw new AppError('Senha inválida', 401);
 
-    user.password = new_password;
+    const hash_password = await this.hashProvider.generateHash(new_password);
+
+    user.password = hash_password;
 
     const new_user = await this.userRepository.save(user);
 
