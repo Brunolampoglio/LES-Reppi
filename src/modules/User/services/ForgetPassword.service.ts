@@ -1,11 +1,10 @@
-import { v4 as uuidV4 } from 'uuid';
 import { inject, injectable } from 'tsyringe';
 import path from 'path';
+import crypto from 'crypto';
 
 import { IMailProvider } from '@shared/container/providers/MailProvider/models/IMailProvider';
 import { AppError } from '@shared/error/AppError';
-import { IRedisProvider } from '@shared/container/providers/RedisProvider/model/IRedisProvider';
-import { password_forget } from '@config/password';
+import { IHashProvider } from '@shared/container/providers/HashProvider/model/IHashProvider';
 import { IUserRepository } from '../repositories/UserRepository.interface';
 import { IForgotPasswordDTO } from './dto/ForgotPasswordDTO';
 
@@ -18,8 +17,8 @@ class ForgotPasswordService {
     @inject('MailProvider')
     private mailProvider: IMailProvider,
 
-    @inject('RedisProvider')
-    private redisProvider: IRedisProvider,
+    @inject('HashProvider')
+    private hashProvider: IHashProvider,
   ) {}
 
   public async execute({ email }: IForgotPasswordDTO): Promise<void> {
@@ -34,26 +33,25 @@ class ForgotPasswordService {
       'forgot_password.hbs',
     );
 
-    const token = uuidV4();
+    const password = crypto.randomBytes(4).toString('hex');
 
-    await this.redisProvider.set({
-      key: `${password_forget.prefix}${token}`,
-      value: user.id,
-      time: password_forget.expiresIn,
-      option: 'EX',
-    });
+    const hashedPassword = await this.hashProvider.generateHash(password);
 
-    await this.mailProvider.sendMail({
+    user.password = hashedPassword;
+
+    await this.userRepository.save(user);
+
+    this.mailProvider.sendMail({
       to: {
         name: user.name,
         email: user.email,
       },
-      subject: '[Mestres da Web] Recuperação de senha',
+      subject: 'Recuperação de senha',
       templateData: {
         file: forgotPasswordTemplate,
         variables: {
           name: user.name,
-          token,
+          password,
         },
       },
     });

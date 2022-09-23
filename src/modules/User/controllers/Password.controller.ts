@@ -3,7 +3,6 @@ import { container } from 'tsyringe';
 
 import { ChangePasswordService } from '../services/ChangePassword.service';
 import { ForgotPasswordService } from '../services/ForgetPassword.service';
-import { ResetPasswordService } from '../services/ResetPassword.service';
 
 class PasswordController {
   async forgot(req: Request, res: Response): Promise<Response> {
@@ -12,20 +11,6 @@ class PasswordController {
     const forgotPasswordService = container.resolve(ForgotPasswordService);
 
     await forgotPasswordService.execute({ email });
-
-    return res.status(204).json();
-  }
-
-  async reset(req: Request, res: Response): Promise<Response> {
-    const { token } = req.params;
-    const { new_password } = req.body;
-
-    const resetPasswordService = container.resolve(ResetPasswordService);
-
-    await resetPasswordService.execute({
-      token,
-      new_password,
-    });
 
     return res.status(204).json();
   }

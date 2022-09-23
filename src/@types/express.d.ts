@@ -5,10 +5,5 @@ declare namespace Express {
       id: string;
       isMaster: boolean;
     };
-
-    io: {
-      connectedUsers: { [key: string]: string };
-      server: import('socket.io').Server<DefaultEventsMap, DefaultEventsMap>;
-    };
   }
 }

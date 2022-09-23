@@ -6,15 +6,6 @@ export const forgotPasswordMiddleware = celebrate({
   },
 });
 
-export const resetPasswordMiddleware = celebrate({
-  [Segments.BODY]: {
-    new_password: Joi.string().required().min(8),
-  },
-  [Segments.PARAMS]: {
-    token: Joi.string().uuid().required(),
-  },
-});
-
 export const changePasswordMiddleware = celebrate({
   [Segments.BODY]: {
     new_password: Joi.string().required().min(8),

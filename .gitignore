@@ -11,4 +11,5 @@ ormconfig.json
 .DS_STORE
 logs/
 dist/
+/tmp
 diagrams/
