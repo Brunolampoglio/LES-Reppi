@@ -1,15 +1,14 @@
 import { container } from 'tsyringe';
+import { SmsTwillioProvider } from './implementations/SMSTwillioProvider';
+import { SMSZenviaProvider } from './implementations/SMSZenviaProvider';
 
 import { ISMSProvider } from './models/ISMSProvider';
 
-import { SNSProvider } from './implementations/SNSProvider';
-import { SMSOneSignalProvider } from './implementations/SMSOneSignalProvider';
-
-const smsDriver = process.env.SMS_DRIVER as 'sns';
+const smsDriver = process.env.SMS_DRIVER as 'twillio' | 'zenvia';
 
 const providers = {
-  sns: container.resolve(SNSProvider),
-  onesignal: container.resolve(SMSOneSignalProvider),
+  twillio: container.resolve(SmsTwillioProvider),
+  zenvia: container.resolve(SMSZenviaProvider),
 };
 
 container.registerInstance<ISMSProvider>('SMSProvider', providers[smsDriver]); // --> providers[smsDriver] <-- Error
