@@ -30,6 +30,9 @@ class User {
   @Column({ default: 'User' })
   role: string;
 
+  @Column({ nullable: true })
+  device_token: string;
+
   @Expose({ name: 'avatar' })
   getAvatarUrl(): string | null {
     switch (uploadConfig.driver) {

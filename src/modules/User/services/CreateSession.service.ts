@@ -27,12 +27,15 @@ class CreateSessionService {
   public async execute({
     email,
     password,
+    device_token,
     remember_me = false,
   }: ICreateSessionDTO): Promise<ICreateSessionResponseDTO> {
     const user = await this.userRepository.findBy({ email });
+
     if (!user) throw new AppError('Email ou senha inválidos', 404);
 
     const passwordMatched = await compare(password, user.password);
+
     if (!passwordMatched) throw new AppError('Email ou senha inválidos', 401);
 
     const jwToken = jwtGenerate(user.id, user.role === Roles.master);
@@ -46,6 +49,12 @@ class CreateSessionService {
         time: refreshToken_config.expiresIn,
         option: 'EX',
       });
+    }
+
+    if (device_token) {
+      user.device_token = device_token;
+
+      await this.userRepository.save(user);
     }
 
     return {

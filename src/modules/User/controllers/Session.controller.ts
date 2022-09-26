@@ -6,13 +6,14 @@ import { RefreshSessionService } from '../services/RefreshSession.service';
 
 class SessionController {
   async create(req: Request, res: Response): Promise<Response> {
-    const { email, password, remember_me } = req.body;
+    const { email, password, remember_me, device_token } = req.body;
 
     const createSessionService = container.resolve(CreateSessionService);
 
     const resp = await createSessionService.execute({
       email,
       password,
+      device_token,
       remember_me,
     });
 

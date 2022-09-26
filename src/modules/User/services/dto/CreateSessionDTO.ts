@@ -1,6 +1,7 @@
 import { User } from '../../entities/User';
 
 interface ICreateSessionDTO {
+  device_token?: string;
   email: string;
   password: string;
   remember_me?: boolean;

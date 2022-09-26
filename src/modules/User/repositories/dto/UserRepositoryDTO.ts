@@ -5,6 +5,7 @@ interface IUserCreate {
   email: string;
   password: string;
   role: Roles;
+  device_token?: string;
 }
 
 export { IUserCreate };

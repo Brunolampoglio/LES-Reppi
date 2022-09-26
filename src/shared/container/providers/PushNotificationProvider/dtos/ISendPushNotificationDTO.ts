@@ -1,8 +1,7 @@
 interface ISendPushNotificationDTO {
-  user_id: string;
+  device_token: string;
   title?: string;
   content: string;
-  date?: Date;
 }
 
 export { ISendPushNotificationDTO };
