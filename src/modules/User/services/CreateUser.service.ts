@@ -1,4 +1,5 @@
 import { instanceToInstance } from 'class-transformer';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { inject, injectable } from 'tsyringe';
 
 import { Roles } from '@shared/enum/Roles';

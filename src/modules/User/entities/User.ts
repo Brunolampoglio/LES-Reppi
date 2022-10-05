@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Column,
   CreateDateColumn,
@@ -9,7 +10,7 @@ import {
 import { Exclude, Expose } from 'class-transformer';
 import { uploadConfig } from '@config/upload';
 
-@Entity('userss')
+@Entity('users')
 class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
