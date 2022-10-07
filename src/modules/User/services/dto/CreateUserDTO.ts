@@ -4,7 +4,10 @@ interface ICreateUserDTO {
   name: string;
   email: string;
   password: string;
-  role?: Roles;
+  role: Roles;
+  corporate_name?: string;
+  cnpj?: string;
+  gestor_id?: string;
 }
 
 export { ICreateUserDTO };

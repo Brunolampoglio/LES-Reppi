@@ -32,6 +32,15 @@ class User {
   role: string;
 
   @Column({ nullable: true })
+  corporate_name: string;
+
+  @Column({ nullable: true })
+  cnpj: string;
+
+  @Column({ nullable: true })
+  gestor_id: string;
+
+  @Column({ nullable: true })
   device_token: string;
 
   @Expose({ name: 'avatar' })

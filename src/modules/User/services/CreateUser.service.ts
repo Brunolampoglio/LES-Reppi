@@ -2,7 +2,6 @@ import { instanceToInstance } from 'class-transformer';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { inject, injectable } from 'tsyringe';
 
-import { Roles } from '@shared/enum/Roles';
 import { AppError } from '@shared/error/AppError';
 import { IHashProvider } from '@shared/container/providers/HashProvider/model/IHashProvider';
 import { User } from '../entities/User';
@@ -23,11 +22,20 @@ class CreateUserService {
     name,
     email,
     password,
-    role = Roles.user,
+    role,
+    corporate_name,
+    cnpj,
+    gestor_id,
   }: ICreateUserDTO): Promise<User> {
-    const user_exists = await this.userRepository.findBy({ email });
+    const [user_exists, user_existsCnpj] = await Promise.all([
+      this.userRepository.findBy({
+        email,
+      }),
+      this.userRepository.findBy({ cnpj }),
+    ]);
 
-    if (user_exists) throw new AppError('Email já cadastrado');
+    if (user_exists || user_existsCnpj)
+      throw new AppError('Usuário já cadastrado');
 
     const hashed_password = await this.hashProvider.generateHash(password);
 
@@ -36,6 +44,9 @@ class CreateUserService {
       email,
       password: hashed_password,
       role,
+      corporate_name,
+      cnpj,
+      gestor_id,
     });
 
     await this.userRepository.save(user);

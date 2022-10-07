@@ -5,6 +5,9 @@ interface IUserCreate {
   email: string;
   password: string;
   role: Roles;
+  corporate_name?: string;
+  cnpj?: string;
+  gestor_id?: string;
   device_token?: string;
 }
 

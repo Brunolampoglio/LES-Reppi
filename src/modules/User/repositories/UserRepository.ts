@@ -39,12 +39,23 @@ class UserRepository implements IUserRepository {
     };
   }
 
-  create({ name, email, password, role }: IUserCreate): User {
+  create({
+    name,
+    email,
+    password,
+    role,
+    cnpj,
+    corporate_name,
+    gestor_id,
+  }: IUserCreate): User {
     const user = this.ormRepository.create({
       name,
       email,
       password,
       role,
+      cnpj,
+      corporate_name,
+      gestor_id,
     });
 
     return user;
