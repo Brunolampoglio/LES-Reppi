@@ -1,10 +1,13 @@
 enum Roles {
   master = 'Master',
   gestor = 'Gestor',
-  paciente = 'Paciente',
-  medico = 'Medico',
+  Clínico_geral = 'Clinico geral',
+  nefrologista = 'Nefrologista',
+  cardiologista = 'Cardiologista',
+  endocrinologista = 'Endocrinologista',
+  educador_fisico = 'Educador fisico',
   enfermeiro = 'Enfermeiro',
-  educador_fisico = 'Educador Fisico',
+  outros = 'Outros',
 }
 
 export { Roles };

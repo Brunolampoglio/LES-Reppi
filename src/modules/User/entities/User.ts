@@ -3,12 +3,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 import { Exclude, Expose } from 'class-transformer';
 import { uploadConfig } from '@config/upload';
+import { Comments } from '@modules/Comments/entities/Comments';
 
 @Entity('users')
 class User {
@@ -42,6 +44,16 @@ class User {
 
   @Column({ nullable: true })
   device_token: string;
+
+  @OneToMany(() => Comments, comments => comments.userReceiver, {
+    cascade: true,
+  })
+  receiver_comments: Comments[];
+
+  @OneToMany(() => Comments, comments => comments.userSender, {
+    cascade: true,
+  })
+  sender_comments: Comments[];
 
   @Expose({ name: 'avatar' })
   getAvatarUrl(): string | null {
