@@ -8,4 +8,6 @@ const bannerController = new BannerController();
 
 bannerRouter.post('/', createBannerMiddleware, bannerController.create);
 
+bannerRouter.get('/', bannerController.list);
+
 export { bannerRouter };

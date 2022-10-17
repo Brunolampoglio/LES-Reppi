@@ -1,4 +1,5 @@
 import { AppError } from '@shared/error/AppError';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { inject, injectable } from 'tsyringe';
 
 import { User } from '../entities/User';

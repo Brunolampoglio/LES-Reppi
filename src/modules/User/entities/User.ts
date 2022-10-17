@@ -11,6 +11,7 @@ import {
 import { Exclude, Expose } from 'class-transformer';
 import { uploadConfig } from '@config/upload';
 import { Comments } from '@modules/Comments/entities/Comments';
+import { Banner } from '@modules/Banners/entities/Banner';
 
 @Entity('users')
 class User {
@@ -54,6 +55,11 @@ class User {
     cascade: true,
   })
   sender_comments: Comments[];
+
+  @OneToMany(() => Banner, banner => banner.user, {
+    cascade: true,
+  })
+  banners: Banner[];
 
   @Expose({ name: 'avatar' })
   getAvatarUrl(): string | null {

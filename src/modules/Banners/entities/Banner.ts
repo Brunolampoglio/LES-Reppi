@@ -1,9 +1,14 @@
 import { uploadConfig } from '@config/upload';
+import { User } from '@modules/User/entities/User';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Expose } from 'class-transformer';
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -22,8 +27,25 @@ class Banner {
   @Column()
   link_image: string;
 
+  @Column()
+  dt_initial: Date;
+
+  @Column()
+  dt_final: Date;
+
   @Column({ nullable: true, type: 'varchar' })
   image: string | null;
+
+  @Column()
+  user_id: string;
+
+  @ManyToOne(() => User, user => user.banners, {
+    orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 
   @Expose({ name: 'image' })
   getimageUrl(): string | null {
