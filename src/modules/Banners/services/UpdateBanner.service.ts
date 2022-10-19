@@ -18,8 +18,8 @@ class UpdateBannerService {
     dt_Final,
     dt_Initial,
     image,
-    link_Banner,
-    link_Image,
+    link_banner,
+    link_image,
     name,
     userId,
   }: IUpdateBannerDTO): Promise<Banner> {
@@ -35,8 +35,8 @@ class UpdateBannerService {
       dt_Final,
       dt_Initial,
       image,
-      link_Banner,
-      link_Image,
+      link_banner,
+      link_image,
       name,
       userId,
     });

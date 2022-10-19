@@ -39,12 +39,23 @@ class BannerRepository implements IBannerRepository {
     };
   }
 
-  create({ name, link_banner, link_image, image }: IBannerCreate): Banner {
+  create({
+    name,
+    link_banner,
+    link_image,
+    image,
+    dt_final,
+    dt_initial,
+    user_id,
+  }: IBannerCreate): Banner {
     const banner = this.ormRepository.create({
       name,
       link_banner,
       link_image,
       image,
+      dt_final,
+      dt_initial,
+      user_id,
     });
 
     return banner;

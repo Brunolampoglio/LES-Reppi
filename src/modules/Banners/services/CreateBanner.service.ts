@@ -16,12 +16,18 @@ class CreateBannerService {
     link_banner,
     link_image,
     image,
+    dt_final,
+    dt_initial,
+    user_id,
   }: IBannerCreate): Promise<Banner> {
     const banner = this.bannerRepository.create({
       name,
       link_banner,
       link_image,
       image,
+      dt_final,
+      dt_initial,
+      user_id,
     });
 
     await this.bannerRepository.save(banner);
