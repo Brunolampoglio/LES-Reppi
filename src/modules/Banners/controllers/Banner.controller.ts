@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { CreateBannerService } from '../services/CreateBanner.service';
+import { DeleteBannerService } from '../services/DeleteBanner.service';
 import { ListBannerService } from '../services/ListBanner.service';
 import { UpdateBannerService } from '../services/UpdateBanner.service';
 
@@ -55,6 +56,19 @@ class BannerController {
     });
 
     return res.json(banner);
+  }
+
+  async delete(req: Request, res: Response): Promise<Response> {
+    const { id_banner } = req.params;
+
+    const deleteBannerService = container.resolve(DeleteBannerService);
+
+    await deleteBannerService.execute({
+      banner_id: id_banner,
+      isMaster: req.user.isMaster,
+    });
+
+    return res.status(204).send();
   }
 }
 export { BannerController };

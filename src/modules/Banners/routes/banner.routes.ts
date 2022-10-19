@@ -18,4 +18,6 @@ bannerRouter.use(verifyToken);
 
 bannerRouter.put('/:id', updateBannerMiddleware, bannerController.update);
 
+bannerRouter.delete('/:id', bannerController.delete);
+
 export { bannerRouter };
