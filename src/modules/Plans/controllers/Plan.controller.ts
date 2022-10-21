@@ -2,6 +2,8 @@ import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 import { CreatePlanService } from '../services/CreatePlan.service';
 import { ListAllPlansService } from '../services/ListAllPlans.service';
+import { DeletePlanService } from '../services/DeletePlan.service';
+import { UpdatePlanService } from '../services/UpdatePlan.service';
 
 class PlansController {
   async create(req: Request, res: Response): Promise<Response> {
@@ -15,6 +17,8 @@ class PlansController {
       price,
       recurrence,
       qtd_access,
+      user_id: req.user.id,
+      isMaster: req.user.isMaster,
     });
 
     return res.status(201).json(plan);
@@ -33,6 +37,35 @@ class PlansController {
     });
 
     return res.status(200).json(plans);
+  }
+
+  async delete(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+
+    const deletePlanService = container.resolve(DeletePlanService);
+
+    await deletePlanService.execute({ id, isMaster: req.user.isMaster });
+
+    return res.status(204).send();
+  }
+
+  async update(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+    const { name, description, price, recurrence, qtd_access } = req.body;
+
+    const updatePlanService = container.resolve(UpdatePlanService);
+
+    const plan = await updatePlanService.execute({
+      id,
+      name,
+      description,
+      price,
+      recurrence,
+      qtd_access,
+      isMaster: req.user.isMaster,
+    });
+
+    return res.status(200).json(plan);
   }
 }
 export { PlansController };

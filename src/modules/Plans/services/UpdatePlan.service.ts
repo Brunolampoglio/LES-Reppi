@@ -3,40 +3,45 @@ import { AppError } from '@shared/error/AppError';
 import { inject, injectable } from 'tsyringe';
 import { Plans } from '../entities/Plans';
 import { IPlansRepository } from '../repositories/PlanRepositories.interface';
-import { ICreatePlansDTO } from './dto/CreatePlansDTO';
+import { IUpdatePlanDTO } from './dto/UpdatePlansDTO';
 
 @injectable()
-class CreatePlanService {
+class UpdatePlanService {
   constructor(
     @inject('PlanRepository')
     private planRepository: IPlansRepository,
   ) {}
 
   public async execute({
+    id,
     name,
     description,
     price,
     recurrence,
     qtd_access,
-    user_id,
     isMaster,
-  }: ICreatePlansDTO): Promise<Plans> {
-    if (!isMaster)
-      throw new AppError('Você não tem permissão para criar um plano', 403);
+  }: IUpdatePlanDTO): Promise<Plans> {
+    const plan = await this.planRepository.findBy({ id });
 
-    const plan = this.planRepository.create({
+    if (!plan) throw new AppError('Plano não encontrado', 404);
+
+    if (!isMaster)
+      throw new AppError(
+        'Você não tem permissão para atualizar este plano',
+        403,
+      );
+
+    Object.assign(plan, {
       name,
       description,
       price,
       recurrence,
       qtd_access,
-      user_id,
     });
 
-    await this.planRepository.save(plan);
+    const newPlan = await this.planRepository.save(plan);
 
-    return plan;
+    return newPlan;
   }
 }
-
-export { CreatePlanService };
+export { UpdatePlanService };

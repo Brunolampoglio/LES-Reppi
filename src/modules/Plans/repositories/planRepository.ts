@@ -43,6 +43,7 @@ class PlanRepository implements IPlansRepository {
     price,
     recurrence,
     qtd_access,
+    user_id,
   }: IPlanCreate): Plans {
     const plan = this.ormRepository.create({
       name,
@@ -50,6 +51,7 @@ class PlanRepository implements IPlansRepository {
       price,
       recurrence,
       qtd_access,
+      user_id,
     });
 
     return plan;
