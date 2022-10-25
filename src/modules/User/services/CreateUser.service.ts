@@ -25,16 +25,18 @@ class CreateUserService {
     role,
     corporate_name,
     cnpj,
+    cpf,
     gestor_id,
   }: ICreateUserDTO): Promise<User> {
-    const [user_exists, user_existsCnpj] = await Promise.all([
+    const [user_exists, user_existsCnpj, user_existsCpf] = await Promise.all([
       this.userRepository.findBy({
         email,
       }),
       this.userRepository.findBy({ cnpj }),
+      this.userRepository.findBy({ cpf }),
     ]);
 
-    if (user_exists || user_existsCnpj)
+    if (user_exists || user_existsCnpj || user_existsCpf)
       throw new AppError('Usuário já cadastrado');
 
     const hashed_password = await this.hashProvider.generateHash(password);

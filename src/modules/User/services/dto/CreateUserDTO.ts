@@ -7,6 +7,7 @@ interface ICreateUserDTO {
   role: Roles;
   corporate_name?: string;
   cnpj?: string;
+  cpf?: string;
   gestor_id?: string;
 }
 

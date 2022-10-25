@@ -45,6 +45,7 @@ class UserRepository implements IUserRepository {
     password,
     role,
     cnpj,
+    cpf,
     corporate_name,
     gestor_id,
   }: IUserCreate): User {
@@ -54,6 +55,7 @@ class UserRepository implements IUserRepository {
       password,
       role,
       cnpj,
+      cpf,
       corporate_name,
       gestor_id,
     });

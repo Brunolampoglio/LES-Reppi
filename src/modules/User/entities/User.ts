@@ -3,7 +3,9 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -13,6 +15,7 @@ import { uploadConfig } from '@config/upload';
 import { Comments } from '@modules/Comments/entities/Comments';
 import { Banner } from '@modules/Banners/entities/Banner';
 import { Plans } from '@modules/Plans/entities/Plans';
+import { Address } from './Address';
 
 @Entity('users')
 class User {
@@ -24,6 +27,12 @@ class User {
 
   @Column()
   email: string;
+
+  @Column({ nullable: true })
+  cpf: string;
+
+  @Column({ nullable: true })
+  phone_number: string;
 
   @Exclude()
   @Column()
@@ -66,6 +75,16 @@ class User {
     cascade: true,
   })
   plans: Plans[];
+
+  @Column({ nullable: true })
+  address_id: string;
+
+  @OneToOne(() => Address, address => address.user, {
+    cascade: true,
+    eager: true,
+  })
+  @JoinColumn({ name: 'address_id' })
+  address: Address;
 
   @Expose({ name: 'avatar' })
   getAvatarUrl(): string | null {

@@ -8,15 +8,18 @@ import { UpdateUserService } from '../services/UpdateUser.service';
 
 class UserController {
   async create(req: Request, res: Response): Promise<Response> {
-    const { name, email, password, role } = req.body;
+    const { name, email, cnpj, cpf, password, role } = req.body;
 
     const createUserService = container.resolve(CreateUserService);
 
     const user = await createUserService.execute({
       name,
       email,
+      cnpj,
+      cpf,
       password,
       role,
+      gestor_id: req.user.id,
     });
 
     return res.status(201).json(user);
