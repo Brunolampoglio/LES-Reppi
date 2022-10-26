@@ -45,6 +45,9 @@ class User {
   role: string;
 
   @Column({ nullable: true })
+  position: string;
+
+  @Column({ nullable: true })
   corporate_name: string;
 
   @Column({ nullable: true })
