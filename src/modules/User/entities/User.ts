@@ -44,8 +44,8 @@ class User {
   @Column({ default: 'User' })
   role: string;
 
-  @Column({ nullable: true })
-  position: string;
+  // @Column({ nullable: true })
+  // position: string;
 
   @Column({ nullable: true })
   corporate_name: string;
@@ -91,6 +91,12 @@ class User {
 
   @Expose({ name: 'avatar' })
   getAvatarUrl(): string | null {
+    if (!this.avatar) {
+      return (
+        process.env.DEFAULT_USER_AVATAR_URL ||
+        `${process.env.APP_API_URL}/files/default.png`
+      );
+    }
     switch (uploadConfig.driver) {
       case 'disk':
         return `${process.env.APP_API_URL}/files/${this.avatar}`;

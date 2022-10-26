@@ -44,6 +44,9 @@ export const updateUserAvatarMiddleware = celebrate({
   [Segments.PARAMS]: {
     user_id: Joi.string().uuid().required(),
   },
+  [Segments.BODY]: {
+    avatar: Joi.string(),
+  },
 });
 
 export const deleteUserAvatarMiddleware = celebrate({
