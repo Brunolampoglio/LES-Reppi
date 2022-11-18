@@ -15,7 +15,9 @@ import { uploadConfig } from '@config/upload';
 import { Comments } from '@modules/Comments/entities/Comments';
 import { Banner } from '@modules/Banners/entities/Banner';
 import { Plans } from '@modules/Plans/entities/Plans';
+import { Invoices } from '@modules/invoices/entities/Invoices';
 import { Address } from './Address';
+import { Session } from './Session';
 
 @Entity('users')
 class User {
@@ -79,6 +81,12 @@ class User {
   })
   plans: Plans[];
 
+  @OneToMany(() => Invoices, invoices => invoices.user, {
+    cascade: true,
+    eager: true,
+  })
+  invoices: Invoices[];
+
   @Column({ nullable: true })
   address_id: string;
 
@@ -106,6 +114,11 @@ class User {
         return `${process.env.APP_API_URL}/files/default.png`;
     }
   }
+
+  @OneToMany(() => Session, session => session.user, {
+    cascade: true,
+  })
+  sessions: Session[];
 
   @CreateDateColumn()
   created_at: Date;

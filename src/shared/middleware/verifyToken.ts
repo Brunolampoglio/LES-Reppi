@@ -4,13 +4,6 @@ import { verify } from 'jsonwebtoken';
 import { jwt_config } from '@config/auth';
 import { AppError } from '../error/AppError';
 
-interface ITokenPayload {
-  iat: number;
-  exp: number;
-  sub: string;
-  isMaster: boolean;
-}
-
 function verifyToken(
   request: Request,
   response: Response,
