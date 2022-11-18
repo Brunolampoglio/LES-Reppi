@@ -1,41 +1,39 @@
-import { Invoices } from '@modules/invoices/entities/Invoices';
-import { User } from '@modules/User/entities/User';
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Plans } from '@modules/Plans/entities/Plans';
+import { User } from '@modules/User/entities/User';
 import {
   Column,
   CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('plans')
-class Plans {
+@Entity('invoices')
+class Invoices {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  name: string;
+  desc: string;
 
   @Column()
-  description: string;
+  plan_id: string;
 
-  @Column()
-  price: number;
-
-  @Column()
-  recurrence: string;
-
-  @Column()
-  qtd_access: number;
+  @ManyToOne(() => Plans, plan => plan.invoices, {
+    orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  @JoinColumn({ name: 'plan_id' })
+  plan: Plans;
 
   @Column()
   user_id: string;
 
-  @ManyToOne(() => User, user => user.plans, {
+  @ManyToOne(() => User, user => user.invoices, {
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
@@ -43,15 +41,11 @@ class Plans {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
-  @OneToMany(() => Invoices, invoice => invoice.plan, {
-    cascade: true,
-  })
-  invoices: Invoices[];
-
   @CreateDateColumn()
   created_at: Date;
 
   @UpdateDateColumn()
   updated_at: Date;
 }
-export { Plans };
+
+export { Invoices };
