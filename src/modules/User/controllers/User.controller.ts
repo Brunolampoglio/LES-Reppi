@@ -39,6 +39,7 @@ class UserController {
       const users = await listUserService.execute({
       limit: parseInt(limit, 10) || 50,
       page: parseInt(page, 10) || 1,
+      isMaster: req.user.isMaster,
       });
 
       return res.json(users);

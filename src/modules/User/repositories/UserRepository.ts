@@ -11,6 +11,9 @@ class UserRepository implements IUserRepository {
   constructor() {
     this.ormRepository = getRepository(User);
   }
+  listCorporate(): Promise<IPaginatedResponse<User>> {
+    throw new Error('Method not implemented.');
+  }
   listBy(filter: IPaginatedRequest<User>): Promise<IPaginatedResponse<User>> {
     throw new Error('Method not implemented.');
   }

@@ -1,3 +1,4 @@
+import { AppError } from '@shared/error/AppError';
 import { IPaginatedResponse } from '@shared/interfaces/IPaginatedResponse';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { inject, injectable } from 'tsyringe';
@@ -15,7 +16,12 @@ class ListUserService {
   public async execute({
     page,
     limit,
+    isMaster,
   }: IListUserDTO): Promise<IPaginatedResponse<User>> {
+    if (!isMaster) {
+      throw new AppError ('Usuário não autorizado', 404);
+    }
+
     const user = await this.userRepository.listByUser({
       page,
       limit,
