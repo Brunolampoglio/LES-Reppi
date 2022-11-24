@@ -8,8 +8,8 @@ import { IListAllPlansDTO } from './dto/ListAllPlansDTO';
 @injectable()
 class ListAllPlansService {
   constructor(
-    @inject('PlansRepository')
-    private plansRepository: IPlansRepository,
+    @inject('PlanRepository')
+    private planRepository: IPlansRepository,
   ) {}
 
   public async execute({
@@ -17,7 +17,7 @@ class ListAllPlansService {
     limit,
     user_id,
   }: IListAllPlansDTO): Promise<IPaginatedResponse<Plans>> {
-    const plan = await this.plansRepository.listBy({
+    const plan = await this.planRepository.listBy({
       filters: {
         user_id,
       },
