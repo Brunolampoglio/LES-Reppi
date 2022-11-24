@@ -10,6 +10,8 @@ import {
 const planRouter = Router();
 const planController = new PlansController();
 
+planRouter.get('/:id', planController.show);
+
 planRouter.use(verifyToken);
 planRouter.post('/', createPlanMiddleware, planController.create);
 planRouter.get('/', planController.list);

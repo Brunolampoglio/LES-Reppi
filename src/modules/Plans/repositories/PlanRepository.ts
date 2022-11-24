@@ -18,6 +18,12 @@ class PlanRepository implements IPlansRepository {
     return plan;
   }
 
+  async Show(id: string): Promise<Plans | undefined> {
+    const plan = await this.ormRepository.findOne(id);
+
+    return plan;
+  }
+
   public async listBy({
     page = 1,
     limit = 10,
