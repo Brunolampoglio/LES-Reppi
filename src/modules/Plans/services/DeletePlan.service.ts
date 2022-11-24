@@ -1,5 +1,4 @@
 import { AppError } from '@shared/error/AppError';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { injectable, inject } from 'tsyringe';
 import { IPlansRepository } from '../repositories/PlanRepositories.interface';
 import { IDeletePlanDTO } from './dto/DeletePlanDTO';

@@ -28,6 +28,7 @@ userRouter.use('/password', passwordRouter);
 userRouter.use('/session', sessionRouter);
 
 userRouter.post('/', createUserMiddleware, userController.create);
+userRouter.get('/listar', userController.listUser);
 
 userRouter.use(verifyToken);
 
@@ -37,6 +38,8 @@ userRouter.patch(
   uploadMulter.single('avatar'),
   userAvatarController.update,
 );
+
+
 
 userRouter.delete(
   '/:user_id/avatar',

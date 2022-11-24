@@ -11,6 +11,9 @@ class UserRepository implements IUserRepository {
   constructor() {
     this.ormRepository = getRepository(User);
   }
+  listBy(filter: IPaginatedRequest<User>): Promise<IPaginatedResponse<User>> {
+    throw new Error('Method not implemented.');
+  }
 
   async findBy(filter: Partial<User>): Promise<User | undefined> {
     const user = await this.ormRepository.findOne(filter);
@@ -18,13 +21,13 @@ class UserRepository implements IUserRepository {
     return user;
   }
 
-  public async listBy({
+  public async listByUser({
     page = 1,
     limit = 10,
     filters,
   }: IPaginatedRequest<User>): Promise<IPaginatedResponse<User>> {
     const users = await this.ormRepository.find({
-      where: filters,
+      where: {role:'Paciente'},
       skip: (page - 1) * limit,
       take: limit,
     });
@@ -47,6 +50,7 @@ class UserRepository implements IUserRepository {
     cnpj,
     cpf,
     corporate_name,
+    position,
     gestor_id,
   }: IUserCreate): User {
     const user = this.ormRepository.create({
@@ -57,6 +61,7 @@ class UserRepository implements IUserRepository {
       cnpj,
       cpf,
       corporate_name,
+      position,
       gestor_id,
     });
 

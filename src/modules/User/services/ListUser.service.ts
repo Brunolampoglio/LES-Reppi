@@ -8,19 +8,15 @@ import { IListUserDTO } from './dto/ListUserDTO';
 @injectable()
 class ListUserService {
   constructor(
-    @inject('UsersRepository')
-    private usersRepository: IUserRepository,
+    @inject('UserRepository')
+    private userRepository: IUserRepository,
   ) {}
 
   public async execute({
     page,
     limit,
-    role,
   }: IListUserDTO): Promise<IPaginatedResponse<User>> {
-    const user = await this.usersRepository.listBy({
-      filters: {
-        role,
-      },
+    const user = await this.userRepository.listByUser({
       page,
       limit,
     });

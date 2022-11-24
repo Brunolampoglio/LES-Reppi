@@ -3,12 +3,14 @@ import { container } from 'tsyringe';
 
 import { CreateUserService } from '../services/CreateUser.service';
 import { DeleteUserService } from '../services/DeleteUser.service';
+import { ListUserService } from '../services/ListUser.service';
 import { ShowUserService } from '../services/ShowUser.service';
 import { UpdateUserService } from '../services/UpdateUser.service';
 
 class UserController {
   async create(req: Request, res: Response): Promise<Response> {
-    const { name, email, cnpj, cpf, password, role } = req.body;
+    const { name, email, cnpj, cpf, password, role, corporate_name, position } = req.body;
+    const { user_id } = req.params;
 
     const createUserService = container.resolve(CreateUserService);
 
@@ -19,10 +21,27 @@ class UserController {
       cpf,
       password,
       role,
-      gestor_id: req.user.id,
+      corporate_name,
+      position,
+      gestor_id: user_id,
     });
 
     return res.status(201).json(user);
+  }
+
+  async listUser(req: Request, res: Response): Promise<Response> {
+      const listUserService = container.resolve(ListUserService);
+
+      const { page, limit, role } = req.query as {
+        [key: string]: string;
+      };
+
+      const users = await listUserService.execute({
+      limit: parseInt(limit, 10) || 50,
+      page: parseInt(page, 10) || 1,
+      });
+
+      return res.json(users);
   }
 
   async show(req: Request, res: Response): Promise<Response> {
@@ -43,7 +62,7 @@ class UserController {
   async update(req: Request, res: Response): Promise<Response> {
     const { user_id } = req.params;
     const { id } = req.user;
-    const { name, email } = req.body;
+    const { name, cpf, cnpj, corporate_name } = req.body;
 
     const updateUserService = container.resolve(UpdateUserService);
 
@@ -51,7 +70,9 @@ class UserController {
       user_id,
       request_id: id,
       name,
-      email,
+      cpf,
+      cnpj,
+      corporate_name,
     });
 
     return res.json(user);

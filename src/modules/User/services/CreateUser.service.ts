@@ -1,5 +1,4 @@
 import { instanceToInstance } from 'class-transformer';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { inject, injectable } from 'tsyringe';
 
 import { AppError } from '@shared/error/AppError';
@@ -26,6 +25,7 @@ class CreateUserService {
     corporate_name,
     cnpj,
     cpf,
+    position,
     gestor_id,
   }: ICreateUserDTO): Promise<User> {
     const [user_exists, user_existsCnpj, user_existsCpf] = await Promise.all([
@@ -48,7 +48,9 @@ class CreateUserService {
       role,
       corporate_name,
       cnpj,
-      gestor_id,
+      cpf,
+      position,
+      gestor_id: gestor_id || undefined,
     });
 
     await this.userRepository.save(user);

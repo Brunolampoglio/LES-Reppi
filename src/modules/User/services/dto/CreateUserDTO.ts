@@ -1,4 +1,4 @@
-import { Roles } from '@shared/enum/Roles';
+import { Positions, Roles } from '@shared/enum/Roles';
 
 interface ICreateUserDTO {
   name: string;
@@ -8,6 +8,7 @@ interface ICreateUserDTO {
   corporate_name?: string;
   cnpj?: string;
   cpf?: string;
+  position?: Positions;
   gestor_id?: string;
 }
 

@@ -10,6 +10,7 @@ interface IUserCreate {
   cpf?: string;
   gestor_id?: string;
   device_token?: string;
+  position?: string;
 }
 
 export { IUserCreate };

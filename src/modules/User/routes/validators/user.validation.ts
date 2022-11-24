@@ -7,7 +7,9 @@ export const createUserMiddleware = celebrate({
     password: Joi.string().required().min(8),
     cpf: Joi.string(),
     cnpj: Joi.string(),
-    role: Joi.string().valid('admin', 'user'),
+    corporate_name: Joi.string(),
+    position: Joi.string(),
+    role: Joi.string().valid('Master', 'Paciente', 'Gestor', 'Funcionário'),
   },
 });
 
@@ -30,7 +32,9 @@ export const updateUserMiddleware = celebrate({
   },
   [Segments.BODY]: {
     name: Joi.string(),
-    email: Joi.string().email(),
+    cpf: Joi.string(),
+    cnpj: Joi.string(),
+    corporate_name: Joi.string(),
   },
 });
 
