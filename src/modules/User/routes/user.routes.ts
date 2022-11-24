@@ -39,9 +39,8 @@ userRouter.patch(
   userAvatarController.update,
 );
 
-userRouter.get('/listar', userController.listUser);
-
-
+userRouter.get('/', userController.listUser);
+userRouter.get('/gestor', userController.listGestor);
 
 userRouter.delete(
   '/:user_id/avatar',

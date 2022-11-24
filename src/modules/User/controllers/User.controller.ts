@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 
 import { CreateUserService } from '../services/CreateUser.service';
 import { DeleteUserService } from '../services/DeleteUser.service';
+import { ListGestorService } from '../services/ListGestor.service';
 import { ListUserService } from '../services/ListUser.service';
 import { ShowUserService } from '../services/ShowUser.service';
 import { UpdateUserService } from '../services/UpdateUser.service';
@@ -44,6 +45,23 @@ class UserController {
 
       return res.json(users);
   }
+
+  async listGestor(req: Request, res: Response): Promise<Response> {
+    const { page, limit } = req.query as {
+      [key: string]: string;
+    };
+
+    const listUserService = container.resolve(ListGestorService);
+
+    const users = await listUserService.execute({
+      limit: parseInt(limit, 10) || 50,
+      page: parseInt(page, 10) || 1,
+      isMaster: req.user.isMaster,
+    });
+
+    return res.json(users);
+  }
+
 
   async show(req: Request, res: Response): Promise<Response> {
     const { user_id } = req.params;

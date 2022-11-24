@@ -11,12 +11,7 @@ class UserRepository implements IUserRepository {
   constructor() {
     this.ormRepository = getRepository(User);
   }
-  listCorporate(): Promise<IPaginatedResponse<User>> {
-    throw new Error('Method not implemented.');
-  }
-  listBy(filter: IPaginatedRequest<User>): Promise<IPaginatedResponse<User>> {
-    throw new Error('Method not implemented.');
-  }
+
 
   async findBy(filter: Partial<User>): Promise<User | undefined> {
     const user = await this.ormRepository.findOne(filter);
@@ -36,6 +31,23 @@ class UserRepository implements IUserRepository {
     });
 
     const userTotal = await this.ormRepository.count(filters);
+
+    return {
+      results: users,
+      total: userTotal,
+      page,
+      limit,
+    };
+  }
+
+  public async listCorporate({ page = 1, limit = 10 }: IPaginatedRequest<User>): Promise<IPaginatedResponse<User>> {
+    const users = await this.ormRepository.find({
+      where: {role:'Gestor'},
+      skip: (page - 1) * limit,
+      take: limit,
+    });
+
+    const userTotal = await this.ormRepository.count();
 
     return {
       results: users,
