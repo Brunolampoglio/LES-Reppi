@@ -23,17 +23,15 @@ class PlanRepository implements IPlansRepository {
     limit = 10,
     filters,
   }: IPaginatedRequest<Plans>): Promise<IPaginatedResponse<Plans>> {
-    const plans = await this.ormRepository.find({
+    const [plans, plansTotal] = await this.ormRepository.findAndCount({
       where: filters,
       skip: (page - 1) * limit,
       take: limit,
     });
 
-    const planTotal = await this.ormRepository.count(filters);
-
     return {
       results: plans,
-      total: planTotal,
+      total: plansTotal,
       page,
       limit,
     };
@@ -45,6 +43,7 @@ class PlanRepository implements IPlansRepository {
     price,
     recurrence,
     qtd_access,
+    user_id,
   }: IPlanCreate): Plans {
     const plan = this.ormRepository.create({
       name,
@@ -52,6 +51,7 @@ class PlanRepository implements IPlansRepository {
       price,
       recurrence,
       qtd_access,
+      user_id,
     });
 
     return plan;

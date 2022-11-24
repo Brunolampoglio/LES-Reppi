@@ -4,6 +4,8 @@ interface ICreatePlansDTO {
   price: number;
   recurrence: string;
   qtd_access: number;
+  user_id: string;
+  isMaster: boolean;
 }
 
 export { ICreatePlansDTO };

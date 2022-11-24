@@ -1,4 +1,5 @@
 import { v4 as uuidV4 } from 'uuid';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { inject, injectable } from 'tsyringe';
 import { instanceToInstance } from 'class-transformer';
 import { compare } from 'bcrypt';

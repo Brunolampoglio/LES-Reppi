@@ -2,7 +2,9 @@ interface IUpdateUserDTO {
   user_id: string;
   request_id: string;
   name?: string;
-  email?: string;
+  cpf?: string;
+  cnpj?: string;
+  corporate_name?: string;
 }
 
 export { IUpdateUserDTO };

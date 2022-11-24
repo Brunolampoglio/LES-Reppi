@@ -5,7 +5,11 @@ export const createUserMiddleware = celebrate({
     name: Joi.string().required(),
     email: Joi.string().email().required(),
     password: Joi.string().required().min(8),
-    role: Joi.string().valid('admin', 'user'),
+    cpf: Joi.string(),
+    cnpj: Joi.string(),
+    corporate_name: Joi.string(),
+    position: Joi.string(),
+    role: Joi.string().valid('Master', 'Paciente', 'Gestor', 'Funcionário'),
   },
 });
 
@@ -28,7 +32,9 @@ export const updateUserMiddleware = celebrate({
   },
   [Segments.BODY]: {
     name: Joi.string(),
-    email: Joi.string().email(),
+    cpf: Joi.string(),
+    cnpj: Joi.string(),
+    corporate_name: Joi.string(),
   },
 });
 
@@ -41,6 +47,9 @@ export const deleteUserMiddleware = celebrate({
 export const updateUserAvatarMiddleware = celebrate({
   [Segments.PARAMS]: {
     user_id: Joi.string().uuid().required(),
+  },
+  [Segments.BODY]: {
+    avatar: Joi.string(),
   },
 });
 

@@ -9,3 +9,22 @@ export const createPlanMiddleware = celebrate({
     qtd_access: Joi.number().required(),
   },
 });
+
+export const deletePlanMiddleware = celebrate({
+  [Segments.PARAMS]: {
+    id: Joi.string().uuid().required(),
+  },
+});
+
+export const updatePlanMiddleware = celebrate({
+  [Segments.PARAMS]: {
+    id: Joi.string().uuid().required(),
+  },
+  [Segments.BODY]: {
+    name: Joi.string(),
+    description: Joi.string(),
+    price: Joi.number(),
+    recurrence: Joi.string(),
+    qtd_access: Joi.number(),
+  },
+});

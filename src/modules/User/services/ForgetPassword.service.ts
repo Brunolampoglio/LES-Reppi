@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { inject, injectable } from 'tsyringe';
 import path from 'path';
 import crypto from 'crypto';

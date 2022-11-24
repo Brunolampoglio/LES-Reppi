@@ -1,5 +1,4 @@
 import { instanceToInstance } from 'class-transformer';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { inject, injectable } from 'tsyringe';
 
 import { AppError } from '@shared/error/AppError';
@@ -25,16 +24,19 @@ class CreateUserService {
     role,
     corporate_name,
     cnpj,
+    cpf,
+    position,
     gestor_id,
   }: ICreateUserDTO): Promise<User> {
-    const [user_exists, user_existsCnpj] = await Promise.all([
+    const [user_exists, user_existsCnpj, user_existsCpf] = await Promise.all([
       this.userRepository.findBy({
         email,
       }),
       this.userRepository.findBy({ cnpj }),
+      this.userRepository.findBy({ cpf }),
     ]);
 
-    if (user_exists || user_existsCnpj)
+    if (user_exists || user_existsCnpj || user_existsCpf)
       throw new AppError('Usuário já cadastrado');
 
     const hashed_password = await this.hashProvider.generateHash(password);
@@ -46,7 +48,9 @@ class CreateUserService {
       role,
       corporate_name,
       cnpj,
-      gestor_id,
+      cpf,
+      position,
+      gestor_id: gestor_id || undefined,
     });
 
     await this.userRepository.save(user);

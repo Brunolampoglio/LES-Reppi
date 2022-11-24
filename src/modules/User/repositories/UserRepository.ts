@@ -12,24 +12,42 @@ class UserRepository implements IUserRepository {
     this.ormRepository = getRepository(User);
   }
 
+
   async findBy(filter: Partial<User>): Promise<User | undefined> {
     const user = await this.ormRepository.findOne(filter);
 
     return user;
   }
 
-  public async listBy({
+  public async listByUser({
     page = 1,
     limit = 10,
     filters,
   }: IPaginatedRequest<User>): Promise<IPaginatedResponse<User>> {
     const users = await this.ormRepository.find({
-      where: filters,
+      where: {role:'Paciente'},
       skip: (page - 1) * limit,
       take: limit,
     });
 
     const userTotal = await this.ormRepository.count(filters);
+
+    return {
+      results: users,
+      total: userTotal,
+      page,
+      limit,
+    };
+  }
+
+  public async listCorporate({ page = 1, limit = 10 }: IPaginatedRequest<User>): Promise<IPaginatedResponse<User>> {
+    const users = await this.ormRepository.find({
+      where: {role:'Gestor'},
+      skip: (page - 1) * limit,
+      take: limit,
+    });
+
+    const userTotal = await this.ormRepository.count();
 
     return {
       results: users,
@@ -45,7 +63,9 @@ class UserRepository implements IUserRepository {
     password,
     role,
     cnpj,
+    cpf,
     corporate_name,
+    position,
     gestor_id,
   }: IUserCreate): User {
     const user = this.ormRepository.create({
@@ -54,7 +74,9 @@ class UserRepository implements IUserRepository {
       password,
       role,
       cnpj,
+      cpf,
       corporate_name,
+      position,
       gestor_id,
     });
 

@@ -7,8 +7,10 @@ interface IUserCreate {
   role: Roles;
   corporate_name?: string;
   cnpj?: string;
+  cpf?: string;
   gestor_id?: string;
   device_token?: string;
+  position?: string;
 }
 
 export { IUserCreate };
