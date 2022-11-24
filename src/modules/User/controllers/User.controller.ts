@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 
 import { CreateUserService } from '../services/CreateUser.service';
 import { DeleteUserService } from '../services/DeleteUser.service';
+import { ListEmployeeByGestorService } from '../services/ListEmployeeByGestor.service';
 import { ListGestorService } from '../services/ListGestor.service';
 import { ListUserService } from '../services/ListUser.service';
 import { ShowUserService } from '../services/ShowUser.service';
@@ -60,6 +61,26 @@ class UserController {
     });
 
     return res.json(users);
+  }
+
+  async listEmployeeByGestor(req: Request, res: Response): Promise<Response> {
+    const { page, limit } = req.query as {
+      [key: string]: string;
+    };
+
+    const { gestor_id } = req.params;
+
+    const listEmployeeByGestorService = container.resolve(ListEmployeeByGestorService);
+
+    const users = await listEmployeeByGestorService.execute({
+      limit: parseInt(limit, 10) || 50,
+      page: parseInt(page, 10) || 1,
+      gestor_id,
+      isMaster: req.user.isMaster,
+    });
+
+    return res.json(users);
+
   }
 
 

@@ -1,3 +1,4 @@
+
 import { IPaginatedRequest } from 'src/shared/interfaces/IPaginatedRequest';
 import { IPaginatedResponse } from 'src/shared/interfaces/IPaginatedResponse';
 import { getRepository, Repository } from 'typeorm';
@@ -11,7 +12,6 @@ class UserRepository implements IUserRepository {
   constructor() {
     this.ormRepository = getRepository(User);
   }
-
 
   async findBy(filter: Partial<User>): Promise<User | undefined> {
     const user = await this.ormRepository.findOne(filter);
@@ -43,6 +43,23 @@ class UserRepository implements IUserRepository {
   public async listCorporate({ page = 1, limit = 10 }: IPaginatedRequest<User>): Promise<IPaginatedResponse<User>> {
     const users = await this.ormRepository.find({
       where: {role:'Gestor'},
+      skip: (page - 1) * limit,
+      take: limit,
+    });
+
+    const userTotal = await this.ormRepository.count();
+
+    return {
+      results: users,
+      total: userTotal,
+      page,
+      limit,
+    };
+  }
+
+  public async listEmployee({ page = 1, limit = 10, gestor_id}: IPaginatedRequest<User> & {gestor_id: string}): Promise<IPaginatedResponse<User>> {
+    const users = await this.ormRepository.find({
+      where: { gestor_id },
       skip: (page - 1) * limit,
       take: limit,
     });

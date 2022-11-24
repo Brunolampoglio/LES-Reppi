@@ -7,6 +7,7 @@ interface IUserRepository {
   findBy(filter: Partial<User>): Promise<User | undefined>;
   listByUser(filter: IPaginatedRequest<User>): Promise<IPaginatedResponse<User>>;
   listCorporate(filter: IPaginatedRequest<User>): Promise<IPaginatedResponse<User>>;
+  listEmployee(filter: IPaginatedRequest<User> & {gestor_id: string}, ): Promise<IPaginatedResponse<User>>;
   create(user: IUserCreate): User;
   save(user: User): Promise<User>;
   remove(user: User): Promise<void>;
