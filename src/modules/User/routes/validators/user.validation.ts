@@ -49,6 +49,16 @@ export const updateUserMiddleware = celebrate({
   },
 });
 
+export const updateStatusMiddleware = celebrate({
+  [Segments.PARAMS]: {
+    user_id: Joi.string().uuid().required(),
+  },
+  [Segments.BODY]: {
+    status: Joi.boolean().required(),
+  },
+});
+
+
 export const deleteUserMiddleware = celebrate({
   [Segments.PARAMS]: {
     user_id: Joi.string().uuid().required(),

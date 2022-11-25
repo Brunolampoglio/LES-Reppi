@@ -7,6 +7,7 @@ import { ListEmployeeByGestorService } from '../services/ListEmployeeByGestor.se
 import { ListGestorService } from '../services/ListGestor.service';
 import { ListUserService } from '../services/ListUser.service';
 import { ShowUserService } from '../services/ShowUser.service';
+import { UpdateStatusService } from '../services/UpdateStatus.service';
 import { UpdateUserService } from '../services/UpdateUser.service';
 
 class UserController {
@@ -118,6 +119,23 @@ class UserController {
 
     return res.json(user);
   }
+
+  async updateStatus(req: Request, res: Response): Promise<Response> {
+    const { user_id } = req.params;
+
+    const { status } = req.body;
+
+    const updateStatusService = container.resolve(UpdateStatusService);
+
+    const user = await updateStatusService.execute({
+      user_id,
+      isMaster: req.user.isMaster,
+      status,
+    });
+
+    return res.json(user);
+  }
+
 
   async delete(req: Request, res: Response): Promise<Response> {
     const { user_id } = req.params;
