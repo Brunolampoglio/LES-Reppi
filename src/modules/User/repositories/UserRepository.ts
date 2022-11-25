@@ -84,6 +84,7 @@ class UserRepository implements IUserRepository {
     corporate_name,
     position,
     gestor_id,
+    phone_number
   }: IUserCreate): User {
     const user = this.ormRepository.create({
       name,
@@ -95,6 +96,7 @@ class UserRepository implements IUserRepository {
       corporate_name,
       position,
       gestor_id,
+      phone_number,
     });
 
     return user;

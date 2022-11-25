@@ -29,6 +29,7 @@ class CreateUserService {
     position,
     gestor_id,
     address,
+    phone_number,
   }: ICreateUserDTO): Promise<User> {
     const [user_exists, user_existsCnpj, user_existsCpf] = await Promise.all([
       this.userRepository.findBy({
@@ -56,6 +57,7 @@ class CreateUserService {
       cpf,
       position,
       gestor_id: gestor_id || undefined,
+     phone_number,
     });
 
     if(address) {

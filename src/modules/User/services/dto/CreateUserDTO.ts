@@ -12,6 +12,7 @@ interface ICreateUserDTO {
   position?: Positions;
   gestor_id?: string;
   address?: Address;
+  phone_number?: string;
 }
 
 export { ICreateUserDTO };
