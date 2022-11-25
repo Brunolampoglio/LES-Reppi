@@ -8,6 +8,7 @@ interface IBannerRepository {
   listBy(
     filter: IPaginatedRequest<Banner>,
   ): Promise<IPaginatedResponse<Banner>>;
+  show(id: string): Promise<IPaginatedResponse<Banner>>;
   create(banner: IBannerCreate): Banner;
   save(banner: Banner): Promise<Banner>;
   remove(banner: Banner): Promise<void>;

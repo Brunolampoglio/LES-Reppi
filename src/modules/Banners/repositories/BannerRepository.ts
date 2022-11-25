@@ -39,6 +39,25 @@ class BannerRepository implements IBannerRepository {
     };
   }
 
+  public async show(id: string): Promise<IPaginatedResponse<Banner>> {
+
+    const banners = await this.ormRepository.find(
+      {
+        where: {id},
+      },
+    );
+
+    const bannerTotal = await this.ormRepository.count();
+
+    return {
+      results: banners,
+      total: bannerTotal,
+      page: 1,
+      limit: 10,
+    };
+  }
+
+
   create({
     name,
     link_banner,

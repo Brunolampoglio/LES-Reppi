@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 import { CreateBannerService } from '../services/CreateBanner.service';
 import { DeleteBannerService } from '../services/DeleteBanner.service';
 import { ListBannerService } from '../services/ListBanner.service';
+import { ShowBannerService } from '../services/ShowBanner.service';
 import { UpdateBannerService } from '../services/UpdateBanner.service';
 
 class BannerController {
@@ -42,6 +43,19 @@ class BannerController {
     });
 
     return res.json(banners);
+  }
+
+  async show(req: Request, res: Response): Promise<Response> {
+    const { id_banner } = req.params;
+
+    const showBannerService = container.resolve(ShowBannerService);
+
+    const banner = await showBannerService.execute({
+      id: id_banner,
+    });
+
+    return res.json(banner);
+
   }
 
   async update(req: Request, res: Response): Promise<Response> {
