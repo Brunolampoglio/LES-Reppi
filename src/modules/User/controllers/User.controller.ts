@@ -26,7 +26,7 @@ class UserController {
       corporate_name,
       position,
       gestor_id: user_id,
-      address,
+      address
     });
 
     return res.status(201).json(user);
@@ -121,13 +121,12 @@ class UserController {
 
   async delete(req: Request, res: Response): Promise<Response> {
     const { user_id } = req.params;
-    const { id } = req.user;
 
     const deleteUserService = container.resolve(DeleteUserService);
 
     await deleteUserService.execute({
       user_id,
-      request_id: id,
+     isMaster: req.user.isMaster,
     });
 
     return res.status(204).send();

@@ -12,9 +12,10 @@ class DeleteUserService {
     private userRepository: IUserRepository,
   ) {}
 
-  public async execute({ user_id, request_id }: IDeleteUserDTO): Promise<void> {
-    if (request_id !== user_id)
-      throw new AppError('Usuário não encontrado', 404);
+  public async execute({ user_id, isMaster }: IDeleteUserDTO): Promise<void> {
+    if (!isMaster) {
+      throw new AppError('Usuário não autorizado', 404);
+    }
 
     const user = await this.userRepository.findBy({ id: user_id });
 
