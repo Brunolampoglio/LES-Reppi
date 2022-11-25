@@ -12,6 +12,7 @@ import {
   deleteUserAvatarMiddleware,
   deleteUserMiddleware,
   showUserMiddleware,
+  updateStatusMiddleware,
   updateUserAvatarMiddleware,
   updateUserMiddleware,
 } from './validators/user.validation';
@@ -52,6 +53,7 @@ userRouter.delete(
 userRouter.get('/:user_id', showUserMiddleware, userController.show);
 
 userRouter.put('/:user_id', updateUserMiddleware, userController.update);
+userRouter.put('/status/:user_id', updateStatusMiddleware, userController.updateStatus);
 
 userRouter.delete('/:user_id', deleteUserMiddleware, userController.delete);
 
