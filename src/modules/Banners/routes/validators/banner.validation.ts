@@ -25,6 +25,12 @@ export const updateBannerMiddleware = celebrate({
   },
 });
 
+export const showBannerMiddleware = celebrate({
+  [Segments.PARAMS]: {
+    id_banner: Joi.string().uuid().required(),
+  },
+});
+
 export const deleteBannerMiddleware = celebrate({
   [Segments.PARAMS]: {
     id: Joi.string().uuid().required(),
