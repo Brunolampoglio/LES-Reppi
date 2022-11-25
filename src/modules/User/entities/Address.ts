@@ -35,6 +35,9 @@ class Address {
   @Column()
   number: string;
 
+  @Column({ nullable: true })
+  complement: string;
+
   @OneToOne(() => User, user => user.address, {
     orphanedRowAction: 'delete',
   })

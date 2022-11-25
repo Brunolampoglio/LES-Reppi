@@ -17,6 +17,7 @@ export const createUserMiddleware = celebrate({
       uf: Joi.string().length(2).required(),
       city: Joi.string().required().label('cidade'),
       district: Joi.string().required().label('bairro'),
+      complement: Joi.string(),
       number: Joi.string()
         .max(6)
         .pattern(/^[0-9]+$/)
