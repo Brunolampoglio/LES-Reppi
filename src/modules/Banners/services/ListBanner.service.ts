@@ -8,16 +8,16 @@ import { IListBannerDTO } from './dto/ListBannerDTO';
 @injectable()
 class ListBannerService {
   constructor(
-    @inject('BannersRepository')
-    private bannersRepository: IBannerRepository,
+    @inject('BannerRepository')
+    private bannerRepository: IBannerRepository,
   ) {}
 
   public async execute({ user_id, isMaster }: IListBannerDTO): Promise<Banner> {
     if (!isMaster) throw new AppError('Usuário não autorizado', 404);
 
-    const banners = await this.bannersRepository.findBy({
-      id: user_id,
-    });
+    console.log(user_id);
+
+    const banners = await this.bannerRepository.findBy({ user_id });
 
     if (!banners) throw new AppError('Banners não encontrados', 404);
 

@@ -1,3 +1,4 @@
+import { AppError } from '@shared/error/AppError';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { CreateBannerService } from '../services/CreateBanner.service';
@@ -7,17 +8,24 @@ import { UpdateBannerService } from '../services/UpdateBanner.service';
 
 class BannerController {
   async create(req: Request, res: Response): Promise<Response> {
-    const { name, link_banner, link_image, image, dt_final, dt_initial } =
+    const { name, link_banner, link_image, dt_final, dt_initial } =
       req.body;
+
+      if (!req.file) throw new AppError('Foto não encontrada');
+
+    const { filename } = req.file;
 
     const createBannerService = container.resolve(CreateBannerService);
 
+    console.log( name, link_banner, link_image, dt_final, dt_initial);
+
     const banner = await createBannerService.execute({
       user_id: req.user.id,
+      isMaster: req.user.isMaster,
       name,
       link_banner,
       link_image,
-      image,
+      image: filename,
       dt_final,
       dt_initial,
     });

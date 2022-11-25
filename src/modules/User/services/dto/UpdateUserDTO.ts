@@ -5,6 +5,9 @@ interface IUpdateUserDTO {
   cpf?: string;
   cnpj?: string;
   corporate_name?: string;
+  phone_number?: string;
+  position?: string;
+  status?: string;
 }
 
 export { IUpdateUserDTO };

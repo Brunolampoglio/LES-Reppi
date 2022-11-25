@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import {
   Column,
   CreateDateColumn,
@@ -60,6 +60,12 @@ class User {
 
   @Column({ nullable: true })
   device_token: string;
+
+  @Column({ default: true, nullable: true })
+  status: boolean;
+
+  @Column({ nullable: true })
+  health_insurance: string;
 
   @OneToMany(() => Comments, comments => comments.userReceiver, {
     cascade: true,
