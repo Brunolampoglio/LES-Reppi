@@ -12,3 +12,4 @@ ormconfig.json
 logs/
 dist/
 diagrams/
+ormconfig.ts

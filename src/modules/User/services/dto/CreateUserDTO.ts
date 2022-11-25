@@ -1,3 +1,4 @@
+import { Address } from '@modules/User/entities/Address';
 import { Positions, Roles } from '@shared/enum/Roles';
 
 interface ICreateUserDTO {
@@ -10,6 +11,7 @@ interface ICreateUserDTO {
   cpf?: string;
   position?: Positions;
   gestor_id?: string;
+  address?: Address;
 }
 
 export { ICreateUserDTO };

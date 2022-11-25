@@ -10,6 +10,17 @@ export const createUserMiddleware = celebrate({
     corporate_name: Joi.string(),
     position: Joi.string(),
     role: Joi.string().valid('Master', 'Paciente', 'Gestor', 'Funcionário'),
+    address: Joi.object({
+      zip: Joi.string().min(8).max(9).required().label('CEP'),
+      street: Joi.string().required().label('rua'),
+      uf: Joi.string().length(2).required(),
+      city: Joi.string().required().label('cidade'),
+      district: Joi.string().required().label('bairro'),
+      number: Joi.string()
+        .max(6)
+        .pattern(/^[0-9]+$/)
+        .label('número'),
+    }),
   },
 });
 
