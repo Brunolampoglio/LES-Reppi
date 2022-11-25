@@ -6,6 +6,7 @@ import { IHashProvider } from '@shared/container/providers/HashProvider/model/IH
 import { User } from '../entities/User';
 import { IUserRepository } from '../repositories/UserRepository.interface';
 import { ICreateUserDTO } from './dto/CreateUserDTO';
+import { Address } from '../entities/Address';
 
 @injectable()
 class CreateUserService {
@@ -27,6 +28,7 @@ class CreateUserService {
     cpf,
     position,
     gestor_id,
+    address,
   }: ICreateUserDTO): Promise<User> {
     const [user_exists, user_existsCnpj, user_existsCpf] = await Promise.all([
       this.userRepository.findBy({
@@ -40,6 +42,9 @@ class CreateUserService {
       throw new AppError('Usuário já cadastrado');
 
     const hashed_password = await this.hashProvider.generateHash(password);
+    const addressInstance = new Address();
+
+
 
     const user = this.userRepository.create({
       name,
@@ -52,6 +57,11 @@ class CreateUserService {
       position,
       gestor_id: gestor_id || undefined,
     });
+
+    if(address) {
+      Object.assign(addressInstance, { ...address });
+      user.address = addressInstance;
+    }
 
     await this.userRepository.save(user);
 
