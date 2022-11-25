@@ -46,6 +46,9 @@ class Invoices {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @Column({ nullable: true })
+  status: boolean;
 }
 
 export { Invoices };

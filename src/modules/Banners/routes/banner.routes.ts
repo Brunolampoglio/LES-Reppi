@@ -5,16 +5,26 @@ import {
   createBannerMiddleware,
   updateBannerMiddleware,
 } from './validators/banner.validation';
+import multer from 'multer';
+import { uploadConfig } from '@config/upload';
 
 const bannerRouter = Router();
 
 const bannerController = new BannerController();
 
-bannerRouter.post('/', createBannerMiddleware, bannerController.create);
+const uploadMulter = multer({
+  storage: uploadConfig.multer.storage,
+  limits: { fileSize: 200 * 1024 * 1024 },
+});
 
-bannerRouter.get('/', bannerController.list);
+
+
 
 bannerRouter.use(verifyToken);
+
+bannerRouter.post('/',  uploadMulter.single('image'), bannerController.create);
+
+bannerRouter.get('/', bannerController.list);
 
 bannerRouter.put('/:id', updateBannerMiddleware, bannerController.update);
 
