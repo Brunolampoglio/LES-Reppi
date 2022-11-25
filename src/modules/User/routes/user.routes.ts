@@ -41,6 +41,7 @@ userRouter.patch(
 
 userRouter.get('/', userController.listUser);
 userRouter.get('/gestor', userController.listGestor);
+userRouter.get('/employee', userController.listEmployeeByGestor);
 
 userRouter.delete(
   '/:user_id/avatar',
