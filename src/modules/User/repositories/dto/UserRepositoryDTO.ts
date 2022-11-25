@@ -11,6 +11,7 @@ interface IUserCreate {
   gestor_id?: string;
   device_token?: string;
   position?: string;
+  phone_number?: string;
 }
 
 export { IUserCreate };
