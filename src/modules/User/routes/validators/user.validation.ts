@@ -48,6 +48,9 @@ export const updateUserMiddleware = celebrate({
     cpf: Joi.string(),
     cnpj: Joi.string(),
     corporate_name: Joi.string(),
+    position: Joi.string(),
+    phone_number: Joi.string(),
+
   },
 });
 

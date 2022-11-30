@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { AppError } from '@shared/error/AppError';
 import { inject, injectable } from 'tsyringe';
 import { Banner } from '../entities/Banner';

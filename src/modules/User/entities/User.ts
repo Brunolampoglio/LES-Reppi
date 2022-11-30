@@ -18,6 +18,7 @@ import { Plans } from '@modules/Plans/entities/Plans';
 import { Invoices } from '@modules/invoices/entities/Invoices';
 import { Address } from './Address';
 import { Session } from './Session';
+import { Card } from '@modules/Cards/entities/Card';
 
 @Entity('users')
 class User {
@@ -92,6 +93,11 @@ class User {
     eager: true,
   })
   invoices: Invoices[];
+
+  @OneToMany(() => Card , card => card.user, {
+    cascade: true,
+    })
+  cards: Card[];
 
   @Column({ nullable: true })
   address_id: string;

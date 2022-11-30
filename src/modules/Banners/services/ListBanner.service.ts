@@ -16,8 +16,6 @@ class ListBannerService {
   public async execute({ user_id, isMaster }: IListBannerDTO): Promise<IPaginatedResponse<Banner>> {
     if (!isMaster) throw new AppError('Usuário não autorizado', 404);
 
-    console.log(user_id);
-
     const banners = await this.bannerRepository.listBy({ filters: { user_id } });
 
 
