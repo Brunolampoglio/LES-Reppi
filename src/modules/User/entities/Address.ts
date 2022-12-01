@@ -29,7 +29,7 @@ class Address {
   @Column()
   city: string;
 
-  @Column()
+  @Column({ nullable: true })
   district: string;
 
   @Column()

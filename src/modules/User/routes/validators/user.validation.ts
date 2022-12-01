@@ -16,7 +16,6 @@ export const createUserMiddleware = celebrate({
       street: Joi.string().required().label('rua'),
       uf: Joi.string().length(2).required(),
       city: Joi.string().required().label('cidade'),
-      district: Joi.string().required().label('bairro'),
       complement: Joi.string(),
       number: Joi.string()
         .max(6)

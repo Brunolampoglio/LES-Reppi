@@ -81,12 +81,12 @@ class BannerController {
   }
 
   async delete(req: Request, res: Response): Promise<Response> {
-    const { id_banner } = req.params;
+    const { id } = req.params;
 
     const deleteBannerService = container.resolve(DeleteBannerService);
 
     await deleteBannerService.execute({
-      banner_id: id_banner,
+      banner_id: id,
       isMaster: req.user.isMaster,
     });
 
