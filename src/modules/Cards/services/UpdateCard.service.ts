@@ -18,19 +18,38 @@ class UpdateCardService {
   public async execute({
     id,
     user_id,
+    digits,
+    expiration,
+    main,
     ...cardParams
   }: IUpdateCardDTO): Promise<Card> {
-    const card = await this.cardRepository.findBy({ id });
+    const { results: card } = await this.cardRepository.listBy({ filters:{ user_id } });
 
     if (!card) throw new AppError("Cartão não encontrado", 404);
 
-    const user = await this.userRepository.findBy({ id: user_id });
+    const first_digits = digits.slice(0, 4);
+    const last_digits = digits.slice(-4);
 
-    if (!user) throw new AppError("Usuário não encontrado", 404);
+    const expiration_month = expiration.toString().slice(0, 2);
+    const expiration_year = expiration.toString().slice(-4);
 
-    if(user.id !== card.user_id) throw new AppError('Usuário não autorizado', 404);
+    const month = Number(expiration_month);
+    const year = Number(expiration_year);
 
-    Object.assign(card, { ...cardParams });
+    Object.assign(card, {
+      first_digits,
+      last_digits,
+      expiration_month: month,
+      expiration_year: year,
+      ...cardParams });
+
+      card.forEach(async (card) => {
+        if (card.id === id) {
+          card.main = main;
+        } else {
+          card.main = false;
+        }
+      });
 
     const newCard = await this.cardRepository.save(card);
 

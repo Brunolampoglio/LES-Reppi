@@ -17,12 +17,9 @@ class CreateCardService {
 
   public async execute({
     external_id,
-    first_digits,
-    last_digits,
-    brand,
     holder_name,
-    expiration_month,
-    expiration_year,
+    digits,
+    expiration,
     main,
     user_id,
   }: ICreateCardDTO): Promise<Card> {
@@ -31,15 +28,23 @@ class CreateCardService {
 
     if(!user) throw new AppError('Usuário não encontrado', 404);
 
+    const first_digits = digits.slice(0, 4);
+    const last_digits = digits.slice(-4);
+
+    const expiration_month = expiration.slice(0, 2);
+    const expiration_year = expiration.slice(-4);
+
+    const month = Number(expiration_month);
+    const year = Number(expiration_year);
 
     const card = this.cardRepository.create({
       external_id,
       first_digits,
       last_digits,
-      brand,
+      brand: 'Visa',
       holder_name,
-      expiration_month,
-      expiration_year,
+      expiration_month: month,
+      expiration_year: year,
       main,
       user_id,
     });

@@ -10,7 +10,7 @@ interface ICardRepository {
   ): Promise<IPaginatedResponse<Card>>;
   show(id: string): Promise<IPaginatedResponse<Card>>;
   create(card: ICardCreate): Card;
-  save(card: Card): Promise<Card>;
+  save(card: Card | Card[]): Promise<Card>;
   remove(card: Card): Promise<void>;
 }
 export { ICardRepository };

@@ -8,18 +8,15 @@ import { DeleteCardService } from "../services/DeleteCard.service";
 class CardController {
   async create(req: Request, res: Response): Promise<Response> {
 
-    const { external_id, first_digits, last_digits, brand, holder_name, expiration_month, expiration_year, main, user_id } = req.body;
+    const { external_id, digits, holder_name, expiration, main, user_id } = req.body;
 
     const createCardService = container.resolve(CreateCardService);
 
     const card = await createCardService.execute({
       external_id,
-      first_digits,
-      last_digits,
-      brand,
       holder_name,
-      expiration_month,
-      expiration_year,
+      expiration,
+      digits,
       main,
       user_id,
     });
@@ -41,8 +38,8 @@ class CardController {
 
   async update(req: Request, res: Response): Promise<Response> {
     const { card_id } = req.params;
-    const { external_id, brand, holder_name, expiration_month, expiration_year, main,
-    first_digits, last_digits } = req.body;
+    const { external_id, brand, holder_name, expiration, main,
+    digits } = req.body;
 
     const updateCardService = container.resolve(UpdateCardService);
 
@@ -50,12 +47,11 @@ class CardController {
       external_id,
       brand,
       holder_name,
-      expiration_month,
-      expiration_year,
+      digits,
+      expiration,
       main,
       user_id: req.user.id,
-      first_digits,
-      last_digits,
+
       id: card_id,
 
 
