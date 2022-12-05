@@ -19,6 +19,7 @@ import { Invoices } from '@modules/invoices/entities/Invoices';
 import { Address } from './Address';
 import { Session } from './Session';
 import { Card } from '@modules/Cards/entities/Card';
+import { PatientData } from '@modules/PatientData/entities/PatientData';
 
 @Entity('users')
 class User {
@@ -82,6 +83,11 @@ class User {
     cascade: true,
   })
   banners: Banner[];
+
+  @OneToMany(() => PatientData, patientData => patientData.user, {
+    cascade: true,
+  })
+  patientData: PatientData[];
 
   @OneToMany(() => Plans, plans => plans.user, {
     cascade: true,
