@@ -10,8 +10,11 @@ import { ICommentsRepository } from '@modules/Comments/repositories/CommentsRepo
 import { CommentRepository } from '@modules/Comments/repositories/CommentsRepository';
 import { IBannerRepository } from '@modules/Banners/repositories/BannerRepositories.interface';
 import { BannerRepository } from '@modules/Banners/repositories/BannerRepository';
+import { IExamsRepository } from '@modules/Exams/repositories/ExamsRepositories.interface';
+import { ExamRepository } from '@modules/Exams/repositories/ExamsRepository';
 
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
-container.registerSingleton<IPlansRepository>('PlanRepository', PlanRepository)
-container.registerSingleton<ICommentsRepository>('CommentRepository', CommentRepository)
-container.registerSingleton<IBannerRepository>('BannerRepository', BannerRepository)
+container.registerSingleton<IPlansRepository>('PlanRepository', PlanRepository);
+container.registerSingleton<ICommentsRepository>('CommentRepository', CommentRepository);
+container.registerSingleton<IBannerRepository>('BannerRepository', BannerRepository);
+container.registerSingleton<IExamsRepository>('ExamsRepository', ExamRepository);
