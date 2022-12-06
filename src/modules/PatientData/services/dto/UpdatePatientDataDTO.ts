@@ -1,4 +1,4 @@
-interface IPatientDataCreate {
+interface IPatientDataUpdate {
   colesterol: string;
   creatinina: string;
   hemoglobina_glicada: string;
@@ -7,4 +7,4 @@ interface IPatientDataCreate {
   patientId: string;
 }
 
-export { IPatientDataCreate };
+export { IPatientDataUpdate };

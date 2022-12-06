@@ -10,3 +10,30 @@ export const createPatientDataMiddleware = celebrate({
     descricao: Joi.string().required(),
   },
 });
+
+
+export const deletePatientDataMiddleware = celebrate({
+  [Segments.PARAMS]: {
+    patientId: Joi.string().uuid().required(),
+  },
+});
+
+export const updatePatientDataMiddleware = celebrate({
+  [Segments.PARAMS]: {
+    patientId: Joi.string().uuid().required(),
+  },
+  [Segments.BODY]: {
+    colesterol: Joi.string(),
+    creatinina: Joi.string(),
+    hemoglobina_glicada: Joi.string(),
+    peso: Joi.string(),
+    descricao: Joi.string(),
+  },
+});
+
+export const listPatientDataMiddleware = celebrate({
+  [Segments.PARAMS]: {
+    patientId: Joi.string().uuid().required(),
+  },
+});
+
