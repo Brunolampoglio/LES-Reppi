@@ -35,11 +35,16 @@ class BannerController {
   }
 
   async list(req: Request, res: Response): Promise<Response> {
+    const { page, limit } = req.query as {
+      [key: string]: string;
+    };
     const listBannerService = container.resolve(ListBannerService);
 
     const banners = await listBannerService.execute({
       user_id: req.user.id,
       isMaster: req.user.isMaster,
+      limit: parseInt(limit, 10) || 50,
+      page: parseInt(page, 10) || 1,
     });
 
     return res.json(banners);

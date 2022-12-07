@@ -14,8 +14,10 @@ class ListAllCardService {
 
   public async execute({
     user_id,
+    page,
+    limit,
   }: IListAllCardDTO): Promise<IPaginatedResponse<Card>> {
-    const cards = await this.cardRepository.listBy({ filters: { user_id } });
+    const cards = await this.cardRepository.listBy({ filters: { user_id }, page, limit });
 
     if (!cards) throw new AppError("Cartões não encontrados", 404);
 

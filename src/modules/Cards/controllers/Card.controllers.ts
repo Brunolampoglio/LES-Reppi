@@ -26,11 +26,16 @@ class CardController {
 
  async listAll(req: Request, res: Response): Promise<Response> {
     const { user_id } = req.params;
+    const { page, limit } = req.query as {
+      [key: string]: string;
+    };
 
     const listAllCardService = container.resolve(ListAllCardService);
 
     const cards = await listAllCardService.execute({
       user_id,
+      limit: parseInt(limit, 10) || 50,
+      page: parseInt(page, 10) || 1,
     });
 
     return res.json(cards);
