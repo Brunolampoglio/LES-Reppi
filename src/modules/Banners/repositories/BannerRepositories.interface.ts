@@ -1,4 +1,4 @@
-import { IPaginatedRequest } from '@shared/interfaces/IPaginatedRequest';
+import { IPaginatedRequest, IPaginatedRequestObri } from '@shared/interfaces/IPaginatedRequest';
 import { IPaginatedResponse } from '@shared/interfaces/IPaginatedResponse';
 import { Banner } from '../entities/Banner';
 import { IBannerCreate } from './dto/BannerRepositoryDTO';
@@ -6,7 +6,7 @@ import { IBannerCreate } from './dto/BannerRepositoryDTO';
 interface IBannerRepository {
   findBy(filter: Partial<Banner>): Promise<Banner | undefined>;
   listBy(
-    filter: IPaginatedRequest<Banner>,
+    filter: IPaginatedRequestObri<Banner>,
   ): Promise<IPaginatedResponse<Banner>>;
   show(id: string): Promise<IPaginatedResponse<Banner>>;
   create(banner: IBannerCreate): Banner;
