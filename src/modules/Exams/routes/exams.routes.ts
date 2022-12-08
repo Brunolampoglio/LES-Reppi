@@ -13,7 +13,7 @@ examsRouter.post('/:client_Id', createExamsMiddleware, examsController.create);
 
 examsRouter.delete('/:examId', deleteExamsMiddleware, examsController.delete);
 
-examsRouter.get('/:client_id', showExamsMiddleware, examsController.show);
+examsRouter.get('/:client_Id', showExamsMiddleware, examsController.show);
 
 examsRouter.put('/:examId', updateExamsMiddleware, examsController.update);
 

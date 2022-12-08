@@ -37,7 +37,7 @@ class ExamsController {
   }
 
   async show(req: Request, res: Response): Promise<Response> {
-    const { client_id } = req.params;
+    const { client_Id } = req.params;
     const { page, limit } = req.query as {
       [key: string]: string;
     };
@@ -45,7 +45,7 @@ class ExamsController {
     const listExamsService = container.resolve(ListExamsService);
 
     const exams = await listExamsService.execute({
-      client_id,
+      client_id: client_Id,
       page: parseInt(page, 10) || 1,
       limit: parseInt(limit, 10) || 50,
     });
