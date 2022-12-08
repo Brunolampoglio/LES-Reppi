@@ -1,5 +1,5 @@
 
-import { IPaginatedRequest } from 'src/shared/interfaces/IPaginatedRequest';
+import { IPaginatedRequest, IPaginatedRequestObri } from 'src/shared/interfaces/IPaginatedRequest';
 import { IPaginatedResponse } from 'src/shared/interfaces/IPaginatedResponse';
 import { getRepository, Repository } from 'typeorm';
 import { User } from '../entities/User';
@@ -20,10 +20,10 @@ class UserRepository implements IUserRepository {
   }
 
   public async listByUser({
-    page = 1,
-    limit = 10,
+    page,
+    limit,
     filters,
-  }: IPaginatedRequest<User>): Promise<IPaginatedResponse<User>> {
+  }: IPaginatedRequestObri<User>): Promise<IPaginatedResponse<User>> {
     const users = await this.ormRepository.find({
       where: {role:'Paciente'},
       skip: (page - 1) * limit,
@@ -40,7 +40,7 @@ class UserRepository implements IUserRepository {
     };
   }
 
-  public async listCorporate({ page = 1, limit = 10 }: IPaginatedRequest<User>): Promise<IPaginatedResponse<User>> {
+  public async listCorporate({ page, limit }: IPaginatedRequestObri<User>): Promise<IPaginatedResponse<User>> {
     const users = await this.ormRepository.find({
       where: {role:'Gestor'},
       skip: (page - 1) * limit,

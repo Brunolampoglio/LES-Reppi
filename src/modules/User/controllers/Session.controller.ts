@@ -15,6 +15,7 @@ class SessionController {
       password,
       device_token,
       remember_me,
+      role: req.params.role,
     });
 
     return res.json(resp);

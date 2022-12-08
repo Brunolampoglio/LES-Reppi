@@ -13,12 +13,10 @@ class ListBannerService {
     private bannerRepository: IBannerRepository,
   ) {}
 
-  public async execute({ user_id, isMaster }: IListBannerDTO): Promise<IPaginatedResponse<Banner>> {
+  public async execute({ user_id, isMaster, page, limit }: IListBannerDTO): Promise<IPaginatedResponse<Banner>> {
     if (!isMaster) throw new AppError('Usuário não autorizado', 404);
 
-    console.log(user_id);
-
-    const banners = await this.bannerRepository.listBy({ filters: { user_id } });
+    const banners = await this.bannerRepository.listBy({ filters: { user_id }, page, limit });
 
 
     if (!banners) throw new AppError('Banners não encontrados', 404);

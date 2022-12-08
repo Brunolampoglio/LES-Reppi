@@ -2,7 +2,7 @@ enum Roles {
   master = 'Master',
   gestor = 'Gestor',
   user = 'Paciente',
-  employee = 'Funcionário',
+  employee = 'Funcionario',
 }
 
 export { Roles };
