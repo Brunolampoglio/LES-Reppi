@@ -9,7 +9,7 @@ export const createUserMiddleware = celebrate({
     cnpj: Joi.string(),
     corporate_name: Joi.string(),
     position: Joi.string(),
-    role: Joi.string().valid('Master', 'Paciente', 'Gestor', 'Funcionário'),
+    role: Joi.string().valid('Master', 'Paciente', 'Gestor', 'Funcionario'),
     phone_number: Joi.string(),
     address: Joi.object({
       zip: Joi.string().min(8).max(9).required().label('CEP'),

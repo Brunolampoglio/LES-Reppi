@@ -57,7 +57,7 @@ class CreateUserService {
       cpf,
       position,
       gestor_id: gestor_id || undefined,
-     phone_number,
+      phone_number,
     });
 
     if(address) {

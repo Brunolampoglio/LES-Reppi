@@ -30,10 +30,18 @@ class CreateSessionService {
     password,
     device_token,
     remember_me = false,
+    role,
   }: ICreateSessionDTO): Promise<ICreateSessionResponseDTO> {
     const user = await this.userRepository.findBy({ email });
 
     if (!user) throw new AppError('Email ou senha inválidos', 404);
+
+
+    if(Roles.employee !== role){
+      if (user.role !== role ) throw new AppError('Email ou senha inválidos', 401);
+    } else if(user.role !== Roles.employee)
+      throw new AppError('Email ou senha inválidos', 401);
+
 
     const passwordMatched = await compare(password, user.password);
 
