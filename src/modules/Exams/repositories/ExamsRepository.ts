@@ -71,6 +71,7 @@ class ExamRepository implements IExamsRepository {
       day,
       month,
       client_id,
+      status: "Agendado",
     });
 
     return exam;

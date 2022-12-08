@@ -12,8 +12,9 @@ class ListExamsService {
   ) {}
 
   public async execute({
-    client_id}: IListExamsDTO): Promise<IPaginatedResponse<Exam>> {
-    const exams = await this.examRepository.show( client_id );
+    client_id
+  }: IListExamsDTO): Promise<IPaginatedResponse<Exam>> {
+    const exams = await this.examRepository.listBy({filters: {client_id}});
 
     return {
       results: exams.results,

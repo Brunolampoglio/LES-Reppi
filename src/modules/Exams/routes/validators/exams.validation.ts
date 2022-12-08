@@ -1,6 +1,9 @@
 import { celebrate, Segments, Joi } from "celebrate";
 
 export const createExamsMiddleware = celebrate({
+  [Segments.PARAMS]: {
+    client_Id: Joi.string().uuid().required(),
+  },
   [Segments.BODY]: {
     name: Joi.string().required(),
     hour: Joi.string().required(),
@@ -22,7 +25,7 @@ export const deleteExamsMiddleware = celebrate({
 
 export const showExamsMiddleware = celebrate({
   [Segments.PARAMS]: {
-    examId: Joi.string().uuid().required(),
+    client_Id: Joi.string().uuid().required(),
   },
 });
 

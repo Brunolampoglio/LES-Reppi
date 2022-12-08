@@ -29,6 +29,9 @@ class Exam {
   @JoinColumn({ name: 'client_id' })
   user: User;
 
+  @Column()
+  status: string;
+
   @CreateDateColumn()
   created_at: Date;
 

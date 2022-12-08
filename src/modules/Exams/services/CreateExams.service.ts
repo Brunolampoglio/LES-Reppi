@@ -15,7 +15,8 @@ class CreateExamsService {
     hour,
     day,
     month,
-    client_id,}: ICreateExamsDTO): Promise<Exam> {
+    client_id,
+  }: ICreateExamsDTO): Promise<Exam> {
     const exams = this.examRepository.create({
       name,
       hour,
