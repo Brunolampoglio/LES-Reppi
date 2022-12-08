@@ -8,7 +8,7 @@ import { UpdateExamsService } from "../services/UpdateExams.service";
 class ExamsController {
   async create(req: Request, res: Response): Promise<Response> {
     const { name, hour, day, month} = req.body;
-    const { client_id } = req.params;
+    const { client_Id } = req.params;
 
     const createExamService = container.resolve(CreateExamsService);
 
@@ -17,7 +17,7 @@ class ExamsController {
       hour,
       day,
       month,
-      client_id,
+      client_id: client_Id,
     });
 
     return res.status(201).json(exam);
@@ -25,13 +25,12 @@ class ExamsController {
 
   async delete(req: Request, res: Response): Promise<Response> {
     const { examId } = req.params;
-    const { isMaster } = req.body;
 
     const deleteExamService = container.resolve(DeleteExamsService);
 
     await deleteExamService.execute({
       examId,
-      isMaster,
+      isMaster: req.user.isMaster,
     });
 
     return res.status(204).json();

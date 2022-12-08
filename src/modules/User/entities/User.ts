@@ -20,6 +20,7 @@ import { Address } from './Address';
 import { Session } from './Session';
 import { Card } from '@modules/Cards/entities/Card';
 import { PatientData } from '@modules/PatientData/entities/PatientData';
+import { PatientMenu } from '@modules/PatientMenu/entities/PatientMenu';
 
 @Entity('users')
 class User {
@@ -104,6 +105,11 @@ class User {
     cascade: true,
     })
   cards: Card[];
+
+  @OneToMany(()=> PatientMenu, patientMenu => patientMenu.user, {
+    cascade: true,
+    })
+  patientMenu: PatientMenu[];
 
   @Column({ nullable: true })
   address_id: string;

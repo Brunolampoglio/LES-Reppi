@@ -9,7 +9,7 @@ const examsController = new ExamsController();
 
 examsRouter.use(verifyToken);
 
-examsRouter.post('/', createExamsMiddleware, examsController.create);
+examsRouter.post('/:client_Id', createExamsMiddleware, examsController.create);
 
 examsRouter.delete('/:examId', deleteExamsMiddleware, examsController.delete);
 

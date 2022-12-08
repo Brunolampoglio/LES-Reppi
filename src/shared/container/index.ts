@@ -17,4 +17,4 @@ container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 container.registerSingleton<IPlansRepository>('PlanRepository', PlanRepository);
 container.registerSingleton<ICommentsRepository>('CommentRepository', CommentRepository);
 container.registerSingleton<IBannerRepository>('BannerRepository', BannerRepository);
-container.registerSingleton<IExamsRepository>('ExamsRepository', ExamRepository);
+container.registerSingleton<IExamsRepository>('ExamRepository', ExamRepository);
