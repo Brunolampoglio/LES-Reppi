@@ -1,6 +1,7 @@
 import { verifyToken } from "@shared/middleware/verifyToken";
 import { Router } from "express";
 import { PatientDataController } from "../controllers/PatientData.controller";
+import { createPatientDataMiddleware } from "./validators/patientData.validation";
 
 const patientDataRouter = Router();
 
@@ -9,13 +10,13 @@ const patientDataController = new PatientDataController();
 
 patientDataRouter.use(verifyToken);
 
-patientDataRouter.post('/:patientId', patientDataController.create);
+patientDataRouter.post('/:patientId', createPatientDataMiddleware,patientDataController.create);
 
 patientDataRouter.get('/:patientId', patientDataController.list);
 
-patientDataRouter.put('/:patientId', patientDataController.update);
+patientDataRouter.put('/:patientDataId', patientDataController.update);
 
-patientDataRouter.delete('/:patientId', patientDataController.delete);
+patientDataRouter.delete('/:patientDataId', patientDataController.delete);
 
 
 export { patientDataRouter };

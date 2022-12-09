@@ -30,27 +30,27 @@ class PatientDataController {
   }
 
   async delete(req: Request, res: Response): Promise<Response> {
-    const { patientId } = req.params;
+    const { patientDataId } = req.params;
 
 
     const deletePatientDataService = container.resolve(DeletePatientDataService);
 
     await deletePatientDataService.execute({
-      patientId,
+      patientDataId,
     });
 
     return res.status(204).json();
   }
 
   async update(req: Request, res: Response): Promise<Response> {
-    const { patientId } = req.params;
+    const { patientDataId } = req.params;
     const { colesterol, creatinina, hemoglobina_glicada, peso, descricao } =
       req.body;
 
     const updatePatientDataService = container.resolve(UpdatePatientDataService);
 
     const patientData = await updatePatientDataService.execute({
-      patientId,
+      patientDataId,
       colesterol,
       creatinina,
       hemoglobina_glicada,

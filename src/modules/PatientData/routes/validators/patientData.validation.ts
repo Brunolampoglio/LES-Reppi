@@ -14,7 +14,7 @@ export const createPatientDataMiddleware = celebrate({
 
 export const deletePatientDataMiddleware = celebrate({
   [Segments.PARAMS]: {
-    patientId: Joi.string().uuid().required(),
+    patientDataId: Joi.string().uuid().required(),
   },
 });
 

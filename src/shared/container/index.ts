@@ -14,6 +14,8 @@ import { IExamsRepository } from '@modules/Exams/repositories/ExamsRepositories.
 import { ExamRepository } from '@modules/Exams/repositories/ExamsRepository';
 import { IPatientDataRepository } from '@modules/PatientData/repositories/PatientDataRepositories.interface';
 import { PatientDataRepository } from '@modules/PatientData/repositories/PatientDataRepository';
+import { IPatientMenuRepository } from '@modules/PatientMenu/repositories/PatienteMenuRepositories.interface';
+import { PatientMenuRepository } from '@modules/PatientMenu/repositories/PatientMenuRepository';
 
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 container.registerSingleton<IPlansRepository>('PlanRepository', PlanRepository);
@@ -21,3 +23,4 @@ container.registerSingleton<ICommentsRepository>('CommentRepository', CommentRep
 container.registerSingleton<IBannerRepository>('BannerRepository', BannerRepository);
 container.registerSingleton<IExamsRepository>('ExamRepository', ExamRepository);
 container.registerSingleton<IPatientDataRepository>('PatientDataRepository', PatientDataRepository);
+container.registerSingleton<IPatientMenuRepository>('PatientMenuRepository', PatientMenuRepository);
