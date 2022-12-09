@@ -18,6 +18,9 @@ description: string;
 @Column()
 user_id: string;
 
+@Column({nullable: true})
+typeofmeal: string;
+
 @ManyToOne(() => User, user => user.patientMenu, {
   onDelete: 'CASCADE',
   onUpdate: 'CASCADE',

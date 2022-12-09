@@ -7,7 +7,7 @@ import { ListPatientMenuService } from "../services/ListPatientMenu.service";
 class PatientMenuController {
 
     async create(req: Request, res: Response): Promise<Response> {
-        const { dayofweek, description, hour } = req.body;
+        const { dayofweek, description, hour, typeofmeal } = req.body;
 
         const { patientId } = req.params
 
@@ -18,6 +18,7 @@ class PatientMenuController {
             description,
             patientId,
             hour,
+            typeofmeal,
         });
 
         return res.status(201).json(patientMenu);
@@ -38,7 +39,7 @@ class PatientMenuController {
     async update(req: Request, res: Response): Promise<Response> {
         const { patientMenuId } = req.params;
 
-        const { dayofweek, description, hour } = req.body;
+        const { dayofweek, description, hour, typeofmeal } = req.body;
 
         const updatePatientMenuService = container.resolve(UpdatePatientMenuService);
 
@@ -47,6 +48,7 @@ class PatientMenuController {
             dayofweek,
             description,
             hour,
+            typeofmeal,
         });
 
         return res.status(200).json(patientMenu);

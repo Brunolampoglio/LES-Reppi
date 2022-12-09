@@ -16,6 +16,7 @@ class UpdatePatientMenuService {
     dayofweek,
     description,
     hour,
+    typeofmeal,
   }:IUpdatePatientMenuDTO): Promise<PatientMenu> {
     const patientMenuExists = await this.patientMenuRepository.findBy({
       id: patientMenuId,
@@ -27,6 +28,7 @@ class UpdatePatientMenuService {
       dayofweek,
       description,
       hour,
+      typeofmeal,
     });
 
     await this.patientMenuRepository.save(patientMenuExists);

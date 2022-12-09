@@ -15,6 +15,7 @@ class CreatePatientMenuService {
             description,
             patientId,
             hour,
+            typeofmeal,
         }: IPatientMenuCreate): Promise<PatientMenu> {
 
         const patientMenu = this.patientMenuRepository.create({
@@ -22,7 +23,8 @@ class CreatePatientMenuService {
             description,
             user_id:patientId,
             hour,
-        });
+            typeofmeal,
+               });
 
         await this.patientMenuRepository.save(patientMenu);
 
