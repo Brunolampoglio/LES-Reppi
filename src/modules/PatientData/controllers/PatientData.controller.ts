@@ -11,7 +11,11 @@ class PatientDataController {
     const { colesterol, creatinina, hemoglobina_glicada, peso, descricao } =
       req.body;
 
+      const { patientId } = req.params
+
     const createPatientDataService = container.resolve(CreatePatientDataService);
+
+
 
     const patientData = await createPatientDataService.execute({
       colesterol,
@@ -19,7 +23,7 @@ class PatientDataController {
       hemoglobina_glicada,
       peso,
       descricao,
-      user_id: req.user.id,
+      user_id: patientId,
     });
 
     return res.status(201).json(patientData);

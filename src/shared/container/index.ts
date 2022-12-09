@@ -12,9 +12,12 @@ import { IBannerRepository } from '@modules/Banners/repositories/BannerRepositor
 import { BannerRepository } from '@modules/Banners/repositories/BannerRepository';
 import { IExamsRepository } from '@modules/Exams/repositories/ExamsRepositories.interface';
 import { ExamRepository } from '@modules/Exams/repositories/ExamsRepository';
+import { IPatientDataRepository } from '@modules/PatientData/repositories/PatientDataRepositories.interface';
+import { PatientDataRepository } from '@modules/PatientData/repositories/PatientDataRepository';
 
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 container.registerSingleton<IPlansRepository>('PlanRepository', PlanRepository);
 container.registerSingleton<ICommentsRepository>('CommentRepository', CommentRepository);
 container.registerSingleton<IBannerRepository>('BannerRepository', BannerRepository);
 container.registerSingleton<IExamsRepository>('ExamRepository', ExamRepository);
+container.registerSingleton<IPatientDataRepository>('PatientDataRepository', PatientDataRepository);

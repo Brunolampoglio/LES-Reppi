@@ -9,7 +9,13 @@ const patientDataController = new PatientDataController();
 
 patientDataRouter.use(verifyToken);
 
-patientDataRouter.post("/", patientDataController.create);
+patientDataRouter.post('/:patientId', patientDataController.create);
+
+patientDataRouter.get('/:patientId', patientDataController.list);
+
+patientDataRouter.put('/:patientId', patientDataController.update);
+
+patientDataRouter.delete('/:patientId', patientDataController.delete);
 
 
 export { patientDataRouter };
