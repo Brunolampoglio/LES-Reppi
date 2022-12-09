@@ -5,6 +5,7 @@ import { planRouter } from '@modules/Plans/routes/plan.routes';
 import { bannerRouter } from '@modules/Banners/routes/banner.routes';
 import { commentRouter } from '@modules/Comments/routes/comment.routes';
 import { examsRouter } from '@modules/Exams/routes/exams.routes';
+import { patientDataRouter } from '@modules/PatientData/routes/patientData.routes';
 
 const router = Router();
 
@@ -13,6 +14,7 @@ router.use('/plan', planRouter);
 router.use('/banner', bannerRouter);
 router.use('/comment', commentRouter);
 router.use('/exams', examsRouter);
+router.use('/patientData', patientDataRouter);
 
 router.get('/', (request: Request, response: Response) =>
   response.send('Carbon Free - 0.0.1'),

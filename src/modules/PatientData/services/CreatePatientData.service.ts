@@ -18,6 +18,8 @@ public async execute({
     descricao,
     user_id,
   }: IPatientDataCreate): Promise<PatientData> {
+
+
     const patientData = this.patientDataRepository.create({
       colesterol,
       creatinina,
