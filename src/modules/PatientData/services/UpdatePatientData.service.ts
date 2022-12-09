@@ -17,10 +17,10 @@ class UpdatePatientDataService {
     hemoglobina_glicada,
     peso,
     descricao,
-    patientId,
+    patientDataId,
   }: IPatientDataUpdate): Promise<PatientData> {
     const patientDataExists = await this.patientDataRepository.findBy({
-      user_id: patientId,
+      id: patientDataId,
     });
 
     if (!patientDataExists) throw new AppError("Dados do paciente não encontrado", 404);

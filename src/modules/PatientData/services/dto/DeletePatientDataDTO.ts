@@ -1,4 +1,4 @@
 interface IDeletePatientDataDTO {
-  patientId: string;
+  patientDataId: string;
 }
 export { IDeletePatientDataDTO };

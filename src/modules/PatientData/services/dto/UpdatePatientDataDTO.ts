@@ -4,7 +4,7 @@ interface IPatientDataUpdate {
   hemoglobina_glicada: string;
   peso: string;
   descricao: string;
-  patientId: string;
+  patientDataId: string;
 }
 
 export { IPatientDataUpdate };

@@ -11,9 +11,9 @@ class DeletePatientDataService {
   ){}
 
   public async execute({
-    patientId,
+    patientDataId,
   }: IDeletePatientDataDTO): Promise<void> {
-    const patientData = await this.patientDataRepository.findBy({ user_id: patientId });
+    const patientData = await this.patientDataRepository.findBy({ id: patientDataId });
 
     if (!patientData) throw new AppError("Paciente não encontrado", 404);
 
