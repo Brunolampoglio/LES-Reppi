@@ -57,9 +57,12 @@ class UserRepository implements IUserRepository {
     };
   }
 
-  public async listEmployee({ page = 1, limit = 10, gestor_id}: IPaginatedRequest<User> & {gestor_id: string}): Promise<IPaginatedResponse<User>> {
+  public async listEmployee({ page = 1, limit = 10, gestor_id}: IPaginatedRequest<User> & {gestor_id: string}):
+  Promise<IPaginatedResponse<User>> {
+    console.log(gestor_id);
     const users = await this.ormRepository.find({
-      where: { gestor_id },
+      where: { gestor_id: gestor_id },
+       relations: ['gestor'],
       skip: (page - 1) * limit,
       take: limit,
     });

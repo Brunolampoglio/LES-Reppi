@@ -33,6 +33,8 @@ userRouter.post('/', createUserMiddleware, userController.create);
 
 userRouter.use(verifyToken);
 
+userRouter.post('/employee', createUserMiddleware, userController.create);
+
 userRouter.patch(
   '/:user_id/avatar',
   updateUserAvatarMiddleware,
@@ -42,7 +44,7 @@ userRouter.patch(
 
 userRouter.get('/', userController.listUser);
 userRouter.get('/gestor', userController.listGestor);
-userRouter.get('/employee', userController.listEmployeeByGestor);
+userRouter.get('/employee/:gestor_id', userController.listEmployeeByGestor);
 
 userRouter.delete(
   '/:user_id/avatar',
