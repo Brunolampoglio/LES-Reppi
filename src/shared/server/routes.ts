@@ -8,6 +8,7 @@ import { examsRouter } from '@modules/Exams/routes/exams.routes';
 import { patientDataRouter } from '@modules/PatientData/routes/patientData.routes';
 import { patientMenuRouter } from '@modules/PatientMenu/routes/patienteMenu.routes';
 import { physicalActivityRoutes } from '@modules/PhysicalActivity/routes/physicalActivity.routes';
+import { certificateRouter } from '@modules/Certificates/routes/certificates.routes';
 
 const router = Router();
 
@@ -19,6 +20,7 @@ router.use('/exams', examsRouter);
 router.use('/patientData', patientDataRouter);
 router.use('/patientMenu', patientMenuRouter);
 router.use('/physicalActivity', physicalActivityRoutes);
+router.use('/certificate', certificateRouter);
 
 router.get('/', (request: Request, response: Response) =>
   response.send('Carbon Free - 0.0.1'),

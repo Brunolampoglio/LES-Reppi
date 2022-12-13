@@ -23,6 +23,7 @@ import { Card } from '@modules/Cards/entities/Card';
 import { PatientData } from '@modules/PatientData/entities/PatientData';
 import { PatientMenu } from '@modules/PatientMenu/entities/PatientMenu';
 import { PhysicalActivity } from '@modules/PhysicalActivity/entities/PhysicalActivity';
+import { Certificate } from '@modules/Certificates/entities/Certificates';
 
 @Entity('users')
 class User {
@@ -96,6 +97,11 @@ class User {
     cascade: true,
   })
   banners: Banner[];
+
+  @OneToMany(()=> Certificate, certificate => certificate.user, {
+    cascade: true,
+    })
+  certificates: Certificate[];
 
   @OneToMany(() => PatientData, patientData => patientData.user, {
     cascade: true,

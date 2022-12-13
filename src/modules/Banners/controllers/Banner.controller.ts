@@ -18,7 +18,6 @@ class BannerController {
 
     const createBannerService = container.resolve(CreateBannerService);
 
-    console.log( name, link_banner, link_image, dt_final, dt_initial);
 
     const banner = await createBannerService.execute({
       user_id: req.user.id,
