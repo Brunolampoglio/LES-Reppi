@@ -5,6 +5,7 @@ import { verifyToken } from '@shared/middleware/verifyToken';
 import {
   changePasswordMiddleware,
   forgotPasswordMiddleware,
+  resetPasswordMiddleware,
 } from './validators/password.validation';
 
 const passwordRouter = Router();
@@ -22,6 +23,12 @@ passwordRouter.post(
   '/change/:user_id',
   changePasswordMiddleware,
   passwordController.change,
+);
+
+passwordRouter.put(
+  '/reset/:token',
+  resetPasswordMiddleware,
+  passwordController.reset,
 );
 
 export { passwordRouter };

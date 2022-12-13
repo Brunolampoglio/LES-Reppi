@@ -15,3 +15,13 @@ export const changePasswordMiddleware = celebrate({
     user_id: Joi.string().uuid().required(),
   },
 });
+
+
+export const resetPasswordMiddleware = celebrate({
+  [Segments.BODY]: {
+    new_password: Joi.string().required().min(8),
+  },
+  [Segments.PARAMS]: {
+    token: Joi.string().required(),
+  },
+});
