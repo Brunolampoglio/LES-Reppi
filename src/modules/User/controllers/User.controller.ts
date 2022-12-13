@@ -13,7 +13,6 @@ import { UpdateUserService } from '../services/UpdateUser.service';
 class UserController {
   async create(req: Request, res: Response): Promise<Response> {
     const { name, email, cnpj, cpf, password, role, corporate_name, position, address, phone_number } = req.body;
-    const { user_id } = req.params;
 
     const createUserService = container.resolve(CreateUserService);
 
@@ -26,7 +25,7 @@ class UserController {
       role,
       corporate_name,
       position,
-      gestor_id: user_id,
+      gestor_id: req.user.id,
       address,
       phone_number
     });
@@ -116,6 +115,7 @@ class UserController {
       cpf,
       cnpj,
       corporate_name,
+      isMaster: req.user.isMaster,
     });
 
     return res.json(user);

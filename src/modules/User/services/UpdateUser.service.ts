@@ -15,11 +15,14 @@ class UpdateUserService {
   public async execute({
     user_id,
     request_id,
+    isMaster,
     ...userParams
   }: IUpdateUserDTO): Promise<User> {
+
+    if (!isMaster){
     if (request_id !== user_id)
       throw new AppError('Usuário não autorizado', 404);
-
+    }
     const user = await this.userRepository.findBy({
       id: user_id,
     });

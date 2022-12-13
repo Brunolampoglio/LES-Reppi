@@ -63,12 +63,14 @@ class PatientMenuRepository implements IPatientMenuRepository {
     dayofweek,
     hour,
     description,
+    typeofmeal,
   }: IPatientMenuCreate): PatientMenu {
     const patientMenu = this.ormRepository.create({
       user_id,
       dayofweek,
       hour,
       description,
+      typeofmeal,
     });
 
     return patientMenu;

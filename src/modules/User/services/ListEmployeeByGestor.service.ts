@@ -18,9 +18,7 @@ class ListEmployeeByGestorService {
     gestor_id,
     isMaster,
   }: IListUserDTO): Promise<IPaginatedResponse<User>> {
-    if (!isMaster) {
-      throw new AppError("Usuário não autorizado", 404);
-    }
+
     const gestor = await this.userRepository.findBy({ id: gestor_id });
 
     if (!gestor) {

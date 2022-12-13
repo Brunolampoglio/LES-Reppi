@@ -3,6 +3,7 @@ interface IPatientMenuCreate {
   hour: string;
   description: string;
   patientId: string;
+  typeofmeal: string;
 }
 
 export { IPatientMenuCreate };

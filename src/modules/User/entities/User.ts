@@ -4,6 +4,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -21,6 +22,7 @@ import { Session } from './Session';
 import { Card } from '@modules/Cards/entities/Card';
 import { PatientData } from '@modules/PatientData/entities/PatientData';
 import { PatientMenu } from '@modules/PatientMenu/entities/PatientMenu';
+import { PhysicalActivity } from '@modules/PhysicalActivity/entities/PhysicalActivity';
 
 @Entity('users')
 class User {
@@ -58,8 +60,18 @@ class User {
   @Column({ nullable: true })
   cnpj: string;
 
+  @OneToMany(() => User, user => user.gestor_id, {
+    cascade: true,
+    })
+  gestors: User[];
+
   @Column({ nullable: true })
   gestor_id: string;
+
+  @ManyToOne(() => User, user => user.gestor, {
+  })
+  @JoinColumn({ name: 'gestor_id' })
+  gestor: User;
 
   @Column({ nullable: true })
   device_token: string;
@@ -110,6 +122,11 @@ class User {
     cascade: true,
     })
   patientMenu: PatientMenu[];
+
+  @OneToMany(() => PhysicalActivity, physical_activity => physical_activity.user, {
+    cascade: true,
+    })
+  physical_activity: PhysicalActivity[];
 
   @Column({ nullable: true })
   address_id: string;
