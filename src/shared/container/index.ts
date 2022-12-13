@@ -18,6 +18,8 @@ import { IPatientMenuRepository } from '@modules/PatientMenu/repositories/Patien
 import { PatientMenuRepository } from '@modules/PatientMenu/repositories/PatientMenuRepository';
 import { IPhysicalActivityRepository } from '@modules/PhysicalActivity/repositories/PhysicalActivityRepositories.interface';
 import { PhysicalActivityRepository } from '@modules/PhysicalActivity/repositories/PhysicalActivityRespository';
+import { ICertificateRepository } from '@modules/Certificates/repositories/CertificateRepositories.interface';
+import { CertificateRepository } from '@modules/Certificates/repositories/CertificateRepository';
 
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 container.registerSingleton<IPlansRepository>('PlanRepository', PlanRepository);
@@ -27,3 +29,4 @@ container.registerSingleton<IExamsRepository>('ExamRepository', ExamRepository);
 container.registerSingleton<IPatientDataRepository>('PatientDataRepository', PatientDataRepository);
 container.registerSingleton<IPatientMenuRepository>('PatientMenuRepository', PatientMenuRepository);
 container.registerSingleton<IPhysicalActivityRepository>('PhysicalActivityRepository', PhysicalActivityRepository);
+container.registerSingleton<ICertificateRepository>('CertificateRepository', CertificateRepository);
