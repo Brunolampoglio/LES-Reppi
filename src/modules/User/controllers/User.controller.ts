@@ -115,6 +115,7 @@ class UserController {
       cpf,
       cnpj,
       corporate_name,
+      isMaster: req.user.isMaster,
     });
 
     return res.json(user);
