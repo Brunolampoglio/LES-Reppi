@@ -9,6 +9,7 @@ export const createUserMiddleware = celebrate({
     cnpj: Joi.string(),
     corporate_name: Joi.string(),
     position: Joi.string(),
+    gestor_id: Joi.string().uuid(),
     role: Joi.string().valid('Master', 'Paciente', 'Gestor', 'Funcionario'),
     phone_number: Joi.string(),
     address: Joi.object({

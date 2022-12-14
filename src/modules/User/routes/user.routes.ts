@@ -29,7 +29,7 @@ userRouter.use('/password', passwordRouter);
 userRouter.use('/session', sessionRouter);
 
 userRouter.post('/', createUserMiddleware, userController.create);
-
+userRouter.post('/confirm', userController.confirm);
 
 userRouter.use(verifyToken);
 

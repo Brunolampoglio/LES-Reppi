@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
+
 import { container } from 'tsyringe';
+import { ConfirmEmailService } from '../services/ConfirmEmail.service';
 
 import { CreateUserService } from '../services/CreateUser.service';
 import { DeleteUserService } from '../services/DeleteUser.service';
@@ -14,6 +16,7 @@ class UserController {
   async create(req: Request, res: Response): Promise<Response> {
     const { name, email, cnpj, cpf, password, role, corporate_name, position, address, phone_number } = req.body;
 
+
     const createUserService = container.resolve(CreateUserService);
 
     const user = await createUserService.execute({
@@ -25,7 +28,6 @@ class UserController {
       role,
       corporate_name,
       position,
-      gestor_id: req.user.id,
       address,
       phone_number
     });
@@ -149,6 +151,18 @@ class UserController {
     });
 
     return res.status(204).send();
+  }
+
+  async confirm(req: Request, res: Response): Promise<Response> {
+    const { token } = req.body;
+
+    const confirmEmailService = container.resolve(ConfirmEmailService);
+
+    await confirmEmailService.execute({
+      token,
+    });
+
+    return res.status(204).json();
   }
 }
 
