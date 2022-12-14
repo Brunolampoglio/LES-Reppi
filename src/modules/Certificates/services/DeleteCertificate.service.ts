@@ -1,3 +1,4 @@
+import { IStorageProvider } from "@shared/container/providers/StorageProvider/models/IStorageProvider";
 import { AppError } from "@shared/error/AppError";
 import { inject, injectable } from "tsyringe";
 import { ICertificateRepository } from "../repositories/CertificateRepositories.interface";
@@ -8,6 +9,9 @@ class DeleteCertificateService {
     constructor(
         @inject("CertificateRepository")
         private certificateRepository: ICertificateRepository,
+
+        @inject('StorageProvider')
+         private storageProvider: IStorageProvider,
     ) {}
 
     public async execute({
@@ -20,6 +24,11 @@ class DeleteCertificateService {
         });
 
         if (!certificate) throw new AppError("Certificado não encontrado", 404);
+
+        if (certificate.anexo) {
+            await this.storageProvider.deleteFile(certificate.anexo);
+        }
+
 
         await this.certificateRepository.remove(certificate);
     }

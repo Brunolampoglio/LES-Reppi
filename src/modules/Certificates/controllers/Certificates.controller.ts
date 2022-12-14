@@ -43,7 +43,7 @@ class CertificateController{
     async update(req: Request, res: Response): Promise<Response> {
         const { certificate_id } = req.params;
 
-        if (!req.file) throw new AppError('Foto não encontrada');
+        if (!req.file) throw new AppError('Arquivo não enviado');
 
         const { filename } = req.file;
         const createCertificateService = container.resolve(UpdateCertificateService);

@@ -20,6 +20,8 @@ import { IPhysicalActivityRepository } from '@modules/PhysicalActivity/repositor
 import { PhysicalActivityRepository } from '@modules/PhysicalActivity/repositories/PhysicalActivityRespository';
 import { ICertificateRepository } from '@modules/Certificates/repositories/CertificateRepositories.interface';
 import { CertificateRepository } from '@modules/Certificates/repositories/CertificateRepository';
+import { IDocExamsRepository } from '@modules/DocExams/repositories/DocExamsRepositories.interface';
+import { DocExamsRepository } from '@modules/DocExams/repositories/DocExamsRepository';
 
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 container.registerSingleton<IPlansRepository>('PlanRepository', PlanRepository);
@@ -30,3 +32,4 @@ container.registerSingleton<IPatientDataRepository>('PatientDataRepository', Pat
 container.registerSingleton<IPatientMenuRepository>('PatientMenuRepository', PatientMenuRepository);
 container.registerSingleton<IPhysicalActivityRepository>('PhysicalActivityRepository', PhysicalActivityRepository);
 container.registerSingleton<ICertificateRepository>('CertificateRepository', CertificateRepository);
+container.registerSingleton<IDocExamsRepository>('DocExamsRepository', DocExamsRepository);
