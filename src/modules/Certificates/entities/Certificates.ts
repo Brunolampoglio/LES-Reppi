@@ -36,10 +36,7 @@ class Certificate {
   @Expose({ name: 'anexo' })
   getAvatarUrl(): string | null {
     if (!this.anexo) {
-      return (
-        process.env.DEFAULT_USER_AVATAR_URL ||
-        `${process.env.APP_API_URL}/files/default.png`
-      );
+      return process.env.DEFAULT_USER_AVATAR_URL ||'';
     }
     switch (uploadConfig.driver) {
       case 'disk':
@@ -47,7 +44,7 @@ class Certificate {
       case 'spaces':
         return `${process.env.FILE_ENDPOINT}/${this.anexo}`;
       default:
-        return `${process.env.APP_API_URL}/files/default.png`;
+        return null;
     }
   }
 

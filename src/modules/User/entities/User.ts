@@ -24,6 +24,7 @@ import { PatientData } from '@modules/PatientData/entities/PatientData';
 import { PatientMenu } from '@modules/PatientMenu/entities/PatientMenu';
 import { PhysicalActivity } from '@modules/PhysicalActivity/entities/PhysicalActivity';
 import { Certificate } from '@modules/Certificates/entities/Certificates';
+import { DocExams } from '@modules/DocExams/entities/DocExams';
 
 @Entity('users')
 class User {
@@ -82,6 +83,11 @@ class User {
 
   @Column({ nullable: true })
   health_insurance: string;
+
+  @OneToMany(() => DocExams, docExams => docExams.user, {
+    cascade: true,
+    })
+    doc_exams: DocExams[];
 
   @OneToMany(() => Comments, comments => comments.userReceiver, {
     cascade: true,

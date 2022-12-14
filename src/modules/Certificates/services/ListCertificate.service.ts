@@ -14,7 +14,11 @@ class ListCertificateService {
 
   public async execute({ user_id, page, limit }: IListCertificateDTO): Promise<IPaginatedResponse<Certificate>> {
 
-    const certificates = await this.certificateRepository.listBy({ filters: { user_id }, page, limit });
+    const certificates = await this.certificateRepository.listBy({
+       filters: { user_id },
+        page,
+        limit
+      });
 
     if (!certificates) throw new AppError('Certificados não encontrados', 404);
 
