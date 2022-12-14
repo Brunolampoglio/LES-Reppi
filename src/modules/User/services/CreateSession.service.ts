@@ -36,12 +36,17 @@ class CreateSessionService {
 
     if (!user) throw new AppError('Email ou senha inválidos', 404);
 
-
-    if(Roles.employee !== role){
-      if (user.role !== role ) throw new AppError('Email ou senha inválidos', 401);
-    } else if(user.role !== Roles.employee)
-      throw new AppError('Email ou senha inválidos', 401);
-
+    switch(role) {
+      case Roles.master:
+        if (user.role !== Roles.master) throw new AppError('Acesso negado', 401);
+        break;
+      case Roles.gestor:
+        if (user.role !== Roles.gestor || Roles.employee) throw new AppError('Acesso negado', 401);
+        break;
+      default:
+        if (user.role !== Roles.user) throw new AppError('Acesso negado', 401);
+        break;
+    }
 
     const passwordMatched = await compare(password, user.password);
 
