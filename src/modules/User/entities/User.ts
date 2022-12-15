@@ -25,6 +25,7 @@ import { PatientMenu } from '@modules/PatientMenu/entities/PatientMenu';
 import { PhysicalActivity } from '@modules/PhysicalActivity/entities/PhysicalActivity';
 import { Certificate } from '@modules/Certificates/entities/Certificates';
 import { DocExams } from '@modules/DocExams/entities/DocExams';
+import { GoalsPatient } from '@modules/GoalsPatient/entities/GoalsPatient';
 
 @Entity('users')
 class User {
@@ -88,6 +89,11 @@ class User {
     cascade: true,
     })
     doc_exams: DocExams[];
+
+  @OneToMany(() => GoalsPatient, goalsPatient => goalsPatient.user, {
+    cascade: true,
+    })
+    goals_patient: GoalsPatient[];
 
   @OneToMany(() => Comments, comments => comments.userReceiver, {
     cascade: true,
