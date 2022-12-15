@@ -38,13 +38,13 @@ class CreateSessionService {
 
     switch(role) {
       case Roles.master:
-        if (user.role !== Roles.master) throw new AppError('Acesso negado', 401);
+        if (user.role !== Roles.master) throw new AppError('Email ou senha inválidos', 401);
         break;
       case Roles.gestor:
-        if (user.role !== Roles.gestor || Roles.employee) throw new AppError('Acesso negado', 401);
+        if (user.role !== Roles.gestor || Roles.employee) throw new AppError('Email ou senha inválidos', 401);
         break;
       default:
-        if (user.role !== Roles.user) throw new AppError('Acesso negado', 401);
+        if (user.role !== Roles.user) throw new AppError('Email ou senha inválidos', 401);
         break;
     }
 

@@ -86,7 +86,7 @@ class CreateUserService {
         'confirm_email.hbs',
       );
 
-      const token = Math.floor((Math.random() * 90000) + 1000)
+      const token = Math.floor((Math.random() * 90000) + 100)
 
       await this.redisProvider.set({
         key: `${password_forget.prefix}${token}`,
