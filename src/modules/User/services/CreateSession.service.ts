@@ -51,7 +51,7 @@ class CreateSessionService {
 
     const passwordMatched = await compare(password, user.password);
 
-    if (!passwordMatched) throw new AppError('Email ou senha inválidos 5', 401);
+    if (!passwordMatched) throw new AppError('Email ou senha inválidos', 401);
 
     const jwToken = jwtGenerate(user.id, user.role === Roles.master);
 
