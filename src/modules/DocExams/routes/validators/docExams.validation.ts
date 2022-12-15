@@ -2,7 +2,7 @@ import { celebrate, Segments, Joi } from "celebrate";
 
 export const createDocExamsMiddleware = celebrate({
   [Segments.PARAMS]:{
-    user_id: Joi.string().uuid().required(),
+    patientId: Joi.string().uuid().required(),
   },
 });
 
@@ -12,7 +12,7 @@ export const listDocExamsMiddleware = celebrate({
     limit: Joi.number().min(1).max(50),
   },
   [Segments.PARAMS]:{
-    user_id: Joi.string().uuid().required(),
+    patientId: Joi.string().uuid().required(),
   },
 });
 

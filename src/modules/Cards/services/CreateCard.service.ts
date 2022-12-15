@@ -16,7 +16,6 @@ class CreateCardService {
   ) {}
 
   public async execute({
-    external_id,
     holder_name,
     digits,
     expiration,
@@ -38,7 +37,7 @@ class CreateCardService {
     const year = Number(expiration_year);
 
     const card = this.cardRepository.create({
-      external_id,
+      external_id: user.id,
       first_digits,
       last_digits,
       brand: 'Visa',

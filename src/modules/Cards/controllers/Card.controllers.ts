@@ -8,17 +8,16 @@ import { DeleteCardService } from "../services/DeleteCard.service";
 class CardController {
   async create(req: Request, res: Response): Promise<Response> {
 
-    const { external_id, digits, holder_name, expiration, main, user_id } = req.body;
+    const { digits, holder_name, expiration, main } = req.body;
 
     const createCardService = container.resolve(CreateCardService);
 
     const card = await createCardService.execute({
-      external_id,
       holder_name,
       expiration,
       digits,
       main,
-      user_id,
+      user_id: req.user.id,
     });
 
     return res.status(201).json(card);
