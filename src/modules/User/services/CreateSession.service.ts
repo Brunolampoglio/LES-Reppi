@@ -36,12 +36,13 @@ class CreateSessionService {
 
     if (!user) throw new AppError('Email ou senha inválidos', 404);
 
+
     switch(role) {
       case Roles.master:
         if (user.role !== Roles.master) throw new AppError('Email ou senha inválidos', 401);
         break;
       case Roles.gestor:
-        if (user.role !== Roles.gestor || Roles.employee) throw new AppError('Email ou senha inválidos', 401);
+        if (user.role !== Roles.gestor && Roles.employee) throw new AppError('Email ou senha inválidos 1', 401);
         break;
       default:
         if (user.role !== Roles.user) throw new AppError('Email ou senha inválidos', 401);
@@ -50,7 +51,7 @@ class CreateSessionService {
 
     const passwordMatched = await compare(password, user.password);
 
-    if (!passwordMatched) throw new AppError('Email ou senha inválidos', 401);
+    if (!passwordMatched) throw new AppError('Email ou senha inválidos 5', 401);
 
     const jwToken = jwtGenerate(user.id, user.role === Roles.master);
 
