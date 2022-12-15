@@ -15,10 +15,10 @@ const uploadMulter = multer({
 
   docExamsRouter.use(verifyToken);
 
-  docExamsRouter.post('/:user_id', uploadMulter.single('anexo'), docExamsController.create);
+  docExamsRouter.post('/:patientId', uploadMulter.single('anexo'), docExamsController.create);
 
 
-  docExamsRouter.get('/:user_id', docExamsController.list);
+  docExamsRouter.get('/:patientId', docExamsController.list);
 
   docExamsRouter.put('/:docexam_id', uploadMulter.single('anexo'), docExamsController.update);
 
