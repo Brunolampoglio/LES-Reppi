@@ -1,5 +1,4 @@
 interface ICreateCardDTO {
-  external_id: string;
   digits: string;
   holder_name: string;
   expiration: string;

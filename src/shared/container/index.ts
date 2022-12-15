@@ -22,10 +22,13 @@ import { ICertificateRepository } from '@modules/Certificates/repositories/Certi
 import { CertificateRepository } from '@modules/Certificates/repositories/CertificateRepository';
 import { IDocExamsRepository } from '@modules/DocExams/repositories/DocExamsRepositories.interface';
 import { DocExamsRepository } from '@modules/DocExams/repositories/DocExamsRepository';
+import { ICardRepository } from '@modules/Cards/repositories/CardRepositories.interface';
+import { CardRepository } from '@modules/Cards/repositories/CardRepository';
 
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 container.registerSingleton<IPlansRepository>('PlanRepository', PlanRepository);
 container.registerSingleton<ICommentsRepository>('CommentRepository', CommentRepository);
+container.registerSingleton<ICardRepository>('CardRepository', CardRepository);
 container.registerSingleton<IBannerRepository>('BannerRepository', BannerRepository);
 container.registerSingleton<IExamsRepository>('ExamRepository', ExamRepository);
 container.registerSingleton<IPatientDataRepository>('PatientDataRepository', PatientDataRepository);
