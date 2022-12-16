@@ -2,7 +2,6 @@ import { AppError } from '@shared/error/AppError';
 import { inject, injectable } from 'tsyringe';
 import { Banner } from '../entities/Banner';
 import { IBannerRepository } from '../repositories/BannerRepositories.interface';
-import { IBannerCreate } from '../repositories/dto/BannerRepositoryDTO';
 import { ICreateBannerDTO } from './dto/CreateBannerDTO';
 
 @injectable()
