@@ -22,6 +22,9 @@ class GoalsPatient {
   points: number;
 
   @Column()
+  status: string;
+
+  @Column()
   patient_id: string;
 
   @ManyToOne(() => User, user => user.goals_patient, {

@@ -69,6 +69,7 @@ class GoalsPatientRepository implements IGoalsPatientRepository {
       description,
       points,
       patient_id,
+      status: "pendente",
     });
 
     return goals;
