@@ -28,6 +28,8 @@ import { IGoalsPatientRepository } from '@modules/GoalsPatient/repositories/Goal
 import { GoalsPatientRepository } from '@modules/GoalsPatient/repositories/GoalsRepository';
 import { IAwardsRepository } from '@modules/Awards/repositories/AwardsRepositories.interface';
 import AwardsRepository from '@modules/Awards/repositories/AwardsRepository.interface';
+import { ITermsOfUseRepository } from '@modules/TermsOfUse/repositories/TermsOfUse.interface';
+import { TermsOfUseRepository } from '@modules/TermsOfUse/repositories/TermsOfUseRepository';
 
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 container.registerSingleton<IPlansRepository>('PlanRepository', PlanRepository);
@@ -42,3 +44,4 @@ container.registerSingleton<ICertificateRepository>('CertificateRepository', Cer
 container.registerSingleton<IDocExamsRepository>('DocExamsRepository', DocExamsRepository);
 container.registerSingleton<IGoalsPatientRepository>('GoalsPatientRepository', GoalsPatientRepository);
 container.registerSingleton<IAwardsRepository>('AwardsRepository', AwardsRepository);
+container.registerSingleton<ITermsOfUseRepository>('TermsOfUseRepository', TermsOfUseRepository);
