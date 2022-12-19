@@ -26,6 +26,8 @@ import { ICardRepository } from '@modules/Cards/repositories/CardRepositories.in
 import { CardRepository } from '@modules/Cards/repositories/CardRepository';
 import { IGoalsPatientRepository } from '@modules/GoalsPatient/repositories/GoalsRepositories.interface';
 import { GoalsPatientRepository } from '@modules/GoalsPatient/repositories/GoalsRepository';
+import { IAwardsRepository } from '@modules/Awards/repositories/AwardsRepositories.interface';
+import AwardsRepository from '@modules/Awards/repositories/AwardsRepository.interface';
 
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 container.registerSingleton<IPlansRepository>('PlanRepository', PlanRepository);
@@ -39,3 +41,4 @@ container.registerSingleton<IPhysicalActivityRepository>('PhysicalActivityReposi
 container.registerSingleton<ICertificateRepository>('CertificateRepository', CertificateRepository);
 container.registerSingleton<IDocExamsRepository>('DocExamsRepository', DocExamsRepository);
 container.registerSingleton<IGoalsPatientRepository>('GoalsPatientRepository', GoalsPatientRepository);
+container.registerSingleton<IAwardsRepository>('AwardsRepository', AwardsRepository);

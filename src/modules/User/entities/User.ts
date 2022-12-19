@@ -1,4 +1,3 @@
-
 import {
   Column,
   CreateDateColumn,
@@ -26,6 +25,7 @@ import { PhysicalActivity } from '@modules/PhysicalActivity/entities/PhysicalAct
 import { Certificate } from '@modules/Certificates/entities/Certificates';
 import { DocExams } from '@modules/DocExams/entities/DocExams';
 import { GoalsPatient } from '@modules/GoalsPatient/entities/GoalsPatient';
+import { Awards } from '@modules/Awards/entities/Awards';
 
 @Entity('users')
 class User {
@@ -124,6 +124,11 @@ class User {
     cascade: true,
   })
   plans: Plans[];
+
+  @OneToMany(() => Awards, awards => awards.user, {
+    cascade: true,
+  })
+  awards: Awards[];
 
   @OneToMany(() => Invoices, invoices => invoices.user, {
     cascade: true,
