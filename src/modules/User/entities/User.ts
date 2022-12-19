@@ -1,4 +1,3 @@
-
 import {
   Column,
   CreateDateColumn,
@@ -26,6 +25,8 @@ import { PhysicalActivity } from '@modules/PhysicalActivity/entities/PhysicalAct
 import { Certificate } from '@modules/Certificates/entities/Certificates';
 import { DocExams } from '@modules/DocExams/entities/DocExams';
 import { GoalsPatient } from '@modules/GoalsPatient/entities/GoalsPatient';
+import { Awards } from '@modules/Awards/entities/Awards';
+import { MyPoints } from '@modules/myPoints/entities/MyPoints';
 
 @Entity('users')
 class User {
@@ -76,6 +77,11 @@ class User {
   @JoinColumn({ name: 'gestor_id' })
   gestor: User;
 
+  @OneToMany(() => MyPoints, myPoints => myPoints.user, {
+    cascade: true,
+    })
+  mypoints: MyPoints[];
+
   @Column({ nullable: true })
   device_token: string;
 
@@ -124,6 +130,11 @@ class User {
     cascade: true,
   })
   plans: Plans[];
+
+  @OneToMany(() => Awards, awards => awards.user, {
+    cascade: true,
+  })
+  awards: Awards[];
 
   @OneToMany(() => Invoices, invoices => invoices.user, {
     cascade: true,

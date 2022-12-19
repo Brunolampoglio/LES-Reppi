@@ -12,6 +12,8 @@ import { certificateRouter } from '@modules/Certificates/routes/certificates.rou
 import { cardRouter } from '@modules/Cards/routes/card.routes';
 import { docExamsRouter } from '@modules/DocExams/routes/docExams.routes';
 import { goalsPatientRouter } from '@modules/GoalsPatient/routes/goalsPatient.routes';
+import { awardsRouter } from '@modules/Awards/routes/awards.routes';
+import { termsOfUseRouter } from '@modules/TermsOfUse/routes/TermsofUse.routes';
 
 const router = Router();
 
@@ -27,6 +29,9 @@ router.use('/physicalActivity', physicalActivityRoutes);
 router.use('/certificate', certificateRouter);
 router.use('/docExams', docExamsRouter);
 router.use('/goals', goalsPatientRouter);
+router.use('/awards', awardsRouter);
+router.use('termsOfUse', termsOfUseRouter);
+
 
 router.get('/', (request: Request, response: Response) =>
   response.send('Carbon Free - 0.0.1'),
