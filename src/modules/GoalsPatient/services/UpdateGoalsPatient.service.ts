@@ -1,3 +1,4 @@
+import { IMyPointsRepository } from "@modules/myPoints/repositories/MyPointsRepositories.interface";
 import { AppError } from "@shared/error/AppError";
 import { inject, injectable } from "tsyringe";
 import { GoalsPatient } from "../entities/GoalsPatient";
@@ -9,6 +10,9 @@ class UpdateGoalsPatientService {
   constructor(
     @inject("GoalsPatientRepository")
     private goalsPatientRepository: IGoalsPatientRepository,
+
+    @inject("MyPointsRepository")
+    private myPointsRepository: IMyPointsRepository
   ) {}
 
   public async execute({
@@ -26,6 +30,10 @@ class UpdateGoalsPatientService {
 
     if (!goalsPatient) throw new AppError("Goals não encontrado", 404);
 
+    const patient = await this.myPointsRepository.findBy({user_id: goalsPatient.patient_id});
+
+    if(!patient) throw new AppError("Paciente não encontrado", 404);
+
     Object.assign(goalsPatient, {
       typeofgoal,
       description,
@@ -35,7 +43,14 @@ class UpdateGoalsPatientService {
       to
     });
 
+    if(goalsPatient.to === goalsPatient.from){
+      goalsPatient.status = "Concluído";
+      patient.points = goalsPatient.points + patient.points;
+
+    }
+
     const newGoalsPatient = await this.goalsPatientRepository.save(goalsPatient);
+    await this.myPointsRepository.save(patient);
 
     return newGoalsPatient;
  }
