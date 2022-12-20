@@ -5,6 +5,7 @@ interface ICreateGoalsPatientDTO {
   description: string;
   points: number;
   patient_id: string;
+  type?: string;
 }
 
 export { ICreateGoalsPatientDTO };

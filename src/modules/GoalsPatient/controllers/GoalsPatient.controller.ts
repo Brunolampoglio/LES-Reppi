@@ -8,7 +8,7 @@ import { UpdateGoalsPatientService } from '../services/UpdateGoalsPatient.servic
 
 class GoalsPatientController {
   async create(req: Request, res: Response): Promise<Response> {
-    const { typeofgoal, from, to, description, points } = req.body;
+    const { typeofgoal, from, to, description, points, type} = req.body;
     const { patientId } = req.params;
 
     const createGoalsPatientService = container.resolve(CreateGoalsPatientService);
@@ -20,7 +20,7 @@ class GoalsPatientController {
       description,
       points,
       patient_id: patientId,
-
+      type,
 });
 
     return res.status(201).json(goalsPatient);

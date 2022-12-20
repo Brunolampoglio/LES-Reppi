@@ -24,6 +24,9 @@ class GoalsPatient {
   @Column()
   status: string;
 
+  @Column({default: 'perder'})
+  type: string;
+
   @Column()
   patient_id: string;
 
