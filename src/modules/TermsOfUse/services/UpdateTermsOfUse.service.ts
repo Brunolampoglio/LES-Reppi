@@ -15,7 +15,7 @@ class UpdateTermsOfUseService {
     description,
     isMaster,
   }: IUpdateTermsOfUseDTO): Promise<TermsOfUse> {
-    if(isMaster) throw new AppError("Não tem autorização para alterar o termo de uso", 400);
+    if(!isMaster) throw new AppError("Não tem autorização para alterar o termo de uso", 400);
 
     const termsOfUse = await this.termsOfUseRepository.find();
 

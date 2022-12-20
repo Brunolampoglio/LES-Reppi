@@ -30,7 +30,7 @@ router.use('/certificate', certificateRouter);
 router.use('/docExams', docExamsRouter);
 router.use('/goals', goalsPatientRouter);
 router.use('/awards', awardsRouter);
-router.use('termsOfUse', termsOfUseRouter);
+router.use('/termsOfUse', termsOfUseRouter);
 
 
 router.get('/', (request: Request, response: Response) =>
