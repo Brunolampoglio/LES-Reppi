@@ -6,13 +6,13 @@ const termsOfUseRouter = Router();
 
 const termsOfUseController = new TermsOfUseController();
 
+termsOfUseRouter.get('/', termsOfUseController.show);
+
 termsOfUseRouter.use(verifyToken);
 
 termsOfUseRouter.post('/', termsOfUseController.create);
 
 termsOfUseRouter.put('/', termsOfUseController.update);
-
-termsOfUseRouter.get('/', termsOfUseController.show);
 
 termsOfUseRouter.delete('/', termsOfUseController.delete);
 

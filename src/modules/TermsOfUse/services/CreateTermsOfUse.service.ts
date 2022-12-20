@@ -25,6 +25,8 @@ class CreateTermsOfUseService {
 
     const termsOfUse = await this.termsOfUseRepository.create(description);
 
+    await this.termsOfUseRepository.save(termsOfUse);
+
     return termsOfUse;
 
   }
