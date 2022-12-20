@@ -70,9 +70,8 @@ class PatientDataRepository implements IPatientDataRepository {
       hemoglobina_glicada,
       peso,
       descricao,
-      user_id,
+      user_id
     });
-
     return patientData;
   }
 

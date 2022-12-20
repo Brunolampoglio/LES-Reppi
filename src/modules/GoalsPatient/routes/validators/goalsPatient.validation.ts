@@ -10,6 +10,7 @@ export const createGoalsPatientMiddleware = celebrate({
     to: Joi.string().required(),
     description: Joi.string().required(),
     points: Joi.number().required(),
+    type: Joi.string(),
   },
 });
 

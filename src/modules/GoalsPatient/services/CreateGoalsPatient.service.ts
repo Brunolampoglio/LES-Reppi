@@ -17,14 +17,25 @@ class CreateGoalsPatientService {
     description,
     points,
     patient_id,
+    type,
   }: ICreateGoalsPatientDTO): Promise<GoalsPatient> {
+
+
+    let pesoMeta = 0;
+    if(type ==='perder'){
+        pesoMeta = parseInt(from) - parseInt(to);
+    }else {
+        pesoMeta = parseInt(from) + parseInt(to);
+    }
+
     const goalsPatient = this.goalsPatientRepository.create({
       typeofgoal,
       from,
-      to,
+      to: pesoMeta.toString(),
       description,
       points,
       patient_id,
+      type: type || 'perder',
     });
 
     await this.goalsPatientRepository.save(goalsPatient);

@@ -14,6 +14,7 @@ import { Roles } from '@shared/enum/Roles';
 import { password_forget } from '@config/password';
 import { IMailProvider } from '@shared/container/providers/MailProvider/models/IMailProvider';
 import { IRedisProvider } from '@shared/container/providers/RedisProvider/model/IRedisProvider';
+import { IMyPointsRepository } from '@modules/myPoints/repositories/MyPointsRepositories.interface';
 
 @injectable()
 class CreateUserService {
@@ -29,6 +30,9 @@ class CreateUserService {
 
     @inject('RedisProvider')
     private redisProvider: IRedisProvider,
+
+    @inject("MyPointsRepository")
+    private myPointsRepository: IMyPointsRepository,
   ) {}
 
   public async execute({
@@ -77,7 +81,8 @@ class CreateUserService {
     }
 
     if(role === Roles.user){
-      user.status = false;
+      user.status = true;  // TODO: ALTERAR PARA FALSE
+
 
       const confirmEmail = path.resolve(
         __dirname,
@@ -113,6 +118,14 @@ class CreateUserService {
     }
 
     await this.userRepository.save(user);
+
+    const myPoints = await this.myPointsRepository.create({
+      user_id: user.id,
+      points: 0,
+    });
+
+    await this.myPointsRepository.save(myPoints);
+
     return instanceToInstance(user);
   }
 }

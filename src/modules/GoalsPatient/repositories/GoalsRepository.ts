@@ -61,6 +61,7 @@ class GoalsPatientRepository implements IGoalsPatientRepository {
     description,
     points,
     patient_id,
+    type,
   }: IGoalsCreate): GoalsPatient {
     const goals = this.ormRepository.create({
       typeofgoal,
@@ -70,6 +71,7 @@ class GoalsPatientRepository implements IGoalsPatientRepository {
       points,
       patient_id,
       status: "pendente",
+      type,
     });
 
     return goals;
