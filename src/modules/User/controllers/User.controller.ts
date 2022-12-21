@@ -35,6 +35,29 @@ class UserController {
     return res.status(201).json(user);
   }
 
+  async createByGestor(req: Request, res: Response): Promise<Response> {
+    const { name, email, cnpj, cpf, password, role, corporate_name, position, address, phone_number } = req.body;
+
+    const gestor_id = req.user.id;
+    const createUserService = container.resolve(CreateUserService);
+
+    const user = await createUserService.execute({
+      name,
+      email,
+      cnpj,
+      cpf,
+      password,
+      role,
+      corporate_name,
+      position,
+      address,
+      phone_number,
+      gestor_id,
+    });
+
+    return res.status(201).json(user);
+  }
+
   async listUser(req: Request, res: Response): Promise<Response> {
       const listUserService = container.resolve(ListUserService);
 

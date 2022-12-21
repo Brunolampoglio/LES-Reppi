@@ -1,3 +1,5 @@
+import { Address } from "@modules/User/entities/Address";
+
 interface IUpdateUserDTO {
   user_id: string;
   request_id: string;
@@ -7,7 +9,9 @@ interface IUpdateUserDTO {
   cnpj?: string;
   corporate_name?: string;
   phone_number?: string;
+  email?: string;
   position?: string;
+  address?: Address;
 }
 
 export { IUpdateUserDTO };

@@ -11,7 +11,7 @@ export const createUserMiddleware = celebrate({
     position: Joi.string(),
     gestor_id: Joi.string().uuid(),
     role: Joi.string().valid('Master', 'Paciente', 'Gestor', 'Funcionario'),
-    phone_number: Joi.string(),
+    phone_number: Joi.string().required(),
     address: Joi.object({
       zip: Joi.string().min(8).max(9).required().label('CEP'),
       street: Joi.string().required().label('rua'),
@@ -45,12 +45,26 @@ export const updateUserMiddleware = celebrate({
   },
   [Segments.BODY]: {
     name: Joi.string(),
+    email: Joi.string().email(),
+    password: Joi.string().min(8),
     cpf: Joi.string(),
     cnpj: Joi.string(),
     corporate_name: Joi.string(),
     position: Joi.string(),
+    gestor_id: Joi.string().uuid(),
+    role: Joi.string().valid('Master', 'Paciente', 'Gestor', 'Funcionario'),
     phone_number: Joi.string(),
-
+    address: Joi.object({
+      zip: Joi.string().min(8).max(9).label('CEP'),
+      street: Joi.string().label('rua'),
+      uf: Joi.string().length(2),
+      city: Joi.string().label('cidade'),
+      complement: Joi.string(),
+      number: Joi.string()
+        .max(6)
+        .pattern(/^[0-9]+$/)
+        .label('número'),
+    }),
   },
 });
 
