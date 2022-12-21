@@ -32,6 +32,10 @@ import { ITermsOfUseRepository } from '@modules/TermsOfUse/repositories/TermsOfU
 import { TermsOfUseRepository } from '@modules/TermsOfUse/repositories/TermsOfUseRepository';
 import { MyPointsRepository } from '@modules/myPoints/repositories/MyPointsRepository';
 import { IMyPointsRepository } from '@modules/myPoints/repositories/MyPointsRepositories.interface';
+import { ISolicitationRepository } from '@modules/SolicitationRedeem/repositories/SolicitationRepositories.interface';
+import { SolicitationRepository } from '@modules/SolicitationRedeem/repositories/SolicitationRepository';
+import { ILicenseOfUseRepository } from '@modules/LicenseOfUse/repositories/LicenseOfUse.interface';
+import { LicenseOfUseRepository } from '@modules/LicenseOfUse/repositories/LicenseOfUseRepository';
 
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 container.registerSingleton<IPlansRepository>('PlanRepository', PlanRepository);
@@ -48,3 +52,5 @@ container.registerSingleton<IGoalsPatientRepository>('GoalsPatientRepository', G
 container.registerSingleton<IAwardsRepository>('AwardsRepository', AwardsRepository);
 container.registerSingleton<ITermsOfUseRepository>('TermsOfUseRepository', TermsOfUseRepository);
 container.registerSingleton<IMyPointsRepository>('MyPointsRepository', MyPointsRepository);
+container.registerSingleton<ISolicitationRepository>('SolicitationRepository', SolicitationRepository);
+container.registerSingleton<ILicenseOfUseRepository>('LicenseOfUseRepository', LicenseOfUseRepository);

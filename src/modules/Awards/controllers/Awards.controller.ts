@@ -6,14 +6,15 @@ import { UpdateAwardsService } from "../services/UpdateAwards.service";
 import { DeleteAwardsService } from "../services/DeleteAwards.service";
 class AwardsController {
   async create(req: Request, res: Response): Promise<Response> {
-    const {description, points, client_id } = req.body;
+    const {description, points} = req.body;
+    const { patient_id } = req.params;
 
     const createAwardsService = container.resolve(CreateAwardsService);
 
     const awards = await createAwardsService.execute({
       description,
       points,
-      client_id,
+      client_id: patient_id,
     });
     return res.status(201).json(awards);
   }
@@ -23,10 +24,12 @@ class AwardsController {
       [key: string]: string;
     };
 
+    const {patient_id} = req.params;
+
     const listAwardsService = container.resolve(ListAwardsService);
 
     const awards = await listAwardsService.execute({
-      client_id: req.user.id,
+      client_id: patient_id,
       limit: parseInt(limit, 10) || 50,
       page: parseInt(page, 10) || 1,
     });

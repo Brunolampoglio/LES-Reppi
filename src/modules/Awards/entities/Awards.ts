@@ -1,5 +1,6 @@
+import { SolicitationRedeem } from "@modules/SolicitationRedeem/entities/SolicitationRedeem";
 import { User } from "@modules/User/entities/User";
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('awards')
 class Awards {
@@ -11,6 +12,11 @@ class Awards {
 
   @Column()
   points: number;
+
+  @OneToMany(() => SolicitationRedeem, solicitationRedeem => solicitationRedeem.awards, {
+    cascade: true,
+  })
+  solicitation: SolicitationRedeem[];
 
   @Column()
   client_id: string;
