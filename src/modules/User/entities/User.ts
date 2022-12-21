@@ -204,3 +204,4 @@ class User {
 }
 
 export { User };
+// TODO: criar url para qr code com url para pagina web

@@ -33,7 +33,8 @@ userRouter.post('/confirm', userController.confirm);
 
 userRouter.use(verifyToken);
 
-userRouter.post('/employee', createUserMiddleware, userController.create);
+userRouter.post('/gestor', createUserMiddleware, userController.createByGestor);
+userRouter.post('/employee', createUserMiddleware, userController.createByGestor);
 
 userRouter.patch(
   '/:user_id/avatar',
