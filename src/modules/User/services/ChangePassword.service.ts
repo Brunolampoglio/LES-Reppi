@@ -33,7 +33,7 @@ class ChangePasswordService {
 
     const passwordMatched = await compare(old_password, user.password);
 
-    if (!passwordMatched) throw new AppError('Senha inválida', 401);
+    if (!passwordMatched) throw new AppError('Senha atual inválida', 401);
 
     const hash_password = await this.hashProvider.generateHash(new_password);
 
