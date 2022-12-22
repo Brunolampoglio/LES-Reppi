@@ -11,6 +11,9 @@ class PlanRepository implements IPlansRepository {
   constructor() {
     this.ormRepository = getRepository(Plans);
   }
+  listAll(filter: IPaginatedRequest<Plans>): Promise<IPaginatedResponse<Plans>> {
+    throw new Error('Method not implemented.');
+  }
 
   async findBy(filter: Partial<Plans>): Promise<Plans | undefined> {
     const plan = await this.ormRepository.findOne(filter);
@@ -42,6 +45,7 @@ class PlanRepository implements IPlansRepository {
       limit,
     };
   }
+
 
   create({
     name,

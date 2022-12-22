@@ -15,12 +15,8 @@ class ListAllPlansService {
   public async execute({
     page,
     limit,
-    user_id,
   }: IListAllPlansDTO): Promise<IPaginatedResponse<Plans>> {
     const plan = await this.planRepository.listBy({
-      filters: {
-        user_id,
-      },
       page,
       limit,
     });

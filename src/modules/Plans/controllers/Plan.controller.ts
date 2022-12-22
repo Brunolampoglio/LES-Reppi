@@ -44,7 +44,6 @@ class PlansController {
     const listPlansService = container.resolve(ListAllPlansService);
 
     const plans = await listPlansService.execute({
-      user_id: req.user.id,
       limit: parseInt(limit, 10) || 50,
       page: parseInt(page, 10) || 1,
     });
