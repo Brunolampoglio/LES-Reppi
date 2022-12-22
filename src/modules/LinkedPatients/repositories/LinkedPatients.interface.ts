@@ -26,6 +26,7 @@ class LinkedPatientsRepository implements ILinkedPatientsRepository {
   }: IPaginatedRequestObri<LinkedPatients>): Promise<IPaginatedResponse<LinkedPatients>>{
     const linkedPatients = await this.ormRepository.find({
       where: filters,
+      relations: ['user'],
       skip: (page - 1) * limit,
       take: limit,
     });
@@ -38,6 +39,10 @@ class LinkedPatientsRepository implements ILinkedPatientsRepository {
       page,
       limit,
     };
+  }
+
+  async index(): Promise<LinkedPatients[]> {
+    return this.ormRepository.find();
   }
 
   create({
