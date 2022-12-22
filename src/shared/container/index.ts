@@ -36,6 +36,8 @@ import { ISolicitationRepository } from '@modules/SolicitationRedeem/repositorie
 import { SolicitationRepository } from '@modules/SolicitationRedeem/repositories/SolicitationRepository';
 import { ILicenseOfUseRepository } from '@modules/LicenseOfUse/repositories/LicenseOfUse.interface';
 import { LicenseOfUseRepository } from '@modules/LicenseOfUse/repositories/LicenseOfUseRepository';
+import { ILinkedPatientsRepository } from '@modules/LinkedPatients/repositories/LinkedPatientRepository';
+import { LinkedPatientsRepository } from '@modules/LinkedPatients/repositories/LinkedPatients.interface';
 
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 container.registerSingleton<IPlansRepository>('PlanRepository', PlanRepository);
@@ -54,3 +56,4 @@ container.registerSingleton<ITermsOfUseRepository>('TermsOfUseRepository', Terms
 container.registerSingleton<IMyPointsRepository>('MyPointsRepository', MyPointsRepository);
 container.registerSingleton<ISolicitationRepository>('SolicitationRepository', SolicitationRepository);
 container.registerSingleton<ILicenseOfUseRepository>('LicenseOfUseRepository', LicenseOfUseRepository);
+container.registerSingleton<ILinkedPatientsRepository>('LinkedPatientsRepository', LinkedPatientsRepository);

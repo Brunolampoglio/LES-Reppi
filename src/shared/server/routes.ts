@@ -16,6 +16,7 @@ import { awardsRouter } from '@modules/Awards/routes/awards.routes';
 import { termsOfUseRouter } from '@modules/TermsOfUse/routes/TermsofUse.routes';
 import { solicitationRouter } from '@modules/SolicitationRedeem/routes/solicitation.routes';
 import { licenseOfUseRouter } from '@modules/LicenseOfUse/routes/LicenseOfUse.routes';
+import { linkedPatientsRoutes } from '@modules/LinkedPatients/routes/LinkedPatients.routes';
 
 const router = Router();
 
@@ -35,6 +36,7 @@ router.use('/awards', awardsRouter);
 router.use('/termsOfUse', termsOfUseRouter);
 router.use('/solicitation', solicitationRouter);
 router.use('/license', licenseOfUseRouter);
+router.use('/linkedPatients', linkedPatientsRoutes);
 
 
 router.get('/', (request: Request, response: Response) =>

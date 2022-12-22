@@ -13,6 +13,10 @@ class UserRepository implements IUserRepository {
     this.ormRepository = getRepository(User);
   }
 
+  async index(): Promise<User[]> {
+    return this.ormRepository.find();
+  }
+
   async findBy(filter: Partial<User>): Promise<User | undefined> {
     const user = await this.ormRepository.findOne(filter);
 

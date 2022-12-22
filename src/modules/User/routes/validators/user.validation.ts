@@ -45,13 +45,10 @@ export const updateUserMiddleware = celebrate({
   },
   [Segments.BODY]: {
     name: Joi.string(),
-    email: Joi.string().email(),
     password: Joi.string().min(8),
     cpf: Joi.string(),
-    cnpj: Joi.string(),
     corporate_name: Joi.string(),
     position: Joi.string(),
-    gestor_id: Joi.string().uuid(),
     role: Joi.string().valid('Master', 'Paciente', 'Gestor', 'Funcionario'),
     phone_number: Joi.string(),
     address: Joi.object({

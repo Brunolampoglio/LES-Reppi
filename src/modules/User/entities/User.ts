@@ -28,6 +28,7 @@ import { GoalsPatient } from '@modules/GoalsPatient/entities/GoalsPatient';
 import { Awards } from '@modules/Awards/entities/Awards';
 import { MyPoints } from '@modules/myPoints/entities/MyPoints';
 import { SolicitationRedeem } from '@modules/SolicitationRedeem/entities/SolicitationRedeem';
+import { LinkedPatients } from '@modules/LinkedPatients/entities/LinkedPatients';
 
 @Entity('users')
 class User {
@@ -172,6 +173,11 @@ class User {
   })
   @JoinColumn({ name: 'address_id' })
   address: Address;
+
+  @OneToMany(() => LinkedPatients, linkedPatients => linkedPatients.user, {
+    cascade: true,
+    })
+  linked_patients: LinkedPatients[];
 
   @Expose({ name: 'avatar' })
   getAvatarUrl(): string | null {

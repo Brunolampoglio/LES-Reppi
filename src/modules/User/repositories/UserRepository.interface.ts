@@ -8,6 +8,7 @@ interface IUserRepository {
   listByUser(filter: IPaginatedRequestObri<User>): Promise<IPaginatedResponse<User>>;
   listCorporate(filter: IPaginatedRequestObri<User>): Promise<IPaginatedResponse<User>>;
   listEmployee(filter: IPaginatedRequest<User> & {gestor_id: string}, ): Promise<IPaginatedResponse<User>>;
+  index(): Promise<User[]>;
   create(user: IUserCreate): User;
   save(user: User): Promise<User>;
   remove(user: User): Promise<void>;
