@@ -37,12 +37,19 @@ class CreateLinkedPatientsService {
     const fields = XLSX.utils.sheet_to_json<XLSXFields>(sheet);
 
     const users = await this.userRepository.index();
+    const linkeds = await this.linkedPatientsRepository.index();
 
     const linkedPatients = fields.map(({CPF}) => {
       const user = users.find((user) => user.cpf === CPF);
 
       if(!user) {
-        throw new AppError(`Usuário com CPF ${CPF} não encontrado!`, 404);
+        throw new AppError(`Usuário com CPF: ${CPF} não encontrado!`, 404);
+      }
+
+      const linked = linkeds.find((linked) => linked.patient_id === user.id && linked.gestor_id === gestor_id);
+
+      if(linked) {
+        throw new AppError(`Usuário com CPF: ${CPF} já está vinculado ao gestor!`, 400);
       }
 
       const linkedPatient = this.linkedPatientsRepository.create({

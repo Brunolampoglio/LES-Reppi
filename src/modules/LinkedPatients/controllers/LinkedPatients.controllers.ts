@@ -2,6 +2,7 @@ import { container } from "tsyringe";
 import { Request, Response } from 'express';
 import { CreateLinkedPatientsService } from "../services/CreateLinkedPatients.service";
 import { AppError } from "@shared/error/AppError";
+import { ListLinkedPatientService } from "../services/ListLinkedPatient.service";
 
 class LinkedPatientsController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -21,6 +22,21 @@ class LinkedPatientsController {
     return response.json(linkedPatient);
   }
 
+  public async index(request: Request, response: Response): Promise<Response> {
+    const listLinkedPatientsService = container.resolve(ListLinkedPatientService);
+    const { page, limit, role } = request.query as {
+      [key: string]: string;
+    };
+
+    const linkedPatients = await listLinkedPatientsService.execute({
+      gestor_id: request.user.id,
+      limit: parseInt(limit, 10) || 50,
+      page: parseInt(page, 10) || 1,
+    });
+
+    return response.json(linkedPatients);
+
+  }
 }
 
 export { LinkedPatientsController };

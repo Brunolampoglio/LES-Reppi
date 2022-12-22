@@ -11,10 +11,11 @@ const planRouter = Router();
 const planController = new PlansController();
 
 planRouter.get('/:id', planController.show);
+planRouter.get('/', planController.list);
 
 planRouter.use(verifyToken);
 planRouter.post('/', createPlanMiddleware, planController.create);
-planRouter.get('/', planController.list);
+
 planRouter.delete('/:id', deletePlanMiddleware, planController.delete);
 planRouter.put('/:id', updatePlanMiddleware, planController.update);
 
