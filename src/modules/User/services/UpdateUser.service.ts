@@ -31,9 +31,9 @@ class UpdateUserService {
 
     Object.assign(user, userParams);
 
-    const newUser = await this.userRepository.save(user);
+     await this.userRepository.save(user);
 
-    return newUser;
+    return user;
   }
 }
 
