@@ -1,3 +1,4 @@
+import { IStorageProvider } from "@shared/container/providers/StorageProvider/models/IStorageProvider";
 import { inject, injectable } from "tsyringe";
 import { PatientData } from "../entities/PatientData";
 import { IPatientDataCreate } from "../repositories/dto/PatientDataRepositoryDTO";
@@ -8,6 +9,9 @@ class CreatePatientDataService {
   constructor(
     @inject("PatientDataRepository")
     private patientDataRepository: IPatientDataRepository,
+
+    @inject('StorageProvider')
+    private storageProvider: IStorageProvider,
   ) {}
 
 public async execute({
@@ -17,6 +21,7 @@ public async execute({
     peso,
     descricao,
     user_id,
+    eletrocardiograma,
   }: IPatientDataCreate): Promise<PatientData> {
 
 
@@ -28,6 +33,12 @@ public async execute({
       descricao,
       user_id,
     });
+
+
+    if (eletrocardiograma) {
+      const filename = await this.storageProvider.saveFile(eletrocardiograma);
+      patientData.eletrocardiograma = filename;
+    }
 
     await this.patientDataRepository.save(patientData);
 
