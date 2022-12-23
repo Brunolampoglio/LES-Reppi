@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { CreateLinkedPatientsService } from "../services/CreateLinkedPatients.service";
 import { AppError } from "@shared/error/AppError";
 import { ListLinkedPatientService } from "../services/ListLinkedPatient.service";
+import { ListByNameLinkedPatientService } from "../services/ListByNameLinkedPatients.service";
 
 class LinkedPatientsController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -35,8 +36,21 @@ class LinkedPatientsController {
     });
 
     return response.json(linkedPatients);
-
   }
+
+  public async listByName(request: Request, response: Response): Promise<Response> {
+    const { name } = request.query as {
+      [key: string]: string;
+    };
+
+    const linkedsPatients = await container.resolve(ListByNameLinkedPatientService).execute({
+      gestor_id: request.user.id,
+      name,
+    });
+
+
+    return response.json(linkedsPatients);
+ }
 }
 
 export { LinkedPatientsController };

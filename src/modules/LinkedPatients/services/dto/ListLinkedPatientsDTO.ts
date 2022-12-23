@@ -4,4 +4,11 @@ interface IListLinkedPatientsDTO {
   limit?: number;
 }
 
-export { IListLinkedPatientsDTO };
+interface IListByNameLinkedPatientsDTO {
+  name: string;
+  gestor_id: string;
+  page?: number;
+  limit?: number;
+}
+
+export { IListLinkedPatientsDTO, IListByNameLinkedPatientsDTO };

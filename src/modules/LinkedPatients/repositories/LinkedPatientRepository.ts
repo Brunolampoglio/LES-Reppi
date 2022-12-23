@@ -8,10 +8,19 @@ interface ILinkedPatientsRepository {
   listBy(
     filter: IPaginatedRequestObri<LinkedPatients>,
   ): Promise<IPaginatedResponse<LinkedPatients>>;
+
   index(): Promise<LinkedPatients[]>;
   create(linkedPatients: ILinkedPatientsCreate): LinkedPatients;
   save(linkedPatients: LinkedPatients): Promise<LinkedPatients>;
   saveMany(data: LinkedPatients[]): Promise<LinkedPatients[]>;
   remove(linkedPatients: LinkedPatients): Promise<void>;
+
+  /** @param {string} name - Name Patient */
+   /** @param {string} gestor_id - Id do Gestor */
+
+  listByName(
+    name: string,
+    gestor_id: string,
+  ): Promise<LinkedPatients>;
 }
 export { ILinkedPatientsRepository };
