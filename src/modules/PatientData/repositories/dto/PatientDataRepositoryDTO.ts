@@ -4,6 +4,7 @@ interface IPatientDataCreate {
   hemoglobina_glicada: string;
   peso: string;
   descricao: string;
+  eletrocardiograma?: string;
   user_id: string;
 }
 

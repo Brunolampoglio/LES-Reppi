@@ -24,6 +24,7 @@ class PatientDataController {
       peso,
       descricao,
       user_id: patientId,
+      eletrocardiograma: req.file?.filename,
     });
 
     return res.status(201).json(patientData);

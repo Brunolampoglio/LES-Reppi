@@ -63,6 +63,7 @@ class PatientDataRepository implements IPatientDataRepository {
     peso,
     descricao,
     user_id,
+    eletrocardiograma,
   }: IPatientDataCreate): PatientData {
     const patientData = this.ormRepository.create({
       colesterol,
@@ -70,7 +71,8 @@ class PatientDataRepository implements IPatientDataRepository {
       hemoglobina_glicada,
       peso,
       descricao,
-      user_id
+      user_id,
+      eletrocardiograma,
     });
     return patientData;
   }

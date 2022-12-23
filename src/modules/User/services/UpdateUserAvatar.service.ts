@@ -6,6 +6,7 @@ import { IStorageProvider } from '@shared/container/providers/StorageProvider/mo
 import { User } from '../entities/User';
 import { IUserRepository } from '../repositories/UserRepository.interface';
 import { IUpdateUserAvatarDTO } from './dto/UpdateUserAvatarDTO';
+import { instanceToInstance } from 'class-transformer';
 
 @injectable()
 class UpdateUserAvatarService {
@@ -39,9 +40,9 @@ class UpdateUserAvatarService {
 
     user.avatar = filename;
 
-    const newUser = await this.userRepository.save(user);
+    await this.userRepository.save(user);
 
-    return newUser;
+    return instanceToInstance(user);
   }
 }
 
