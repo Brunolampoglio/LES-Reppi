@@ -49,7 +49,7 @@ class LinkedPatientsRepository implements ILinkedPatientsRepository {
       .createQueryBuilder('linkedPatients')
       .leftJoinAndSelect('linkedPatients.user', 'user')
       .where('linkedPatients.gestor_id = :gestor_id', { gestor_id })
-      .andWhere('user.name like :name OR :nullName::text IS NULL',
+      .andWhere('user.name = :name OR :nullName::text IS NULL',
         {
           name: `%${name}%`,
           nullName: name,
