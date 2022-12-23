@@ -41,6 +41,25 @@ class LinkedPatientsRepository implements ILinkedPatientsRepository {
     };
   }
 
+  async listByName(
+    name: string,
+    gestor_id: string
+  ): Promise<LinkedPatients>{
+    const linkedPatients = await this.ormRepository
+      .createQueryBuilder('linkedPatients')
+      .leftJoinAndSelect('linkedPatients.user', 'user')
+      .where('linkedPatients.gestor_id = :gestor_id', { gestor_id })
+      .andWhere('user.name like :name OR :nullName::text IS NULL',
+        {
+          name: `%${name}%`,
+          nullName: name,
+        })
+        .take()
+        .getMany();
+
+    return linkedPatients[0];
+  }
+
   async index(): Promise<LinkedPatients[]> {
     return this.ormRepository.find();
   }
