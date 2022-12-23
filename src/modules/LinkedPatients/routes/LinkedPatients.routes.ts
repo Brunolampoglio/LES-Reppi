@@ -19,6 +19,6 @@ linkedPatientsRoutes.patch(
 );
 
 linkedPatientsRoutes.get('/', linkedpatientsController.index);
-linkedPatientsRoutes.get('/', linkedpatientsController.listByName);
+linkedPatientsRoutes.get('/search', linkedpatientsController.listByName);
 
 export { linkedPatientsRoutes };
