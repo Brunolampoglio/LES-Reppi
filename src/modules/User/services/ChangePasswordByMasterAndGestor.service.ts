@@ -46,9 +46,9 @@ class ChangePasswordByMasterAndGestorService {
 
     user.password = hash_password;
 
-    const new_user = await this.userRepository.save(user);
+   await this.userRepository.save(user);
 
-    return instanceToInstance(new_user);
+    return instanceToInstance(user);
   }
 }
 export { ChangePasswordByMasterAndGestorService };
