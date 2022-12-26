@@ -44,20 +44,28 @@ class LinkedPatientsRepository implements ILinkedPatientsRepository {
   async listByName(
     name: string,
     gestor_id: string
-  ): Promise<LinkedPatients>{
-    const linkedPatients = await this.ormRepository
+  ): Promise<IPaginatedResponse<LinkedPatients>>{
+
+
+    console.log(name);
+    const [linkedPatients, linkedPatientsTotal] = await this.ormRepository
       .createQueryBuilder('linkedPatients')
       .leftJoinAndSelect('linkedPatients.user', 'user')
       .where('linkedPatients.gestor_id = :gestor_id', { gestor_id })
-      .andWhere('user.name = :name OR :nullName::text IS NULL',
+      .andWhere('LOWER(user.name) like :name OR :nullName::text IS NULL',
         {
-          name: `%${name}%`,
+          name: `%${name.toLowerCase()}%`,
           nullName: name,
         })
         .take()
-        .getMany();
+        .getManyAndCount();
 
-    return linkedPatients[0];
+    return {
+      results: linkedPatients,
+      total: linkedPatientsTotal,
+      page: 1,
+      limit: 10,
+    };
   }
 
   async index(): Promise<LinkedPatients[]> {

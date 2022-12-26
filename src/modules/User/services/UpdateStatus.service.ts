@@ -25,9 +25,9 @@ class UpdateStatusService {
 
     user.status = status;
 
-    const newUser = await this.userRepository.save(user);
+    await this.userRepository.save(user);
 
-    return newUser;
+    return user;
   }
 }
 export { UpdateStatusService };
