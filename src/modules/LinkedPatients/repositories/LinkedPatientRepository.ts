@@ -21,6 +21,6 @@ interface ILinkedPatientsRepository {
   listByName(
     name: string,
     gestor_id: string,
-  ): Promise<LinkedPatients>;
+  ): Promise<IPaginatedResponse<LinkedPatients>>;
 }
 export { ILinkedPatientsRepository };
