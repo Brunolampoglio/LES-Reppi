@@ -16,12 +16,8 @@ class UpdateGoalsPatientService {
   ) {}
 
   public async execute({
-    typeofgoal,
-    description,
-    from,
+    status,
     goals_id,
-    points,
-    to
    }: IUpdateGoalsPatientDTO): Promise<GoalsPatient> {
 
     const goalsPatient = await this.goalsPatientRepository.findBy({
@@ -34,25 +30,15 @@ class UpdateGoalsPatientService {
 
     if(!patient) throw new AppError("Paciente não encontrado", 404);
 
-    Object.assign(goalsPatient, {
-      typeofgoal,
-      description,
-      from,
-      goals_id,
-      points,
-      to
-    });
-
-    if(goalsPatient.to === goalsPatient.from){
-      goalsPatient.status = "Concluído";
+    if(status = "Concluído"){
+      goalsPatient.status = status;
       patient.points = goalsPatient.points + patient.points;
-
     }
 
-    const newGoalsPatient = await this.goalsPatientRepository.save(goalsPatient);
+    await this.goalsPatientRepository.save(goalsPatient);
     await this.myPointsRepository.save(patient);
 
-    return newGoalsPatient;
+    return goalsPatient;
  }
 }
 
