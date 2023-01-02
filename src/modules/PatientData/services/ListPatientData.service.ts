@@ -13,15 +13,10 @@ class ListPatientDataService {
 
   public async execute({
     patientId,
-  }: IListPatientDataDTO): Promise<IPaginatedResponse<PatientData>> {
-    const patientData = await this.patientDataRepository.listBy({filters: { user_id: patientId }});
+  }: IListPatientDataDTO): Promise<PatientData> {
+    const patientData = await this.patientDataRepository.findBy({user_id: patientId});
 
-    return {
-      results: patientData.results,
-      total: patientData.total,
-      page: patientData.page,
-      limit: patientData.limit,
-    };
+    return patientData as PatientData;
   }
 }
 export { ListPatientDataService };

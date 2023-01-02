@@ -44,17 +44,14 @@ class GoalsPatientController {
 
   async update(req: Request, res: Response): Promise<Response> {
     const { goals_id } = req.params;
-    const { typeofgoal, from, to, description, points } = req.body;
+    const { status } = req.body;
 
     const updateGoalsPatientService = container.resolve(UpdateGoalsPatientService);
 
     const goalsPatient = await updateGoalsPatientService.execute({
       goals_id,
-      typeofgoal,
-      from,
-      to,
-      description,
-      points,
+      status,
+
     });
 
     return res.json(goalsPatient);

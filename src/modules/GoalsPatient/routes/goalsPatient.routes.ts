@@ -17,11 +17,11 @@ goalsPatientRouter.get('/:patientId',
 listGoalsPatientMiddleware,
 goalsPatientController.list);
 
-goalsPatientRouter.put('/:goal_id',
+goalsPatientRouter.put('/:goals_id',
 updateGoalsPatientMiddleware,
 goalsPatientController.update);
 
-goalsPatientRouter.delete('/:goal_id',
+goalsPatientRouter.delete('/:goals_id',
 deleteGoalsPatientMiddleware,
 goalsPatientController.delete);
 
