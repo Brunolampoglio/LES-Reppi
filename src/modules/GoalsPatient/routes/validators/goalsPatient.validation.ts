@@ -29,11 +29,7 @@ export const updateGoalsPatientMiddleware = celebrate({
     goals_id: Joi.string().uuid().required(),
   },
   [Segments.BODY]: {
-    typeofgoal: Joi.string(),
-    from: Joi.string(),
-    to: Joi.string(),
-    description: Joi.string(),
-    points: Joi.number(),
+    status: Joi.string().required(),
   },
 });
 

@@ -24,11 +24,11 @@ class UpdateGoalsPatientService {
       id: goals_id,
     });
 
-    if (!goalsPatient) throw new AppError("Goals não encontrado", 404);
+    if (!goalsPatient) throw new AppError("Metas não encontrado", 404);
 
     const patient = await this.myPointsRepository.findBy({user_id: goalsPatient.patient_id});
 
-    if(!patient) throw new AppError("Paciente não encontrado", 404);
+    if(!patient) throw new AppError("Pontos não encontrado", 404);
 
     if(status = "Concluído"){
       goalsPatient.status = status;
