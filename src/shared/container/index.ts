@@ -38,6 +38,8 @@ import { ILicenseOfUseRepository } from '@modules/LicenseOfUse/repositories/Lice
 import { LicenseOfUseRepository } from '@modules/LicenseOfUse/repositories/LicenseOfUseRepository';
 import { ILinkedPatientsRepository } from '@modules/LinkedPatients/repositories/LinkedPatientRepository';
 import { LinkedPatientsRepository } from '@modules/LinkedPatients/repositories/LinkedPatients.interface';
+import { IPrescriptionsRepository } from '@modules/Prescriptions/repositories/Prescriptions.interface';
+import { PrescriptionsRepository } from '@modules/Prescriptions/repositories/PrescriptionsRepository';
 
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 container.registerSingleton<IPlansRepository>('PlanRepository', PlanRepository);
@@ -57,3 +59,4 @@ container.registerSingleton<IMyPointsRepository>('MyPointsRepository', MyPointsR
 container.registerSingleton<ISolicitationRepository>('SolicitationRepository', SolicitationRepository);
 container.registerSingleton<ILicenseOfUseRepository>('LicenseOfUseRepository', LicenseOfUseRepository);
 container.registerSingleton<ILinkedPatientsRepository>('LinkedPatientsRepository', LinkedPatientsRepository);
+container.registerSingleton<IPrescriptionsRepository>('PrescriptionsRepository', PrescriptionsRepository);

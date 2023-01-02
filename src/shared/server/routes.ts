@@ -1,5 +1,4 @@
 import { Router, Request, Response, NextFunction } from 'express';
-
 import { userRouter } from '@modules/User/routes/user.routes';
 import { planRouter } from '@modules/Plans/routes/plan.routes';
 import { bannerRouter } from '@modules/Banners/routes/banner.routes';
@@ -17,6 +16,7 @@ import { termsOfUseRouter } from '@modules/TermsOfUse/routes/TermsofUse.routes';
 import { solicitationRouter } from '@modules/SolicitationRedeem/routes/solicitation.routes';
 import { licenseOfUseRouter } from '@modules/LicenseOfUse/routes/LicenseOfUse.routes';
 import { linkedPatientsRoutes } from '@modules/LinkedPatients/routes/LinkedPatients.routes';
+import { prescriptionRoutes } from '@modules/Prescriptions/routes/prescription.routes';
 
 const router = Router();
 
@@ -37,6 +37,7 @@ router.use('/termsOfUse', termsOfUseRouter);
 router.use('/solicitation', solicitationRouter);
 router.use('/license', licenseOfUseRouter);
 router.use('/linkedPatients', linkedPatientsRoutes);
+router.use('/prescription', prescriptionRoutes);
 
 
 router.get('/', (request: Request, response: Response) =>

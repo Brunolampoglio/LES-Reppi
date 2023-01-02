@@ -21,7 +21,7 @@ class Exam {
   @Column()
   client_id: string;
 
-  @ManyToOne(() => User, user => user.banners, {
+  @ManyToOne(() => User, user => user.exams, {
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',

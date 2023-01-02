@@ -29,6 +29,8 @@ import { Awards } from '@modules/Awards/entities/Awards';
 import { MyPoints } from '@modules/myPoints/entities/MyPoints';
 import { SolicitationRedeem } from '@modules/SolicitationRedeem/entities/SolicitationRedeem';
 import { LinkedPatients } from '@modules/LinkedPatients/entities/LinkedPatients';
+import { Exam } from '@modules/Exams/entities/Exams';
+import { Prescriptions } from '@modules/Prescriptions/entities/Prescriptions';
 
 @Entity('users')
 class User {
@@ -97,6 +99,16 @@ class User {
     cascade: true,
     })
     doc_exams: DocExams[];
+
+  @OneToMany(() => Exam, exam => exam.user, {
+    cascade: true,
+    })
+    exams: Exam[];
+
+  @OneToMany(() => Prescriptions, prescriptions => prescriptions.user, {
+    cascade: true,
+    })
+    prescriptions: Prescriptions[];
 
   @OneToMany(() => GoalsPatient, goalsPatient => goalsPatient.user, {
     cascade: true,
