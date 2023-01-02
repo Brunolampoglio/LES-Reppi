@@ -35,13 +35,13 @@ class AwardsController {
   }
 
   async update(req: Request, res: Response): Promise<Response> {
-    const { awards_id } = req.params;
+    const { awardsId } = req.params;
     const { description, points } = req.body;
 
     const updateAwardsService = container.resolve(UpdateAwardsService);
 
     const awards = await updateAwardsService.execute({
-      id: awards_id,
+      id: awardsId,
       client_id: req.user.id,
       description,
       points,
@@ -51,12 +51,12 @@ class AwardsController {
   }
 
   async delete(req: Request, res: Response): Promise<Response> {
-    const { awards_id } = req.params;
+    const { awardsId } = req.params;
 
     const deleteAwardsService = container.resolve(DeleteAwardsService);
 
     await deleteAwardsService.execute({
-      id: awards_id,
+      id: awardsId,
       client_id: req.user.id,
     });
 
