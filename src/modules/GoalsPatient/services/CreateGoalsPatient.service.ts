@@ -22,11 +22,13 @@ class CreateGoalsPatientService {
 
 
     let pesoMeta = 0;
-    if(type ==='perder'){
+    if(typeofgoal === 'peso'){
+      if(type ==='perder'){
         pesoMeta = parseInt(from) - parseInt(to);
-    }else {
+      }else {
         pesoMeta = parseInt(from) + parseInt(to);
-    }
+      }
+  }
 
     const goalsPatient = this.goalsPatientRepository.create({
       typeofgoal,
