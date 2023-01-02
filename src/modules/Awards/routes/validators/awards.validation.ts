@@ -16,7 +16,7 @@ export const listAwardsMiddleware = celebrate({
 
 export const updateAwardsMiddleware = celebrate({
   [Segments.PARAMS]:{
-    awards_id: Joi.string().uuid().required(),
+    awardsId: Joi.string().uuid().required(),
   },
   [Segments.BODY]: {
     description: Joi.string(),
@@ -27,6 +27,6 @@ export const updateAwardsMiddleware = celebrate({
 
 export const deleteAwardsMiddleware = celebrate({
   [Segments.PARAMS]:{
-    awards_id: Joi.string().uuid().required(),
+    awardsId: Joi.string().uuid().required(),
   },
 });
