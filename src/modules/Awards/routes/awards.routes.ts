@@ -9,9 +9,9 @@ const awardsController = new AwardsController();
 
 awardsRouter.use(verifyToken);
 
-awardsRouter.post('/:patient_id', createAwardsMiddleware, awardsController.create);
+awardsRouter.post('/', createAwardsMiddleware, awardsController.create);
 
-awardsRouter.get('/:patient_id', listAwardsMiddleware, awardsController.list);
+awardsRouter.get('/', listAwardsMiddleware, awardsController.list);
 
 awardsRouter.put('/:awardsId', updateAwardsMiddleware, awardsController.update);
 
