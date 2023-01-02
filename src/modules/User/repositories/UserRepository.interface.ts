@@ -11,6 +11,7 @@ interface IUserRepository {
   index(): Promise<User[]>;
   create(user: IUserCreate): User;
   save(user: User): Promise<User>;
+  saveAll(users: User[]): Promise<User[]>;
   remove(user: User): Promise<void>;
 }
 

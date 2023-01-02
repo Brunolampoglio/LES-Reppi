@@ -1,3 +1,4 @@
+import { AppError } from '@shared/error/AppError';
 import { Request, Response } from 'express';
 
 import { container } from 'tsyringe';
@@ -5,6 +6,7 @@ import { ConfirmEmailService } from '../services/ConfirmEmail.service';
 
 import { CreateUserService } from '../services/CreateUser.service';
 import { DeleteUserService } from '../services/DeleteUser.service';
+import { ImportEmployeeService } from '../services/ImportEmployee.service';
 import { ListEmployeeByGestorService } from '../services/ListEmployeeByGestor.service';
 import { ListGestorService } from '../services/ListGestor.service';
 import { ListUserService } from '../services/ListUser.service';
@@ -161,6 +163,25 @@ class UserController {
 
     return res.json(user);
   }
+
+  async importEmployee(req: Request, res: Response): Promise<Response> {
+    if (!req.file) {
+      throw new AppError('Nenhum arquivo enviado', 400);
+    }
+
+    const {filename} = req.file;
+
+    const importEmployeeService = container.resolve(ImportEmployeeService);
+
+    const users = await importEmployeeService.execute({
+      anexo: filename,
+      gestor_id: req.user.id,
+    });
+
+    return res.json(users);
+
+  }
+
 
 
   async delete(req: Request, res: Response): Promise<Response> {

@@ -34,6 +34,9 @@ userRouter.use(verifyToken);
 
 userRouter.post('/gestor', createUserMiddleware, userController.createByGestor);
 userRouter.post('/employee', createUserMiddleware, userController.createByGestor);
+userRouter.patch('/employee',
+uploadMulter.single('anexo'),
+userController.importEmployee);
 
 userRouter.patch(
   '/:user_id/avatar',

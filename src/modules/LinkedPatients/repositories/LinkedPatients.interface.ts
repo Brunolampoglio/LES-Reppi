@@ -45,9 +45,6 @@ class LinkedPatientsRepository implements ILinkedPatientsRepository {
     name: string,
     gestor_id: string
   ): Promise<IPaginatedResponse<LinkedPatients>>{
-
-
-    console.log(name);
     const [linkedPatients, linkedPatientsTotal] = await this.ormRepository
       .createQueryBuilder('linkedPatients')
       .leftJoinAndSelect('linkedPatients.user', 'user')

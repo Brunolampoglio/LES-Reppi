@@ -115,6 +115,12 @@ class UserRepository implements IUserRepository {
     return newUser;
   }
 
+  async saveAll(users: User[]): Promise<User[]> {
+    const newUsers = await this.ormRepository.save(users);
+
+    return newUsers;
+  }
+
   async remove(user: User): Promise<void> {
     await this.ormRepository.remove(user);
   }
