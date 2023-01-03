@@ -18,5 +18,9 @@ patientDataRouter.put('/:patientDataId', patientDataController.update);
 
 patientDataRouter.delete('/:patientDataId', patientDataController.delete);
 
+patientDataRouter.post('/qrCode', patientDataController.createQrCode);
+
+patientDataRouter.get('/qrCode/:qr_code', patientDataController.show);
+
 
 export { patientDataRouter };

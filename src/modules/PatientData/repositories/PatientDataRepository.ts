@@ -13,7 +13,10 @@ class PatientDataRepository implements IPatientDataRepository {
   }
 
   async findBy(filter: Partial<PatientData>): Promise<PatientData | undefined> {
-    const patientData = await this.ormRepository.findOne(filter);
+    const patientData = await this.ormRepository.findOne({
+      where: filter,
+      relations: ['user'],
+    },);
 
     return patientData;
   }
@@ -43,6 +46,7 @@ class PatientDataRepository implements IPatientDataRepository {
       const patientData = await this.ormRepository.find(
         {
           where: {id},
+          relations: ['user'],
         },
       );
 

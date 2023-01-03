@@ -26,6 +26,38 @@ export const createUserMiddleware = celebrate({
   },
 });
 
+export const createGestorMiddleware = celebrate({
+  [Segments.BODY]: {
+    name: Joi.string().required(),
+    email: Joi.string().email().required(),
+    password: Joi.string().required().min(8),
+    cpf: Joi.string(),
+    cnpj: Joi.string(),
+    corporate_name: Joi.string(),
+    position: Joi.string(),
+    role: Joi.string().valid('Master', 'Paciente', 'Gestor', 'Funcionario'),
+    phone_number: Joi.string().required(),
+    plan_id: Joi.string().uuid().required(),
+    address: Joi.object({
+      zip: Joi.string().min(8).max(9).required().label('CEP'),
+      street: Joi.string().required().label('rua'),
+      uf: Joi.string().length(2).required(),
+      city: Joi.string().required().label('cidade'),
+      complement: Joi.string(),
+      number: Joi.string()
+        .max(6)
+        .pattern(/^[0-9]+$/)
+        .label('número'),
+    }),
+    card: Joi.object({
+        holder_name: Joi.string().required(),
+        digits: Joi.string().required(),
+        expiration: Joi.string().required(),
+        main: Joi.boolean().required(),
+  }),
+}
+});
+
 export const listUserMiddleware = celebrate({
   [Segments.QUERY]: {
     page: Joi.number().min(1),

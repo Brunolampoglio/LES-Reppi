@@ -7,6 +7,7 @@ import { IUserRepository } from "../repositories/UserRepository.interface";
 import * as XLSX from 'xlsx';
 import { Roles } from "@shared/enum/Roles";
 import { IImportEmployeeDTO } from "./dto/ImportEmployeeDTO";
+import { instanceToInstance } from "class-transformer";
 
 
 type XLSXFields = {
@@ -61,7 +62,7 @@ class ImportEmployeeService {
 
     await this.userRepository.saveAll(importadEmployees);
 
-    return importadEmployees;
+    return instanceToInstance(importadEmployees);
 
   }
 
