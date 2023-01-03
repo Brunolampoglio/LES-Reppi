@@ -12,6 +12,7 @@ import { ListEmployeeByGestorService } from '../services/ListEmployeeByGestor.se
 import { ListGestorService } from '../services/ListGestor.service';
 import { ListUserService } from '../services/ListUser.service';
 import { ShowUserService } from '../services/ShowUser.service';
+import { UpdateEmployeeService } from '../services/UpdateEmployee.service';
 import { UpdateStatusService } from '../services/UpdateStatus.service';
 import { UpdateUserService } from '../services/UpdateUser.service';
 
@@ -168,6 +169,26 @@ class UserController {
       cnpj,
       corporate_name,
       isMaster: req.user.isMaster,
+    });
+
+    return res.json(user);
+  }
+
+  async updateEmployee(req: Request, res: Response): Promise<Response> {
+    const { user_id } = req.params;
+    const { name, cpf, email, password, phone_number, position } = req.body;
+
+    const updateEmployeeService = container.resolve(UpdateEmployeeService);
+
+    const user = await updateEmployeeService.execute({
+      user_id,
+      request_id: req.user.id,
+      name,
+      cpf,
+      email,
+      password,
+      phone_number,
+      position,
     });
 
     return res.json(user);

@@ -12,6 +12,7 @@ import {
   deleteUserAvatarMiddleware,
   deleteUserMiddleware,
   showUserMiddleware,
+  updateEmployeeMiddleware,
   updateStatusMiddleware,
   updateUserAvatarMiddleware,
   updateUserMiddleware,
@@ -63,6 +64,9 @@ userRouter.delete(
 userRouter.get('/:user_id', showUserMiddleware, userController.show);
 
 userRouter.put('/:user_id', updateUserMiddleware, userController.update);
+
+userRouter.put('/:user_id', updateEmployeeMiddleware, userController.updateEmployee);
+
 userRouter.put('/status/:user_id', updateStatusMiddleware, userController.updateStatus);
 
 userRouter.delete('/:user_id', deleteUserMiddleware, userController.delete);

@@ -97,6 +97,21 @@ export const updateUserMiddleware = celebrate({
   },
 });
 
+export const updateEmployeeMiddleware = celebrate({
+  [Segments.PARAMS]: {
+    user_id: Joi.string().uuid().required(),
+  },
+  [Segments.BODY]: {
+    name: Joi.string(),
+    password: Joi.string().min(8),
+    cpf: Joi.string(),
+    position: Joi.string(),
+    phone_number: Joi.string(),
+    email: Joi.string().email(),
+
+  },
+});
+
 export const updateStatusMiddleware = celebrate({
   [Segments.PARAMS]: {
     user_id: Joi.string().uuid().required(),
