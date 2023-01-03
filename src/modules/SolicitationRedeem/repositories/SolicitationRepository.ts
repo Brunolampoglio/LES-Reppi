@@ -31,6 +31,7 @@ class SolicitationRepository implements ISolicitationRepository {
   }: IPaginatedRequest<SolicitationRedeem>): Promise<IPaginatedResponse<SolicitationRedeem>> {
     const [solicitations, solicitationTotal] = await this.ormRepository.findAndCount({
       where: filters,
+      relations: ["awards"],
       skip: (page - 1) * limit,
       take: limit,
     });
