@@ -1,12 +1,16 @@
 import { celebrate, Joi, Segments } from 'celebrate';
 
+import validator from 'cpf-cnpj-validator';
+
+const JoiCpf = Joi.extend(validator);
+
 export const createUserMiddleware = celebrate({
   [Segments.BODY]: {
     name: Joi.string().required(),
     email: Joi.string().email().required(),
     password: Joi.string().required().min(8),
-    cpf: Joi.string(),
-    cnpj: Joi.string(),
+    cpf: JoiCpf.document().cpf(),
+    cnpj: JoiCpf.document().cnpj(),
     corporate_name: Joi.string(),
     position: Joi.string(),
     gestor_id: Joi.string().uuid(),
@@ -31,8 +35,8 @@ export const createGestorMiddleware = celebrate({
     name: Joi.string().required(),
     email: Joi.string().email().required(),
     password: Joi.string().required().min(8),
-    cpf: Joi.string(),
-    cnpj: Joi.string(),
+    cpf: JoiCpf.document().cpf(),
+    cnpj: JoiCpf.document().cnpj(),
     corporate_name: Joi.string(),
     position: Joi.string(),
     role: Joi.string().valid('Master', 'Paciente', 'Gestor', 'Funcionario'),
@@ -78,7 +82,7 @@ export const updateUserMiddleware = celebrate({
   [Segments.BODY]: {
     name: Joi.string(),
     password: Joi.string().min(8),
-    cpf: Joi.string(),
+    cpf: JoiCpf.document().cpf(),
     corporate_name: Joi.string(),
     position: Joi.string(),
     role: Joi.string().valid('Master', 'Paciente', 'Gestor', 'Funcionario'),
@@ -104,7 +108,7 @@ export const updateEmployeeMiddleware = celebrate({
   [Segments.BODY]: {
     name: Joi.string(),
     password: Joi.string().min(8),
-    cpf: Joi.string(),
+    cpf: JoiCpf.document().cpf(),
     position: Joi.string(),
     phone_number: Joi.string(),
     email: Joi.string().email(),
