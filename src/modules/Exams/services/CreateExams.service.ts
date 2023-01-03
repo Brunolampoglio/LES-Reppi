@@ -16,6 +16,7 @@ class CreateExamsService {
     day,
     month,
     client_id,
+    patient_id
   }: ICreateExamsDTO): Promise<Exam> {
     const exams = this.examRepository.create({
       name,
@@ -23,6 +24,7 @@ class CreateExamsService {
       day,
       month,
       client_id,
+      patient_id,
     });
 
     await this.examRepository.save(exams);

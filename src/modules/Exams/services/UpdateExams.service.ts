@@ -17,15 +17,12 @@ class UpdateExamsService {
     hour,
     day,
     month,
-    isMaster,
   }: IUpdateExamsDTO): Promise<Exam> {
     const examExists = await this.examRepository.findBy({
       id: examId,
     });
 
     if (!examExists) throw new AppError("Exame não encontrado", 404);
-
-    if(!isMaster) throw new AppError("Você não tem permissão para editar este exame", 401);
 
     Object.assign(examExists, {
       name,

@@ -30,7 +30,7 @@ class UpdatePatientDataService {
 
     let points = 0;
     const patientDataExists = await this.patientDataRepository.findBy({
-      user_id: patientDataId,
+      id: patientDataId,
     });
 
     if (!patientDataExists) throw new AppError("Dados do paciente não encontrado", 404);
@@ -41,10 +41,10 @@ class UpdatePatientDataService {
 
     const [goalsPatientColesterol,goalsPatientCreatinina, goalsPatientHemoglobinaGlicada,goalsPatientPeso ] =
     await Promise.all([
-      this.goalsPatientRepository.findBy({typeofgoal: 'colesterol', patient_id: patientDataId }),
-      this.goalsPatientRepository.findBy({typeofgoal: 'creatinina', patient_id: patientDataId}),
-      this.goalsPatientRepository.findBy({typeofgoal: 'hemoglobina_glicada', patient_id: patientDataId}),
-      this.goalsPatientRepository.findBy({typeofgoal: 'peso', patient_id: patientDataId}),
+      this.goalsPatientRepository.findBy({typeofgoal: 'colesterol', patient_id: patientDataExists.user_id }),
+      this.goalsPatientRepository.findBy({typeofgoal: 'creatinina', patient_id: patientDataExists.user_id}),
+      this.goalsPatientRepository.findBy({typeofgoal: 'hemoglobina_glicada', patient_id: patientDataExists.user_id}),
+      this.goalsPatientRepository.findBy({typeofgoal: 'peso', patient_id: patientDataExists.user_id}),
     ]);
 
 

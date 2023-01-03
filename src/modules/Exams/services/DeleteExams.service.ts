@@ -12,9 +12,7 @@ class DeleteExamsService {
 
   public async execute({
     examId,
-    isMaster,
   }: IDeleteExamsDTO): Promise<void> {
-    if (!isMaster) throw new AppError("Usuário não autorizado", 401);
 
     const exam = await this.examRepository.findBy({ id: examId });
 

@@ -29,6 +29,17 @@ class Exam {
   @JoinColumn({ name: 'client_id' })
   user: User;
 
+  @Column({nullable: true})
+  patient_id: string;
+
+  @ManyToOne(() => User, user => user.exams, {
+    orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  @JoinColumn({ name: 'patient_id' })
+  patient: User;
+
   @Column()
   status: string;
 

@@ -4,7 +4,7 @@ interface IUpdateExamsDTO {
   hour: string;
   day: string;
   month: string;
-  isMaster: boolean;
+
 }
 
 export { IUpdateExamsDTO };

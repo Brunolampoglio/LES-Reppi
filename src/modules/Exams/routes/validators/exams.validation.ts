@@ -2,17 +2,13 @@ import { celebrate, Segments, Joi } from "celebrate";
 
 export const createExamsMiddleware = celebrate({
   [Segments.PARAMS]: {
-    client_Id: Joi.string().uuid().required(),
+    patient_id: Joi.string().uuid().required(),
   },
   [Segments.BODY]: {
     name: Joi.string().required(),
     hour: Joi.string().required(),
     day: Joi.string().required(),
     month: Joi.string().required(),
-    [Segments.PARAMS]: {
-      client_id: Joi.string().uuid().required(),
-    },
-
   },
 });
 
@@ -25,7 +21,7 @@ export const deleteExamsMiddleware = celebrate({
 
 export const showExamsMiddleware = celebrate({
   [Segments.PARAMS]: {
-    client_Id: Joi.string().uuid().required(),
+    patient_id: Joi.string().uuid().required(),
   },
 });
 
