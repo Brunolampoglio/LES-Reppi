@@ -105,6 +105,11 @@ class User {
     })
     exams: Exam[];
 
+    @OneToMany(() => Exam, exam => exam.patient, {
+      cascade: true,
+      })
+      examsPatient: Exam[];
+
   @OneToMany(() => Prescriptions, prescriptions => prescriptions.user, {
     cascade: true,
     })

@@ -4,6 +4,7 @@ interface IExamsCreate {
   day: string;
   month: string;
   client_id: string;
+  patient_id: string;
 }
 
 export { IExamsCreate };

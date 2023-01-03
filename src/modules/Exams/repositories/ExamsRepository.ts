@@ -64,6 +64,7 @@ class ExamRepository implements IExamsRepository {
     day,
     month,
     client_id,
+    patient_id,
   }: IExamsCreate): Exam {
     const exam = this.ormRepository.create({
       name,
@@ -72,6 +73,7 @@ class ExamRepository implements IExamsRepository {
       month,
       client_id,
       status: "Agendado",
+      patient_id,
     });
 
     return exam;
