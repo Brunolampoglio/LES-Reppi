@@ -72,10 +72,12 @@ class LinkedPatientsRepository implements ILinkedPatientsRepository {
   create({
     patient_id,
     gestor_id,
+    health_insurance,
   }: ILinkedPatientsCreate): LinkedPatients{
     const linkedPatients = this.ormRepository.create({
       patient_id,
       gestor_id,
+      health_insurance,
     });
     return linkedPatients;
   }

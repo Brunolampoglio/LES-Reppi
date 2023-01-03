@@ -9,6 +9,9 @@ class LinkedPatients {
   @Column()
   patient_id: string;
 
+  @Column({ nullable: true })
+  health_insurance: string;
+
   @ManyToOne(() => User, user => user.linked_patients, {
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
