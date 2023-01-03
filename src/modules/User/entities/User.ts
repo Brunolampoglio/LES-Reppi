@@ -92,8 +92,6 @@ class User {
   @Column({ default: true, nullable: true })
   status: boolean;
 
-  @Column({ nullable: true })
-  health_insurance: string;
 
   @OneToMany(() => DocExams, docExams => docExams.user, {
     cascade: true,

@@ -11,6 +11,7 @@ import { uploadConfig } from "@config/upload";
 
 type XLSXFields = {
   CPF: string;
+  CONVENIO: string;
 }
 
 @injectable()
@@ -39,7 +40,8 @@ class CreateLinkedPatientsService {
     const users = await this.userRepository.index();
     const linkeds = await this.linkedPatientsRepository.index();
 
-    const linkedPatients = fields.map(({CPF}) => {
+
+    const linkedPatients = fields.map(({CPF, CONVENIO}) => {
       const user = users.find((user) => user.cpf === CPF);
 
       if(!user) {
@@ -55,12 +57,16 @@ class CreateLinkedPatientsService {
       const linkedPatient = this.linkedPatientsRepository.create({
         gestor_id,
         patient_id: user.id,
+        health_insurance: CONVENIO,
       });
 
       return linkedPatient;
     });
 
+
+
     await this.linkedPatientsRepository.saveMany(linkedPatients);
+
 
     return linkedPatients;
 
