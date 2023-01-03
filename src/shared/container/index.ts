@@ -40,6 +40,8 @@ import { ILinkedPatientsRepository } from '@modules/LinkedPatients/repositories/
 import { LinkedPatientsRepository } from '@modules/LinkedPatients/repositories/LinkedPatients.interface';
 import { IPrescriptionsRepository } from '@modules/Prescriptions/repositories/Prescriptions.interface';
 import { PrescriptionsRepository } from '@modules/Prescriptions/repositories/PrescriptionsRepository';
+import { IInvoicesRepository } from '@modules/invoices/repositories/InvoicesRepositories.interface';
+import { InvoiceRepository } from '@modules/invoices/repositories/InvoicesRepository';
 
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 container.registerSingleton<IPlansRepository>('PlanRepository', PlanRepository);
@@ -60,3 +62,4 @@ container.registerSingleton<ISolicitationRepository>('SolicitationRepository', S
 container.registerSingleton<ILicenseOfUseRepository>('LicenseOfUseRepository', LicenseOfUseRepository);
 container.registerSingleton<ILinkedPatientsRepository>('LinkedPatientsRepository', LinkedPatientsRepository);
 container.registerSingleton<IPrescriptionsRepository>('PrescriptionsRepository', PrescriptionsRepository);
+container.registerSingleton<IInvoicesRepository>('InvoiceRepository', InvoiceRepository);

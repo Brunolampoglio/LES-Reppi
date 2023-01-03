@@ -37,6 +37,7 @@ export const createGestorMiddleware = celebrate({
     position: Joi.string(),
     role: Joi.string().valid('Master', 'Paciente', 'Gestor', 'Funcionario'),
     phone_number: Joi.string().required(),
+    plan_id: Joi.string().uuid().required(),
     address: Joi.object({
       zip: Joi.string().min(8).max(9).required().label('CEP'),
       street: Joi.string().required().label('rua'),

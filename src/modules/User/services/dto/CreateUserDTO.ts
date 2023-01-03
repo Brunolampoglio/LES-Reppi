@@ -25,7 +25,6 @@ export interface ICreateGestorDTO {
   cnpj?: string;
   cpf?: string;
   position?: Positions;
-  gestor_id?: string;
   address?: Address;
   phone_number?: string;
   plan_id: string;

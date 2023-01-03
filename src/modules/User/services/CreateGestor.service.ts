@@ -24,11 +24,11 @@ class CreateGestorService {
     @inject('PlanRepository')
     private planRepository: IPlansRepository,
 
-    @inject('InvoiceRepository')
-    private invoiceRepository: IInvoicesRepository,
-
     @inject("CardRepository")
     private cardRepository: ICardRepository,
+
+    @inject("InvoiceRepository")
+    private invoicesRepository: IInvoicesRepository,
 
   ) {}
 
@@ -41,7 +41,6 @@ class CreateGestorService {
     cnpj,
     cpf,
     position,
-    gestor_id,
     address,
     phone_number,
     card,
@@ -112,8 +111,13 @@ class CreateGestorService {
       expiration_year: year,
       main: card.main,
       user_id: user.id,
+      external_id: 'card.external_id',
+      brand: 'visa',
     });
     // TODO: Alterar status de acordo com o status de pagamento
+
+    await this.cardRepository.save(cardInstance);
+    await this.invoicesRepository.save(invoiceInstance);
 
     return instanceToInstance(user);
   }
