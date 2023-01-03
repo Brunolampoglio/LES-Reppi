@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 
 import { container } from 'tsyringe';
 import { ConfirmEmailService } from '../services/ConfirmEmail.service';
+import { CreateGestorService } from '../services/CreateGestor.service';
 
 import { CreateUserService } from '../services/CreateUser.service';
 import { DeleteUserService } from '../services/DeleteUser.service';
@@ -55,6 +56,30 @@ class UserController {
       address,
       phone_number,
       gestor_id,
+    });
+
+    return res.status(201).json(user);
+  }
+
+  async createPartner(req: Request, res: Response): Promise<Response> {
+    const { name, email, cnpj, cpf, password, role, corporate_name,
+      position, address, phone_number, card, plan_id} = req.body;
+
+    const createUserService = container.resolve(CreateGestorService);
+
+    const user = await createUserService.execute({
+      name,
+      email,
+      cnpj,
+      cpf,
+      password,
+      role,
+      corporate_name,
+      position,
+      address,
+      phone_number,
+      card,
+      plan_id,
     });
 
     return res.status(201).json(user);

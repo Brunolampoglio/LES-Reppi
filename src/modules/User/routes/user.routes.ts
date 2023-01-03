@@ -7,6 +7,7 @@ import { UserAvatarController } from '../controllers/UserAvatar.controller';
 import { passwordRouter } from './password.routes';
 import { sessionRouter } from './session.routes';
 import {
+  createGestorMiddleware,
   createUserMiddleware,
   deleteUserAvatarMiddleware,
   deleteUserMiddleware,
@@ -30,10 +31,14 @@ userRouter.use('/session', sessionRouter);
 userRouter.post('/', createUserMiddleware, userController.create);
 userRouter.post('/confirm', userController.confirm);
 
+userRouter.post('/partner', createGestorMiddleware, userController.createPartner);
+
 userRouter.use(verifyToken);
 
 userRouter.post('/gestor', createUserMiddleware, userController.createByGestor);
+
 userRouter.post('/employee', createUserMiddleware, userController.createByGestor);
+
 userRouter.patch('/employee',
 uploadMulter.single('anexo'),
 userController.importEmployee);
