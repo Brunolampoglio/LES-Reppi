@@ -1,5 +1,3 @@
 interface IListAllSolicitationDTO {
-  page: number;
-  limit: number;
-  patient_id: string;
+ gestor_id: string;
 }

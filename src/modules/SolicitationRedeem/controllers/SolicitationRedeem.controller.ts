@@ -24,13 +24,11 @@ class SolicitationController {
     const { page, limit } = request.query as {
       [key: string]: string;
     };
-    const { patient_id } = request.params;
     const listSolicitationService = container.resolve(ListAllSolicitationService);
 
     const solicitation = await listSolicitationService.execute({
-      patient_id,
-      limit: parseInt(limit, 10) || 50,
-      page: parseInt(page, 10) || 1,
+      gestor_id: request.user.id,
+
     });
 
     return response.status(200).json(solicitation);

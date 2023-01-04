@@ -10,5 +10,11 @@ interface ISolicitationRepository{
   save(solicitation: SolicitationRedeem): Promise<SolicitationRedeem>;
   remove(solicitation: SolicitationRedeem): Promise<void>;
 
+  /** @param {string} gestor_id - Id do Gestor */
+
+  listByGestor(
+    gestor_id: string,
+  ): Promise<IPaginatedResponse<SolicitationRedeem>>;
+
 }
 export { ISolicitationRepository };
