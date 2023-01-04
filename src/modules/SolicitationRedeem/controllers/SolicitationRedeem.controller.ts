@@ -47,11 +47,13 @@ class SolicitationController {
   async update(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
 
+    const { status } = request.body;
+
     const updateSolicitationService = container.resolve(UpdateSolicitationService);
 
     const solicitation = await updateSolicitationService.execute({
       solicitation_id: id,
-
+      status,
     });
 
     return response.status(200).json(solicitation);
