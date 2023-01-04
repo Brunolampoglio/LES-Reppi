@@ -11,13 +11,13 @@ class UpdateSolicitationService {
     private solicitationRepository: ISolicitationRepository,
   ) {}
 
-  public async execute({ solicitation_id}: IUpdateSolicitationDTO): Promise<SolicitationRedeem> {
+  public async execute({ solicitation_id, status }: IUpdateSolicitationDTO): Promise<SolicitationRedeem> {
     const solicitation = await this.solicitationRepository.findBy({id: solicitation_id});
 
     if (!solicitation) throw new AppError("Solicitação não encontrada", 404);
 
     Object.assign(solicitation, {
-      status: "Aceito",
+      status,
     });
 
     const newSolicitation = await this.solicitationRepository.save(solicitation);

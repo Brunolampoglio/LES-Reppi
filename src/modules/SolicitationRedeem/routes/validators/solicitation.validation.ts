@@ -16,5 +16,8 @@ export const updateSolicitationMiddleware = celebrate({
   [Segments.PARAMS]: {
     solicitation_id: Joi.string().uuid().required(),
   },
+  [Segments.BODY]: {
+    status: Joi.string().required(),
+  },
 });
 

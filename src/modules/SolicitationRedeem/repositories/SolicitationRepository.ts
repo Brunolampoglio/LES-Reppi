@@ -44,6 +44,21 @@ class SolicitationRepository implements ISolicitationRepository {
     };
   }
 
+
+  public async listByGestor(gestor_id: string): Promise<IPaginatedResponse<SolicitationRedeem>> {
+    const [solicitations, solicitationsTotal] = await this.ormRepository.createQueryBuilder('solicitation')
+      .leftJoinAndSelect('solicitation.awards', 'awards')
+      .where('awards.client_id = :client_id', { client_id: gestor_id }).take().getManyAndCount();
+
+    return {
+      results: solicitations,
+      total: solicitationsTotal,
+      page: 1,
+      limit: 10,
+    };
+
+  }
+
   create({
     patient_id,
     awards_id,

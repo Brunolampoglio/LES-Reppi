@@ -11,17 +11,9 @@ class ListAllSolicitationService {
   ) {}
 
   public async execute({
-    page,
-    limit,
-    patient_id,
+    gestor_id
   }: IListAllSolicitationDTO): Promise<IPaginatedResponse<SolicitationRedeem>> {
-    const solicitation = await this.solicitationRepository.listBy({
-      filters: {
-        patient_id,
-      },
-      page,
-      limit,
-    });
+    const solicitation = await this.solicitationRepository.listByGestor(gestor_id);
 
     return {
       results: solicitation.results,

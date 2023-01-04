@@ -13,7 +13,7 @@ solicitationRouter.post("/:awards_id",
 createSolicitaionMiddleware,
 solicitationController.create);
 
-solicitationRouter.get("/:patient_id", solicitationController.list);
+solicitationRouter.get("/", solicitationController.list);
 
 solicitationRouter.delete("/:solicitation_id",
 deleteSolicitationMiddleware,
