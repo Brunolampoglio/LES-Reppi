@@ -71,4 +71,8 @@ userRouter.put('/status/:user_id', updateStatusMiddleware, userController.update
 
 userRouter.delete('/:user_id', deleteUserMiddleware, userController.delete);
 
+userRouter.delete('/gestor/:user_id', deleteUserMiddleware, userController.deleteByGestor);
+
+
+
 export { userRouter };
