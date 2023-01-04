@@ -38,7 +38,6 @@ export const createGestorMiddleware = celebrate({
     cpf: JoiCpf.document().cpf(),
     cnpj: JoiCpf.document().cnpj(),
     corporate_name: Joi.string(),
-    position: Joi.string(),
     role: Joi.string().valid('Master', 'Paciente', 'Gestor', 'Funcionario'),
     phone_number: Joi.string().required(),
     plan_id: Joi.string().uuid().required(),
