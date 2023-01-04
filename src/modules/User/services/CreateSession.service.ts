@@ -41,10 +41,10 @@ class CreateSessionService {
       case Roles.master:
         if (user.role !== Roles.master) throw new AppError('Email ou senha inválidos', 401);
         break;
-      case Roles.gestor:
-        if (user.role !== Roles.gestor && Roles.employee) throw new AppError('Email ou senha inválidos 1', 401);
-        break;
-      default:
+      // case Roles.gestor:
+      //   if (user.role !== Roles.employee && Roles.gestor) throw new AppError('Email ou senha inválidos 2', 401);
+      //   break;
+      case Roles.user:
         if (user.role !== Roles.user) throw new AppError('Email ou senha inválidos', 401);
         break;
     }
