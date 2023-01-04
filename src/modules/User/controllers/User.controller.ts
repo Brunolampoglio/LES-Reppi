@@ -243,6 +243,21 @@ class UserController {
     return res.status(204).send();
   }
 
+  async deleteByGestor(req: Request, res: Response): Promise<Response> {
+    const { user_id } = req.params;
+
+    const deleteUserService = container.resolve(DeleteUserService);
+
+    await deleteUserService.execute({
+      user_id,
+      isMaster: req.user.isMaster,
+      gestor_id: req.user.id,
+    });
+
+    return res.status(204).send();
+
+  }
+
   async confirm(req: Request, res: Response): Promise<Response> {
     const { token } = req.body;
 
