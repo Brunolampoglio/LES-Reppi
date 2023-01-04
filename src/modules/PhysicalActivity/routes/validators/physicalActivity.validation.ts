@@ -2,7 +2,7 @@ import { celebrate, Segments, Joi } from "celebrate";
 
 export const createPhysicalActivityMiddleware = celebrate({
     [Segments.PARAMS]: {
-        client_id: Joi.string().uuid().required(),
+        patient_id: Joi.string().uuid().required(),
       },
   [Segments.BODY]: {
     description: Joi.string().required(),
@@ -32,6 +32,6 @@ export const updatePhysicalActivityMiddleware = celebrate({
 
 export const listPhysicalActivityMiddleware = celebrate({
     [Segments.PARAMS]: {
-        client_id: Joi.string().uuid().required(),
+        patient_id: Joi.string().uuid().required(),
     },
 });

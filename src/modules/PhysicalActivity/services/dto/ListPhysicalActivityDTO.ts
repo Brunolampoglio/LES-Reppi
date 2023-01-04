@@ -1,5 +1,5 @@
 interface IListPhysicalActivityDTO {
-    client_id: string;
+    patient_id: string;
 }
 
 export { IListPhysicalActivityDTO };
