@@ -28,12 +28,26 @@ class CreateGoalsPatientService {
       }else {
         pesoMeta = parseInt(from) + parseInt(to);
       }
+      const goalsPatient = this.goalsPatientRepository.create({
+        typeofgoal,
+        from,
+        to: pesoMeta.toString(),
+        description,
+        points,
+        patient_id,
+        type: type || 'perder',
+      });
+
+      await this.goalsPatientRepository.save(goalsPatient);
+
+      return goalsPatient;
+
   }
 
     const goalsPatient = this.goalsPatientRepository.create({
       typeofgoal,
       from,
-      to: pesoMeta.toString(),
+      to,
       description,
       points,
       patient_id,

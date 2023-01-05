@@ -49,10 +49,9 @@ class UpdatePatientDataService {
 
 
     if (goalsPatientColesterol) {
-      goalsPatientColesterol.from =colesterol;
       goalsPatientColesterol.status = 'em andamento';
 
-      if(colesterol >= goalsPatientColesterol.to ){
+      if(colesterol <= goalsPatientColesterol.from && colesterol >= goalsPatientColesterol.to){
         goalsPatientColesterol.status = 'concluido';
         points += goalsPatientColesterol.points;
 
@@ -63,10 +62,9 @@ class UpdatePatientDataService {
     }
 
     if (goalsPatientCreatinina) {
-      goalsPatientCreatinina.from =creatinina;
       goalsPatientCreatinina.status = 'em andamento';
 
-      if(creatinina >= goalsPatientCreatinina.to ){
+      if(creatinina <= goalsPatientCreatinina.from && creatinina >= goalsPatientCreatinina.to ){
         goalsPatientCreatinina.status = 'concluido';
         points += goalsPatientCreatinina.points;
 
@@ -77,10 +75,9 @@ class UpdatePatientDataService {
     }
 
     if (goalsPatientHemoglobinaGlicada) {
-      goalsPatientHemoglobinaGlicada.from =hemoglobina_glicada;
       goalsPatientHemoglobinaGlicada.status = 'em andamento';
 
-      if(hemoglobina_glicada >= goalsPatientHemoglobinaGlicada.to ){
+      if(hemoglobina_glicada <= goalsPatientHemoglobinaGlicada.from && hemoglobina_glicada >= goalsPatientHemoglobinaGlicada.to ){
         goalsPatientHemoglobinaGlicada.status = 'concluido';
         points += goalsPatientHemoglobinaGlicada.points;
 
@@ -90,7 +87,6 @@ class UpdatePatientDataService {
 
     }
 
-    let pesoAtual = 0;
     let pesoMeta = 0;
 
 
@@ -98,21 +94,16 @@ class UpdatePatientDataService {
 
       goalsPatientPeso.status = 'em andamento';
 
-      pesoAtual = parseInt(goalsPatientPeso?.from);
       pesoMeta = parseInt(goalsPatientPeso?.to);
+      const newPeso = parseInt(peso);
 
      if(goalsPatientPeso.type === 'perder'){
-      const newPeso = parseInt(peso);
-      const pesoGoals = pesoAtual - pesoMeta;
-      console.log(pesoAtual);
-      console.log(pesoGoals);
-        if(newPeso >= pesoGoals ){
+        if(newPeso >= pesoMeta ){
           goalsPatientPeso.status = 'concluido';
           points += goalsPatientPeso.points;
         }else{
           const newPeso = parseInt(peso);
-          const pesoGoals = pesoAtual + pesoMeta;
-            if(newPeso <= pesoGoals ){
+            if(newPeso <= pesoMeta ){
               goalsPatientPeso.status = 'concluido';
               points += goalsPatientPeso.points;
         }
