@@ -1,4 +1,5 @@
 import { IStorageProvider } from "@shared/container/providers/StorageProvider/models/IStorageProvider";
+import { instanceToInstance } from "class-transformer";
 import { inject, injectable } from "tsyringe";
 import { PatientData } from "../entities/PatientData";
 import { IPatientDataCreate } from "../repositories/dto/PatientDataRepositoryDTO";
@@ -42,7 +43,7 @@ public async execute({
 
     await this.patientDataRepository.save(patientData);
 
-    return patientData;
+    return instanceToInstance(patientData);
   }
 
 

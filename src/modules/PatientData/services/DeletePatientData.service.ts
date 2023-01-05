@@ -1,3 +1,4 @@
+import { IStorageProvider } from "@shared/container/providers/StorageProvider/models/IStorageProvider";
 import { AppError } from "@shared/error/AppError";
 import { inject, injectable } from "tsyringe";
 import { IPatientDataRepository } from "../repositories/PatientDataRepositories.interface";
@@ -8,6 +9,9 @@ class DeletePatientDataService {
   constructor(
     @inject("PatientDataRepository")
     private patientDataRepository: IPatientDataRepository,
+
+    @inject('StorageProvider')
+    private storageProvider: IStorageProvider,
   ){}
 
   public async execute({
@@ -17,7 +21,11 @@ class DeletePatientDataService {
 
     if (!patientData) throw new AppError("Paciente não encontrado", 404);
 
-    await this.patientDataRepository.remove(patientData);
+    if(patientData.eletrocardiograma) {
+    await this.storageProvider.deleteFile(patientData.eletrocardiograma);
+    }
+
+    await this.patientDataRepository.remove(patientData)
  }
 }
 export { DeletePatientDataService };
