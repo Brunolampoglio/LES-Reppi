@@ -4,6 +4,10 @@ export const createDocExamsMiddleware = celebrate({
   [Segments.PARAMS]:{
     patientId: Joi.string().uuid().required(),
   },
+  [Segments.BODY]: {
+    name: Joi.string().required(),
+    specialty: Joi.string().required(),
+  },
 });
 
 export const listDocExamsMiddleware = celebrate({

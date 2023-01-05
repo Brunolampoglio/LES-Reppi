@@ -4,6 +4,7 @@ import { IDocExamsRepository } from "../repositories/DocExamsRepositories.interf
 import { ICreateDocExamsDTO } from "./dto/CreateDocExamsDTO";
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
+import { instanceToInstance } from "class-transformer";
 dayjs.extend(utc);
 
 @injectable()
@@ -30,7 +31,7 @@ class CreateDocExamsService {
 
         await this.docExamsRepository.save(docExam);
 
-        return docExam;
+        return instanceToInstance(docExam);
     }
 }
 
