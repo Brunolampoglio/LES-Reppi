@@ -1,4 +1,4 @@
-const mode = process.env.API_MODE !== 'DEV' ? 'dist' : 'src';
+ const mode = process.env.API_MODE === 'DEV' ? 'src' : 'dist';
 
 module.exports = {
   name: 'default',

@@ -1,6 +1,13 @@
 enum Roles {
   master = 'Master',
   gestor = 'Gestor',
+  user = 'Paciente',
+  employee = 'Funcionario',
+}
+
+export { Roles };
+
+export enum Positions {
   Clínico_geral = 'Clinico geral',
   nefrologista = 'Nefrologista',
   cardiologista = 'Cardiologista',
@@ -9,5 +16,3 @@ enum Roles {
   enfermeiro = 'Enfermeiro',
   outros = 'Outros',
 }
-
-export { Roles };

@@ -7,3 +7,10 @@ declare namespace Express {
     };
   }
 }
+
+declare interface ITokenPayload {
+  iat: number;
+  exp: number;
+  sub: string;
+  isMaster: boolean;
+}

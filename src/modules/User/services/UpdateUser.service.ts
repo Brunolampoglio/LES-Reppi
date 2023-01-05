@@ -1,5 +1,5 @@
 import { AppError } from '@shared/error/AppError';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { instanceToInstance } from 'class-transformer';
 import { inject, injectable } from 'tsyringe';
 
 import { User } from '../entities/User';
@@ -16,11 +16,14 @@ class UpdateUserService {
   public async execute({
     user_id,
     request_id,
+    isMaster,
     ...userParams
   }: IUpdateUserDTO): Promise<User> {
+
+    if (!isMaster){
     if (request_id !== user_id)
       throw new AppError('Usuário não autorizado', 404);
-
+    }
     const user = await this.userRepository.findBy({
       id: user_id,
     });
@@ -29,9 +32,9 @@ class UpdateUserService {
 
     Object.assign(user, userParams);
 
-    const newUser = await this.userRepository.save(user);
+     await this.userRepository.save(user);
 
-    return newUser;
+    return instanceToInstance(user);
   }
 }
 

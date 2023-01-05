@@ -15,7 +15,7 @@ const mailConfig = {
   defaults: {
     from: {
       email: EMAIL_ADDRESS || 'suporte@mestresdaweb.io',
-      name: EMAIL_NAME || 'Equipe Booat',
+      name: EMAIL_NAME || 'Equipe HBAW',
     },
   },
 } as IMailConfig;

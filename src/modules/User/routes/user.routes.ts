@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import multer from 'multer';
-
 import { uploadConfig } from '@config/upload';
 import { verifyToken } from '@shared/middleware/verifyToken';
 import { UserController } from '../controllers/User.controller';
@@ -8,10 +7,13 @@ import { UserAvatarController } from '../controllers/UserAvatar.controller';
 import { passwordRouter } from './password.routes';
 import { sessionRouter } from './session.routes';
 import {
+  createGestorMiddleware,
   createUserMiddleware,
   deleteUserAvatarMiddleware,
   deleteUserMiddleware,
   showUserMiddleware,
+  updateEmployeeMiddleware,
+  updateStatusMiddleware,
   updateUserAvatarMiddleware,
   updateUserMiddleware,
 } from './validators/user.validation';
@@ -28,8 +30,19 @@ userRouter.use('/password', passwordRouter);
 userRouter.use('/session', sessionRouter);
 
 userRouter.post('/', createUserMiddleware, userController.create);
+userRouter.post('/confirm', userController.confirm);
+
+userRouter.post('/partner', createGestorMiddleware, userController.createPartner);
 
 userRouter.use(verifyToken);
+
+userRouter.post('/gestor', createUserMiddleware, userController.createByGestor);
+
+userRouter.post('/employee', createUserMiddleware, userController.createByGestor);
+
+userRouter.patch('/employee',
+uploadMulter.single('anexo'),
+userController.importEmployee);
 
 userRouter.patch(
   '/:user_id/avatar',
@@ -37,6 +50,10 @@ userRouter.patch(
   uploadMulter.single('avatar'),
   userAvatarController.update,
 );
+
+userRouter.get('/', userController.listUser);
+userRouter.get('/gestor', userController.listGestor);
+userRouter.get('/employee/:gestor_id', userController.listEmployeeByGestor);
 
 userRouter.delete(
   '/:user_id/avatar',
@@ -48,6 +65,14 @@ userRouter.get('/:user_id', showUserMiddleware, userController.show);
 
 userRouter.put('/:user_id', updateUserMiddleware, userController.update);
 
+userRouter.put('/:user_id', updateEmployeeMiddleware, userController.updateEmployee);
+
+userRouter.put('/status/:user_id', updateStatusMiddleware, userController.updateStatus);
+
 userRouter.delete('/:user_id', deleteUserMiddleware, userController.delete);
+
+userRouter.delete('/gestor/:user_id', deleteUserMiddleware, userController.deleteByGestor);
+
+
 
 export { userRouter };

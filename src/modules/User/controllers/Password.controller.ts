@@ -2,7 +2,9 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
 import { ChangePasswordService } from '../services/ChangePassword.service';
+import { ChangePasswordByMasterAndGestorService } from '../services/ChangePasswordByMasterAndGestor.service';
 import { ForgotPasswordService } from '../services/ForgetPassword.service';
+import { ResetPasswordService } from '../services/ResetPassword.service';
 
 class PasswordController {
   async forgot(req: Request, res: Response): Promise<Response> {
@@ -25,6 +27,36 @@ class PasswordController {
     const user = await changePasswordService.execute({
       new_password,
       old_password,
+      user_id,
+      request_id: id,
+    });
+
+    return res.json(user);
+  }
+
+  async reset(req: Request, res: Response): Promise<Response> {
+    const { token } = req.params;
+    const { new_password } = req.body;
+
+    const resetPasswordService = container.resolve(ResetPasswordService);
+
+    await resetPasswordService.execute({
+      token,
+      new_password,
+    });
+
+    return res.status(204).json();
+  }
+
+  async changeByMasterAndGestor( req: Request, res: Response): Promise<Response> {
+    const { new_password } = req.body;
+    const { user_id } = req.params;
+    const { id } = req.user;
+
+    const changePasswordByMasterAndGestorService = container.resolve(ChangePasswordByMasterAndGestorService);
+
+    const user = await changePasswordByMasterAndGestorService.execute({
+      new_password,
       user_id,
       request_id: id,
     });

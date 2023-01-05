@@ -5,6 +5,7 @@ interface ICreateSessionDTO {
   email: string;
   password: string;
   remember_me?: boolean;
+  role: string;
 }
 
 interface ICreateSessionResponseDTO {

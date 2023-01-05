@@ -1,4 +1,4 @@
-import { IPaginatedRequest } from '@shared/interfaces/IPaginatedRequest';
+import { IPaginatedRequest, IPaginatedRequestObri } from '@shared/interfaces/IPaginatedRequest';
 import { IPaginatedResponse } from '@shared/interfaces/IPaginatedResponse';
 import { getRepository, Repository } from 'typeorm';
 import { Banner } from '../entities/Banner';
@@ -19,10 +19,10 @@ class BannerRepository implements IBannerRepository {
   }
 
   public async listBy({
-    page = 1,
-    limit = 10,
+    page,
+    limit ,
     filters,
-  }: IPaginatedRequest<Banner>): Promise<IPaginatedResponse<Banner>> {
+  }: IPaginatedRequestObri<Banner>): Promise<IPaginatedResponse<Banner>> {
     const banners = await this.ormRepository.find({
       where: filters,
       skip: (page - 1) * limit,
@@ -38,6 +38,25 @@ class BannerRepository implements IBannerRepository {
       limit,
     };
   }
+
+  public async show(id: string): Promise<IPaginatedResponse<Banner>> {
+
+    const banners = await this.ormRepository.find(
+      {
+        where: {id},
+      },
+    );
+
+    const bannerTotal = await this.ormRepository.count();
+
+    return {
+      results: banners,
+      total: bannerTotal,
+      page: 1,
+      limit: 10,
+    };
+  }
+
 
   create({
     name,

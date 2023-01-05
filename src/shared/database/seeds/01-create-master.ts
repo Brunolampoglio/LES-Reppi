@@ -14,9 +14,11 @@ export default class CreateMasterUser implements Seeder {
         {
           id: uuidV4(),
           name: 'Master',
-          email: 'master@booat.com',
+          email: 'master@hbaw.com',
           password: hashSync('123456789', 8),
           role: 'Master',
+          corporate_name: 'HBAW',
+          cnpj: '123456789',
         },
       ])
       .execute();
