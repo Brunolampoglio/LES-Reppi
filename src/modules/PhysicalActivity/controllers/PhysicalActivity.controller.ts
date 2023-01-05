@@ -10,7 +10,7 @@ class PhysicalActivityController {
     async create(req: Request, res: Response): Promise<Response> {
         const { description, repetitions, series, type } = req.body;
 
-        const { client_id } = req.params
+        const { patient_id } = req.params
 
         const createPhysicalActivityService = container.resolve(CreatePhysicalActivityService);
 
@@ -19,7 +19,7 @@ class PhysicalActivityController {
             repetitions,
             series,
             type,
-            client_id
+            patient_id
         });
 
         return res.status(201).json(physicalActivity);
@@ -56,12 +56,12 @@ class PhysicalActivityController {
     }
 
     async list(req: Request, res: Response): Promise<Response> {
-        const { client_id } = req.params;
+        const { patient_id } = req.params;
 
         const listPhysicalActivityService = container.resolve(ListPhysicalActivityService);
 
         const physicalActivities = await listPhysicalActivityService.execute({
-            client_id,
+            patient_id,
         });
 
         return res.status(200).json(physicalActivities);

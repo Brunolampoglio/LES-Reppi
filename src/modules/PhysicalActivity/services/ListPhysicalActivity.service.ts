@@ -12,10 +12,10 @@ class ListPhysicalActivityService {
   ) {}
 
   public async execute({
-    client_id
+    patient_id
   }: IListPhysicalActivityDTO): Promise<IPaginatedResponse<PhysicalActivity>> {
     const physicalActivity = await this.physicalActivityRepository.listBy({
-      filters: { client_id },
+      filters: { client_id: patient_id },
     });
 
     return {

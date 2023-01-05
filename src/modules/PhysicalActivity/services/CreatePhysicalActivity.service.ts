@@ -20,10 +20,10 @@ class CreatePhysicalActivityService {
         repetitions,
         series,
         type,
-        client_id,
+        patient_id,
     }: ICreatePhysicalActivityDTO): Promise<PhysicalActivity> {
 
-        const user = await this.userRepository.findBy({ id: client_id });
+        const user = await this.userRepository.findBy({ id: patient_id });
 
         if (!user) {
             throw new AppError('Usuário não encontrado', 404);
@@ -34,7 +34,7 @@ class CreatePhysicalActivityService {
             repetitions,
             series,
             type,
-            client_id,
+            client_id: patient_id,
         });
 
         await this.physicalActivityRepository.save(physicalActivity);

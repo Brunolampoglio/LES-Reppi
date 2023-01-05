@@ -8,6 +8,7 @@ import * as XLSX from 'xlsx';
 import { Roles } from "@shared/enum/Roles";
 import { IImportEmployeeDTO } from "./dto/ImportEmployeeDTO";
 import { instanceToInstance } from "class-transformer";
+import { IHashProvider } from "@shared/container/providers/HashProvider/model/IHashProvider";
 
 
 type XLSXFields = {
@@ -24,6 +25,9 @@ class ImportEmployeeService {
   constructor(
     @inject('UserRepository')
     private userRepository: IUserRepository,
+
+    @inject('HashProvider')
+    private hashProvider: IHashProvider,
   ) {}
 
   public async execute({
@@ -39,11 +43,12 @@ class ImportEmployeeService {
     const fields = XLSX.utils.sheet_to_json<XLSXFields>(sheet);
 
     const users = await this.userRepository.index();
+
     const importadEmployees = fields.map(({CPF, NAME, EMAIL, FUNCAO, PASSWORD, PHONE_NUMBER}) => {
-      const employee = users.find((user) => user.cpf === CPF);
+      const employee = users.find((user) => user.email === EMAIL);
 
       if(employee) {
-        throw new AppError(`Usuário com CPF: ${CPF} já está cadastrado no sistema!`, 404);
+        throw new AppError(`Usuário com email: ${EMAIL} já está cadastrado no sistema!`, 404);
       }
 
       const CreateEmployee = this.userRepository.create({
@@ -59,6 +64,8 @@ class ImportEmployeeService {
 
       return CreateEmployee;
     });
+
+
 
     await this.userRepository.saveAll(importadEmployees);
 

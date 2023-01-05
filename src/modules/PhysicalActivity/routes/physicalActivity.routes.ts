@@ -9,9 +9,9 @@ const physicalActivityController = new PhysicalActivityController();
 
 physicalActivityRoutes.use(verifyToken);
 
-physicalActivityRoutes.post('/:client_id', createPhysicalActivityMiddleware, physicalActivityController.create);
+physicalActivityRoutes.post('/:patient_id', createPhysicalActivityMiddleware, physicalActivityController.create);
 
-physicalActivityRoutes.get('/:client_id', listPhysicalActivityMiddleware, physicalActivityController.list);
+physicalActivityRoutes.get('/:patient_id', listPhysicalActivityMiddleware, physicalActivityController.list);
 
 physicalActivityRoutes.put('/:physicalActivityId', updatePhysicalActivityMiddleware, physicalActivityController.update);
 

@@ -48,7 +48,7 @@ class PatientData {
       case 'spaces':
         return `${process.env.FILE_ENDPOINT}/${this.eletrocardiograma}`;
       default:
-        return null;
+        return `${process.env.APP_API_URL}/files/default.png`;
     }
   }
 

@@ -3,7 +3,7 @@ interface ICreatePhysicalActivityDTO{
   repetitions: string;
   series: string;
   type: string;
-  client_id: string;
+  patient_id: string;
 }
 
 export {ICreatePhysicalActivityDTO};
