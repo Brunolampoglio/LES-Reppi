@@ -1,7 +1,7 @@
 import { uploadConfig } from "@config/upload";
 import { User } from "@modules/User/entities/User";
 import { Expose } from "class-transformer";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('doc_exams')
 class DocExams {
@@ -46,10 +46,10 @@ class DocExams {
     }
   }
 
-  @Column()
+  @CreateDateColumn()
   created_at: Date;
 
-  @Column()
+  @UpdateDateColumn()
   updated_at: Date;
 }
 
