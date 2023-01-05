@@ -1,6 +1,7 @@
 import { qrCode_config } from "@config/auth";
 import { IRedisProvider } from "@shared/container/providers/RedisProvider/model/IRedisProvider";
 import { AppError } from "@shared/error/AppError";
+import { instanceToInstance } from "class-transformer";
 import { inject, injectable } from "tsyringe";
 import { PatientData } from "../entities/PatientData";
 import { IPatientDataRepository } from "../repositories/PatientDataRepositories.interface";
@@ -27,7 +28,7 @@ class ShowPatientDataService {
 
     await this.redisProvider.del(`${qrCode_config.prefix}${qr_code}`);
 
-    return patientData;
+    return instanceToInstance(patientData);
   }
 }
 
