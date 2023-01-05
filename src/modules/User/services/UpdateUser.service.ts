@@ -1,4 +1,5 @@
 import { AppError } from '@shared/error/AppError';
+import { instanceToInstance } from 'class-transformer';
 import { inject, injectable } from 'tsyringe';
 
 import { User } from '../entities/User';
@@ -33,7 +34,7 @@ class UpdateUserService {
 
      await this.userRepository.save(user);
 
-    return user;
+    return instanceToInstance(user);
   }
 }
 
