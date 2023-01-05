@@ -1,5 +1,6 @@
 import { AppError } from '@shared/error/AppError';
 import { IPaginatedResponse } from '@shared/interfaces/IPaginatedResponse';
+import { instanceToInstance } from 'class-transformer';
 import { inject, injectable } from 'tsyringe';
 import { User } from '../entities/User';
 import { IUserRepository } from '../repositories/UserRepository.interface';
@@ -27,7 +28,7 @@ class ListUserService {
     });
 
     return {
-      results: user.results,
+      results: instanceToInstance(user.results),
       limit: user.limit,
       page: user.page,
       total: user.total,

@@ -21,16 +21,10 @@ class Address {
   street: string;
 
   @Column({ nullable: true })
-  state: string;
-
-  @Column({ nullable: true })
-  neighborhood: string;
+  uf: string;
 
   @Column()
   city: string;
-
-  @Column({ nullable: true })
-  district: string;
 
   @Column()
   number: string;
