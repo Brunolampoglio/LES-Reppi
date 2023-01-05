@@ -1,5 +1,6 @@
 import { AppError } from "@shared/error/AppError";
 import { IPaginatedResponse } from "@shared/interfaces/IPaginatedResponse";
+import { instanceToInstance } from "class-transformer";
 import { inject, injectable } from "tsyringe";
 import { DocExams } from "../entities/DocExams";
 import { IDocExamsRepository } from "../repositories/DocExamsRepositories.interface";
@@ -25,7 +26,7 @@ class ListDocExamsService {
         if (!docExams) throw new AppError("Documentos não encontrados", 404);
 
         return {
-            results: docExams.results,
+            results: instanceToInstance(docExams.results),
             limit: docExams.limit,
             page: docExams.page,
             total: docExams.total,

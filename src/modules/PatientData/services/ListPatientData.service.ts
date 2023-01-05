@@ -1,5 +1,6 @@
 import { AppError } from "@shared/error/AppError";
 import { IPaginatedResponse } from "@shared/interfaces/IPaginatedResponse";
+import { instanceToInstance } from "class-transformer";
 import { inject, injectable } from "tsyringe";
 import { PatientData } from "../entities/PatientData";
 import { IPatientDataRepository } from "../repositories/PatientDataRepositories.interface";
@@ -21,7 +22,7 @@ class ListPatientDataService {
       throw new AppError("Paciente não encontrado");
     }
 
-    return patientData;
+    return instanceToInstance(patientData);
   }
 }
 export { ListPatientDataService };
