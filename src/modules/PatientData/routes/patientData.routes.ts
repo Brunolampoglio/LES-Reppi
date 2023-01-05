@@ -3,7 +3,7 @@ import { verifyToken } from "@shared/middleware/verifyToken";
 import { Router } from "express";
 import multer from "multer";
 import { PatientDataController } from "../controllers/PatientData.controller";
-import { createPatientDataMiddleware } from "./validators/patientData.validation";
+import { createPatientDataMiddleware, updatePatientDataMiddleware } from "./validators/patientData.validation";
 
 const patientDataRouter = Router();
 
@@ -22,7 +22,9 @@ createPatientDataMiddleware,patientDataController.create);
 
 patientDataRouter.get('/:patientId', patientDataController.list);
 
-patientDataRouter.put('/:patientDataId', patientDataController.update);
+patientDataRouter.put('/:patientDataId', uploadMulter.single('anexo'),
+updatePatientDataMiddleware,
+patientDataController.update);
 
 patientDataRouter.delete('/:patientDataId', patientDataController.delete);
 

@@ -5,6 +5,7 @@ interface IPatientDataUpdate {
   peso: string;
   descricao: string;
   patientDataId: string;
+  anexo?: string;
 }
 
 export { IPatientDataUpdate };

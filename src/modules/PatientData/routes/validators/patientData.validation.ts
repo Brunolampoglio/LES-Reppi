@@ -20,7 +20,7 @@ export const deletePatientDataMiddleware = celebrate({
 
 export const updatePatientDataMiddleware = celebrate({
   [Segments.PARAMS]: {
-    patientId: Joi.string().uuid().required(),
+    patientDataId: Joi.string().uuid().required(),
   },
   [Segments.BODY]: {
     colesterol: Joi.string(),

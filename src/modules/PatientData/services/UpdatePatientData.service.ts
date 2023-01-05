@@ -1,6 +1,8 @@
 import { IGoalsPatientRepository } from "@modules/GoalsPatient/repositories/GoalsRepositories.interface";
 import { IMyPointsRepository } from "@modules/myPoints/repositories/MyPointsRepositories.interface";
+import { IStorageProvider } from "@shared/container/providers/StorageProvider/models/IStorageProvider";
 import { AppError } from "@shared/error/AppError";
+import { instanceToInstance } from "class-transformer";
 import { inject, injectable } from "tsyringe";
 import { PatientData } from "../entities/PatientData";
 import { IPatientDataRepository } from "../repositories/PatientDataRepositories.interface";
@@ -17,6 +19,9 @@ class UpdatePatientDataService {
 
     @inject("MyPointsRepository")
     private myPointsRepository: IMyPointsRepository,
+
+    @inject('StorageProvider')
+    private storageProvider: IStorageProvider,
   ) {}
 
   public async execute({
@@ -26,6 +31,7 @@ class UpdatePatientDataService {
     peso,
     descricao,
     patientDataId,
+    anexo,
   }: IPatientDataUpdate): Promise<PatientData> {
 
     let points = 0;
@@ -113,20 +119,29 @@ class UpdatePatientDataService {
         await this.goalsPatientRepository.save(goalsPatientPeso);
   }
 
-    Object.assign(patientDataExists, {
-      colesterol,
-      creatinina,
-      hemoglobina_glicada,
-      peso,
-      descricao,
+  Object.assign(patientDataExists, {
+      colesterol: colesterol,
+      creatinina: creatinina,
+      hemoglobina_glicada: hemoglobina_glicada,
+      peso: peso,
+      descricao: descricao,
     });
 
     userPoints.points = points;
 
-      const newPatientData = await this.patientDataRepository.save(patientDataExists);
-      await this.myPointsRepository.save(userPoints);
+    if(anexo){
+        const filename = await this.storageProvider.saveFile(anexo);
+        if(patientDataExists.eletrocardiograma) {
+          await this.storageProvider.deleteFile(patientDataExists.eletrocardiograma);
+      }
+      patientDataExists.eletrocardiograma = filename;
+    }
 
-      return newPatientData;
+
+    await this.patientDataRepository.save(patientDataExists);
+    await this.myPointsRepository.save(userPoints);
+
+      return instanceToInstance(patientDataExists);
   }
 }
 
