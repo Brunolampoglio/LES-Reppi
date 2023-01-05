@@ -57,6 +57,7 @@ class PatientDataController {
       hemoglobina_glicada,
       peso,
       descricao,
+      anexo: req.file?.filename,
     });
 
     return res.status(200).json(patientData);

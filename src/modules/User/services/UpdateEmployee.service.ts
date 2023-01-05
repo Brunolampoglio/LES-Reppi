@@ -17,8 +17,6 @@ class UpdateEmployeeService {
     request_id,
     ...userParams
   }: IUPdateEmployeeDTO): Promise<User> {
-
-
     const user = await this.userRepository.findBy({
       id: user_id,
     });

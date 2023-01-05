@@ -157,7 +157,7 @@ class UserController {
   async update(req: Request, res: Response): Promise<Response> {
     const { user_id } = req.params;
     const { id } = req.user;
-    const { name, cpf, cnpj, corporate_name } = req.body;
+    const { name, cpf, cnpj, corporate_name, address, phone_number } = req.body;
 
     const updateUserService = container.resolve(UpdateUserService);
 
@@ -169,6 +169,8 @@ class UserController {
       cnpj,
       corporate_name,
       isMaster: req.user.isMaster,
+      address,
+      phone_number,
     });
 
     return res.json(user);
