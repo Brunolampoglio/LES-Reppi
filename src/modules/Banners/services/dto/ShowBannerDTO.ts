@@ -1,3 +1,0 @@
-interface IShowBannerDTO {
-  id: string;
-}
