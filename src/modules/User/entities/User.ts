@@ -4,6 +4,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -11,6 +12,7 @@ import {
 import { hashSync } from 'bcrypt';
 import { Exclude, Expose } from 'class-transformer';
 import { uploadConfig } from '@config/upload';
+import { Address } from './Address';
 
 @Entity('users')
 class User {
@@ -32,6 +34,11 @@ class User {
 
   @Column({ default: 'User' })
   role: string;
+
+  @OneToMany(() => Address, address => address.user, {
+    cascade: true,
+    })
+  address: Address[];
 
   @CreateDateColumn()
   created_at: Date;
