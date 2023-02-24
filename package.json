@@ -33,7 +33,7 @@
     "@typescript-eslint/parser": "^4.6.1",
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-plugin-transform-typescript-metadata": "^0.3.2",
-    "eslint": "latest",
+    "eslint": "^8.34.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-import-resolver-typescript": "^2.7.1",
@@ -47,6 +47,7 @@
     "typescript": "^4.0.5"
   },
   "dependencies": {
+    "@yarnpkg/eslint-config": "^0.6.0-rc.2",
     "aws-sdk": "^2.1127.0",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
@@ -57,7 +58,7 @@
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.7",
     "dotenv": "^16.0.0",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
     "handlebars": "^4.7.7",
     "ioredis": "^5.0.4",
