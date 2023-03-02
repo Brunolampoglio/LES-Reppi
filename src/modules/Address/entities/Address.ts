@@ -34,6 +34,9 @@ class Address {
   obs: string;
 
   @Column()
+  typeResidence: string;
+
+  @Column()
   user_id: string;
 
   @ManyToOne(() => User, user => user.address, {

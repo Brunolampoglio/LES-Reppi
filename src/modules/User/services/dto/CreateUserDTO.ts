@@ -1,3 +1,5 @@
+import { Address } from "@modules/Address/entities/Address";
+
 export interface ICreateUserDTO {
     name: string;
     email: string;
@@ -7,4 +9,5 @@ export interface ICreateUserDTO {
     gender: string;
     birth_date: Date;
     type_phone: string;
+    address: Address;
 }
