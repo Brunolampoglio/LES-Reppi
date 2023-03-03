@@ -8,7 +8,7 @@ export const createUserMiddleware = celebrate({
   [Segments.BODY]: {
     name: Joi.string().required(),
     email: Joi.string().email().required(),
-    password: Joi.string().required().min(8).label('senha'),
+    password: Joi.string().required().min(8).label('senha').pattern(new RegExp('^[a-zA-Z0-9!@#$%&*,]{3,30}$')),
     cpf: JoiCpf.document().cpf().message('CPF inválido'),
     birth_date: Joi.date().required(),
     gender: Joi.string().required(),
@@ -36,7 +36,7 @@ export const updateUserMiddleware = celebrate({
   [Segments.BODY]: {
     name: Joi.string().required(),
     email: Joi.string().email().required(),
-    password: Joi.string().required().min(8).label('senha'),
+    password: Joi.string().required().min(8).label('senha').pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
     cpf: JoiCpf.document().cpf().message('CPF inválido'),
     birth_date: Joi.date().required(),
     gender: Joi.string().required(),

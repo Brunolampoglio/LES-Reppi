@@ -63,3 +63,4 @@ class AddressRepository implements IAddressRepository {
         await this.ormRepository.delete(address);
     }
 }
+export { AddressRepository };

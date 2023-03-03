@@ -2,8 +2,10 @@ import { Address } from "@modules/Address/entities/Address";
 import { IAddressRepository } from "@modules/Address/repositories/AddressRepository.interface";
 import { inject, injectable } from "tsyringe";
 import { User } from "../entities/User";
+import bcrypt from 'bcrypt';
 import { IUserRepository } from "../repositories/UserRepository.interface";
 import { ICreateUserDTO } from "./dto/CreateUserDTO";
+import { AppError } from "@shared/error/AppError";
 
 @injectable()
 class CreateUserService{
@@ -29,14 +31,16 @@ class CreateUserService{
         const userExists = await this.userRepository.findByEmail(email);
        
         if (userExists) {
-            throw new Error("Usuário já existe!");
+            throw new AppError("Usuário já existe!");
         }
+
+        const hashpassword = await bcrypt.hash(password, 10);
 
         const addressInstance = new Address();
         const user = this.userRepository.create({
             name,
             email,
-            password,
+            password: hashpassword,
             cpf,
             phone,
             status: 'ativo',
@@ -51,6 +55,7 @@ class CreateUserService{
             {  ...address, 
             user_id: user.id 
             });
+            user.address = [addressInstance];
         }
 
         await this.userRepository.save(user);

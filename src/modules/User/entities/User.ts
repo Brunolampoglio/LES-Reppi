@@ -47,6 +47,7 @@ class User {
 
   @OneToMany(() => Address, address => address.user, {
     cascade: true,
+    eager: true,
   })
   address: Address[];
 

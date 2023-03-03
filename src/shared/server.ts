@@ -1,15 +1,43 @@
+import express, { json, Request } from 'express';
+import morgan from 'morgan';
+import 'express-async-errors';
 import 'reflect-metadata';
-import express from 'express';
+import cors from 'cors';
 import './database';
 
+
+import { LoggerStream } from '@config/winston';
 import './container';
+
+import { globalErrorHandler } from './middleware/globalErrorHandler';
 import { router } from './routes';
 
 const app = express();
+app.use(
+    cors({
+      credentials: true,
+    }),
+  );
+  
+  app.use(express.urlencoded({ extended: true }));
+  
+  morgan.token('body', (req: Request) => JSON.stringify(req.body));
+  morgan.token('user', (req: Request) => JSON.stringify(req.user));
+  app.use(
+    morgan(
+      `:remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] - "body": ':body' - ":referrer" "user: ':user' ":user-agent"`,
+      {
+        skip: (req, res) => res.statusCode >= 400,
+        stream: new LoggerStream(),
+      },
+    ),
+  );
 
-app.use(express.json());
+app.use(json());
 
 app.use(router);
+
+app.use(globalErrorHandler);
 
 app.listen(3333, () => {
     console.log('Server started on port 3333!');
