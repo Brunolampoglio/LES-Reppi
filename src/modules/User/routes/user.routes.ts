@@ -8,12 +8,14 @@ const userController = new UserController();
 
 userRouter.post('/', createUserMiddleware, userController.create);
 
-userRouter.get('/', getUserMiddleware, userController.get);
+userRouter.get('/', userController.index);
+
+userRouter.get('/:id', getUserMiddleware, userController.findById);
 
 userRouter.put('/:id', updateUserMiddleware, userController.update);
 
 userRouter.put('/status/:id', updateUserStatusMiddleware, userController.updateStatus);
 
-userRouter.delete('/:id', deleteUserMiddleware,userController.delete);
+userRouter.delete('/:id', deleteUserMiddleware, userController.delete);
 
 export { userRouter };

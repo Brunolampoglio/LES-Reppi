@@ -3,17 +3,17 @@ import { User } from "../entities/User";
 import { IUserRepository } from "../repositories/UserRepository.interface";
 
 @injectable()
-class GetUserService {
+class FindUserService {
     constructor(
         @inject('UserRepository')
         private userRepository: IUserRepository,
     ) { }
 
-    public async execute(): Promise<User[]> {
-        const user = await this.userRepository.index();
+    public async execute(id: string): Promise<User> {
+        const user = await this.userRepository.findById(id);
 
         if (!user) {
-            throw new Error('Não foi possível encontrar usuários.');
+            throw new Error('Usuário não encontrado');
         }
 
         return user;
@@ -21,4 +21,4 @@ class GetUserService {
     }
 }
 
-export { GetUserService };
+export { FindUserService };

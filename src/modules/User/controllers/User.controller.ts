@@ -2,13 +2,14 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { CreateUserService } from '../services/CreateUser.service';
 import { DeleteUserService } from '../services/DeleteUser.service';
+import { FindUserService } from '../services/FindUser.service';
 import { GetUserService } from '../services/GetUser.service';
 import { UpdateUserService } from '../services/UpdateUser.service';
 import { UpdateUserStatusService } from '../services/UpdateUserStatus.service';
 
 class UserController {
     async create(req: Request, res: Response) {
-        const { name, email, password, cpf, phone, gender, birth_date, type_phone, address} = req.body;
+        const { name, email, password, cpf, phone, gender, birth_date, type_phone, address } = req.body;
 
         const createUserController = container.resolve(CreateUserService);
 
@@ -42,7 +43,7 @@ class UserController {
     }
 
     async update(req: Request, res: Response) {
-        const {user_id, name, birth_date, cpf, gender, phone, type_phone} = req.body;
+        const { user_id, name, birth_date, cpf, gender, phone, type_phone } = req.body;
 
         const updateUserController = container.resolve(UpdateUserService);
 
@@ -59,12 +60,20 @@ class UserController {
         return res.json(user);
     }
 
-    async get(req: Request, res: Response) {
-        const { user_id } = req.params;
-
+    async index(req: Request, res: Response) {
         const getUserController = container.resolve(GetUserService);
 
-        const user = await getUserController.execute(user_id);
+        const user = await getUserController.execute();
+
+        return res.json(user);
+    }
+
+    async findById(req: Request, res: Response) {
+        const { user_id } = req.params;
+
+        const FindUserController = container.resolve(FindUserService);
+
+        const user = await FindUserController.execute(user_id);
 
         return res.json(user);
     }

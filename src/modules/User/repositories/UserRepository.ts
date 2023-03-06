@@ -3,7 +3,7 @@ import { User } from "../entities/User";
 import { ICreateUserRepositoryDTO } from "./dto/CreateUserRepositoryDTO";
 import { IUserRepository } from "./UserRepository.interface";
 
-class UserRepository implements IUserRepository{
+class UserRepository implements IUserRepository {
     private ormRepository: Repository<User>;
 
     constructor() {
@@ -19,7 +19,7 @@ class UserRepository implements IUserRepository{
     }
 
 
-     create({
+    create({
         name,
         email,
         password,
@@ -52,7 +52,7 @@ class UserRepository implements IUserRepository{
 
         return user;
     }
-    
+
     index(): Promise<User[]> {
         return this.ormRepository.find();
     }
@@ -67,6 +67,6 @@ class UserRepository implements IUserRepository{
     async delete(user: User): Promise<void> {
         await this.ormRepository.delete(user);
     }
-   
+
 }
 export { UserRepository };
