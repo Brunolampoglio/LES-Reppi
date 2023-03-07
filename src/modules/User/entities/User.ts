@@ -56,7 +56,7 @@ class User {
 
   @UpdateDateColumn()
   updated_at: Date;
-    user: Address;
+  user: Address;
 }
 
 export { User };
