@@ -54,8 +54,11 @@ class UserController {
   }
 
   async update(req: Request, res: Response) {
-    const { user_id, name, birth_date, cpf, gender, phone, type_phone } =
-      req.body;
+    const { name, birth_date, cpf, gender, phone, type_phone } = req.body;
+
+    const { user_id } = req.query as {
+      [key: string]: string;
+    };
 
     const updateUserController = container.resolve(UpdateUserService);
 
