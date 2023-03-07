@@ -7,6 +7,6 @@ export interface ICreateUserRepositoryDTO {
     status: string;
     role: string;
     gender: string;
-    birth_date: Date;
+    birth_date: string;
     type_phone: string;
 }

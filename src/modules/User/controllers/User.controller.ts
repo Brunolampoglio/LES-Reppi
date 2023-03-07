@@ -9,7 +9,17 @@ import { UpdateUserStatusService } from '../services/UpdateUserStatus.service';
 
 class UserController {
     async create(req: Request, res: Response) {
-        const { name, email, password, cpf, phone, gender, birth_date, type_phone, address } = req.body;
+        const {
+            name,
+            email,
+            password,
+            cpf,
+            phone,
+            gender,
+            birth_date,
+            type_phone,
+            address,
+        } = req.body;
 
         const createUserController = container.resolve(CreateUserService);
 
@@ -26,13 +36,14 @@ class UserController {
         });
 
         return res.json(user);
-
     }
 
     async updateStatus(req: Request, res: Response) {
         const { user_id, status } = req.body;
 
-        const updateUserStatusController = container.resolve(UpdateUserStatusService);
+        const updateUserStatusController = container.resolve(
+            UpdateUserStatusService,
+        );
 
         const user = await updateUserStatusController.execute({
             user_id,
@@ -43,11 +54,8 @@ class UserController {
     }
 
     async update(req: Request, res: Response) {
-        const { name, birth_date, cpf, gender, phone, type_phone } = req.body;
-
-        const { user_id } = req.query as {
-            [key: string]: string;
-        };
+        const { user_id, name, birth_date, cpf, gender, phone, type_phone } =
+            req.body;
 
         const updateUserController = container.resolve(UpdateUserService);
 

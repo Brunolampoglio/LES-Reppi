@@ -6,7 +6,7 @@ interface IUpdateUserDTO {
     cpf?: string;
     phone?: string;
     gender?: string;
-    birth_date?: Date;
+    birth_date?: string;
     type_phone?: string;
 }
 
