@@ -1,10 +1,13 @@
 import { Router } from "express";
 import { UserController } from "../controllers/User.controller";
+import { sessionRouter } from "./session.routes";
 import { createUserMiddleware, getUserMiddleware, updateUserMiddleware, updateUserStatusMiddleware } from "./validators/user.validation";
 
 const userRouter = Router();
 
 const userController = new UserController();
+
+userRouter.use('/session', sessionRouter);
 
 userRouter.post('/', createUserMiddleware, userController.create);
 
