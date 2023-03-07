@@ -28,7 +28,7 @@ class User {
   cpf: string;
 
   @Column()
-  birth_date: Date;
+  birth_date: string;
 
   @Column()
   gender: string;
@@ -56,7 +56,8 @@ class User {
 
   @UpdateDateColumn()
   updated_at: Date;
-    user: Address;
+
+  user: Address;
 }
 
 export { User };

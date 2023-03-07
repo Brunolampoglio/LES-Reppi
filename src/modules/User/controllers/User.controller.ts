@@ -8,86 +8,98 @@ import { UpdateUserService } from '../services/UpdateUser.service';
 import { UpdateUserStatusService } from '../services/UpdateUserStatus.service';
 
 class UserController {
-    async create(req: Request, res: Response) {
-        const { name, email, password, cpf, phone, gender, birth_date, type_phone, address } = req.body;
+  async create(req: Request, res: Response) {
+    const {
+      name,
+      email,
+      password,
+      cpf,
+      phone,
+      gender,
+      birth_date,
+      type_phone,
+      address,
+    } = req.body;
 
-        const createUserController = container.resolve(CreateUserService);
+    const createUserController = container.resolve(CreateUserService);
 
-        const user = await createUserController.execute({
-            name,
-            email,
-            password,
-            cpf,
-            phone,
-            gender,
-            birth_date,
-            type_phone,
-            address,
-        });
+    const user = await createUserController.execute({
+      name,
+      email,
+      password,
+      cpf,
+      phone,
+      gender,
+      birth_date,
+      type_phone,
+      address,
+    });
 
-        return res.json(user);
+    return res.json(user);
+  }
 
-    }
+  async updateStatus(req: Request, res: Response) {
+    const { user_id, status } = req.body;
 
-    async updateStatus(req: Request, res: Response) {
-        const { user_id, status } = req.body;
+    const updateUserStatusController = container.resolve(
+      UpdateUserStatusService,
+    );
 
-        const updateUserStatusController = container.resolve(UpdateUserStatusService);
+    const user = await updateUserStatusController.execute({
+      user_id,
+      status,
+    });
 
-        const user = await updateUserStatusController.execute({
-            user_id,
-            status,
-        });
+    return res.json(user);
+  }
 
-        return res.json(user);
-    }
+  async update(req: Request, res: Response) {
+    const { user_id, name, birth_date, cpf, gender, phone, type_phone } =
+      req.body;
 
-    async update(req: Request, res: Response) {
-        const { user_id, name, birth_date, cpf, gender, phone, type_phone } = req.body;
+    const updateUserController = container.resolve(UpdateUserService);
 
-        const updateUserController = container.resolve(UpdateUserService);
+    const user = await updateUserController.execute({
+      user_id,
+      name,
+      birth_date,
+      cpf,
+      gender,
+      phone,
+      type_phone,
+    });
 
-        const user = await updateUserController.execute({
-            user_id,
-            name,
-            birth_date,
-            cpf,
-            gender,
-            phone,
-            type_phone,
-        });
+    return res.json(user);
+  }
 
-        return res.json(user);
-    }
+  async index(req: Request, res: Response) {
+    const getUserController = container.resolve(GetUserService);
 
-    async index(req: Request, res: Response) {
-        const getUserController = container.resolve(GetUserService);
+    const user = await getUserController.execute();
 
-        const user = await getUserController.execute();
+    return res.json(user);
+  }
 
-        return res.json(user);
-    }
+  async findById(req: Request, res: Response) {
+    const { user_id } = req.params;
 
-    async findById(req: Request, res: Response) {
-        const { user_id } = req.params;
+    const FindUserController = container.resolve(FindUserService);
 
-        const FindUserController = container.resolve(FindUserService);
+    const user = await FindUserController.execute(user_id);
 
-        const user = await FindUserController.execute(user_id);
+    return res.json(user);
+  }
 
-        return res.json(user);
-    }
+  async delete(req: Request, res: Response) {
+    const { user_id } = req.query as {
+      [key: string]: string;
+    };
 
-    async delete(req: Request, res: Response) {
-        const { user_id } = req.query as {
-            [key: string]: string;
-        };
+    const deleteUserController = container.resolve(DeleteUserService);
 
-        const deleteUserController = container.resolve(DeleteUserService);
+    await deleteUserController.execute(user_id);
 
-        await deleteUserController.execute(user_id);
-
-        return res.status(204).send();
-    }
+    return res.status(204).send();
+  }
 }
 export { UserController };

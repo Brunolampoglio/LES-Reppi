@@ -1,4 +1,3 @@
-import { compare } from 'bcrypt';
 import { instanceToInstance } from 'class-transformer';
 import { inject, injectable } from 'tsyringe';
 
@@ -11,7 +10,6 @@ class UpdateUserService {
   constructor(
     @inject('UserRepository')
     private userRepository: IUserRepository,
-
   ) {}
 
   public async execute({
@@ -24,13 +22,11 @@ class UpdateUserService {
     phone,
     type_phone,
   }: IUpdateUserDTO): Promise<User> {
-    const user = await this.userRepository.findById(
-     user_id,
-    );
+    const user = await this.userRepository.findById(user_id);
 
     if (!user) throw new Error('Usuário não encontrado');
 
-    Object.assign(user,{
+    Object.assign(user, {
       birth_date,
       cpf,
       email,
