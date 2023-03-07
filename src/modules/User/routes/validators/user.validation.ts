@@ -30,18 +30,13 @@ export const createUserMiddleware = celebrate({
 });
 
 export const updateUserMiddleware = celebrate({
-  [Segments.PARAMS]: {
-    user_id: Joi.string().required(),
-  },
   [Segments.BODY]: {
     name: Joi.string().required(),
     email: Joi.string().email().required(),
-    password: Joi.string().required().min(8).label('senha').pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
     cpf: JoiCpf.document().cpf().message('CPF inválido'),
     birth_date: Joi.date().required(),
     gender: Joi.string().required(),
     phone: Joi.string().required(),
-    type_phone: Joi.string().required(),
   },
 });
 
