@@ -59,10 +59,3 @@ export const getUserMiddleware = celebrate({
     user_id: Joi.string().required(),
   },
 });
-
-export const deleteUserMiddleware = celebrate({
-  [Segments.PARAMS]: {
-    user_id: Joi.string().required(),
-  },
-});
-

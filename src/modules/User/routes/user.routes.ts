@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { UserController } from "../controllers/User.controller";
-import { createUserMiddleware, deleteUserMiddleware, getUserMiddleware, updateUserMiddleware, updateUserStatusMiddleware } from "./validators/user.validation";
+import { createUserMiddleware, getUserMiddleware, updateUserMiddleware, updateUserStatusMiddleware } from "./validators/user.validation";
 
 const userRouter = Router();
 
@@ -16,6 +16,6 @@ userRouter.put('/:id', updateUserMiddleware, userController.update);
 
 userRouter.put('/status/:id', updateUserStatusMiddleware, userController.updateStatus);
 
-userRouter.delete('/:id', deleteUserMiddleware, userController.delete);
+userRouter.delete('/:id', userController.delete);
 
 export { userRouter };

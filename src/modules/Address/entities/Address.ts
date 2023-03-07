@@ -41,6 +41,7 @@ class Address {
 
   @ManyToOne(() => User, user => user.address, {
     orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'user_id' })
   user: User;
