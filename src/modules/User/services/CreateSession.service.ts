@@ -21,9 +21,6 @@ class CreateSessionService {
   public async execute({
     email,
     password,
-    device_token,
-    remember_me = false,
-    role,
   }: ICreateSessionDTO): Promise<ICreateSessionResponseDTO> {
 
    const user = await this.userRepository.findByEmail(email);
@@ -44,8 +41,6 @@ class CreateSessionService {
       user.id  as string,
       user.role  === 'User',
     );
-
-    
 
     return {
       user: instanceToInstance(user),
