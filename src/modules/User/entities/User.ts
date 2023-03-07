@@ -27,7 +27,7 @@ class User {
   @Column()
   cpf: string;
 
-  @Column()
+  @Column({ nullable: true })
   birth_date: string;
 
   @Column()
