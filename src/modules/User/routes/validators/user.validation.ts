@@ -38,7 +38,7 @@ export const updateUserMiddleware = celebrate({
     name: Joi.string().required(),
     email: Joi.string().email().required(),
     cpf: JoiCpf.document().cpf().message('CPF inválido'),
-    birth_date: Joi.date().required(),
+    birth_date: Joi.string().required(),
     gender: Joi.string().required(),
     phone: Joi.string().required(),
   },

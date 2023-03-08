@@ -54,7 +54,7 @@ class UserController {
   }
 
   async update(req: Request, res: Response) {
-    const { name, birth_date, cpf, gender, phone, type_phone } = req.body;
+    const { name, birth_date, email, cpf, gender, phone, type_phone } = req.body;
 
     const { user_id } = req.query as {
       [key: string]: string;
@@ -66,6 +66,7 @@ class UserController {
       user_id,
       name,
       birth_date,
+      email,
       cpf,
       gender,
       phone,

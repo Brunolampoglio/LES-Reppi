@@ -20,6 +20,18 @@ class Address {
   @Column()
   street: string;
 
+  @Column()
+  street_type: string;
+
+  @Column()
+  neighborhood: string;
+
+  @Column()
+  country: string;
+
+  @Column()
+  is_default: boolean;
+
   @Column({ nullable: true })
   uf: string;
 
@@ -33,7 +45,7 @@ class Address {
   obs: string;
 
   @Column()
-  typeResidence: string;
+  type_residence: string;
 
   @Column()
   user_id: string;
