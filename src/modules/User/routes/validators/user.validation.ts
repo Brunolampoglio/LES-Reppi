@@ -21,10 +21,14 @@ export const createUserMiddleware = celebrate({
     address: Joi.object({
       zip: Joi.string().min(8).max(9).required().label('CEP'),
       street: Joi.string().required().label('rua'),
+      street_type: Joi.string().required().label('tipo de Logadouro'),
+      is_default: Joi.boolean().required(),
+      neighborhood: Joi.string().required().label('bairro'),
       uf: Joi.string().length(2).required(),
       city: Joi.string().required().label('cidade'),
       obs: Joi.string().required(),
-      typeResidence: Joi.string().required(),
+      country: Joi.string().required(),
+      type_residence: Joi.string().required(),
       number: Joi.string()
         .max(6)
         .pattern(/^[0-9]+$/)
