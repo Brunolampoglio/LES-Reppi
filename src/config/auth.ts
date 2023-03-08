@@ -8,7 +8,3 @@ export const refreshToken_config = {
   prefix: 'session-token-',
 };
 
-export const qrCode_config = {
-  prefix: 'qr-code-',
-  expiresIn: '1d',
-};

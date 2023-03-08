@@ -1,3 +1,4 @@
+import { AppError } from '@shared/error/AppError';
 import { injectable, inject } from 'tsyringe';
 import { IUserRepository } from '../repositories/UserRepository.interface';
 
@@ -12,7 +13,7 @@ class DeleteUserService {
     const user = await this.userRepository.findById(id);
 
     if (!user) {
-      throw new Error('Usuário não encontrado');
+      throw new AppError('Usuário não encontrado');
     }
 
     await this.userRepository.delete(user);

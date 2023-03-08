@@ -1,11 +1,7 @@
-import { v4 as uuidV4 } from 'uuid';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { inject, injectable } from 'tsyringe';
 import { instanceToInstance } from 'class-transformer';
 import { compare } from 'bcrypt';
-
 import { AppError } from '@shared/error/AppError';
-import { refreshToken_config } from '@config/auth';
 import { IUserRepository } from '../repositories/UserRepository.interface';
 import { ICreateSessionDTO, ICreateSessionResponseDTO } from './dto/CreateSessionDTO';
 import { jwtGenerate } from '@shared/util/jwtGenerate';

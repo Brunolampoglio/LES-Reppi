@@ -18,12 +18,34 @@ class AddressRepository implements IAddressRepository {
         return address;
     }
 
+    public async getAllByUserId(user_id: string): Promise<Address[]> {
+        const addresses = await this.ormRepository.find({
+            where: { user_id },
+        });
+
+        return addresses;
+
+    }
+
+    public async findById(id: string): Promise<Address | undefined> {
+        const address = await this.ormRepository.findOne({
+            where: { id_address: id },
+        });
+
+        return address;
+
+    }
+
     create({
         city,
         number,
         obs,
         street,
-        typeResidence,
+        street_type,
+        type_residence,
+        country,
+        is_default,
+        neighborhood,
         uf,
         user_id,
         zip,
@@ -33,7 +55,11 @@ class AddressRepository implements IAddressRepository {
             number,
             obs,
             street,
-            typeResidence,
+            street_type,
+            country,
+            is_default,
+            neighborhood,
+            type_residence,
             uf,
             user_id,
             zip,
@@ -60,7 +86,7 @@ class AddressRepository implements IAddressRepository {
     }
 
     async delete(address: Address): Promise<void> {
-        await this.ormRepository.delete(address);
+        await this.ormRepository.delete(address.id_address);
     }
 }
 export { AddressRepository };

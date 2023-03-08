@@ -4,6 +4,8 @@ import { ICreateAddressRepositoryDTO } from "./dto/CreateAddressDTO";
 interface IAddressRepository {
     create(address: ICreateAddressRepositoryDTO): Address;
     findByCep(cep: string): Promise<Address | undefined>;
+    findById(id: string): Promise<Address | undefined>;
+    getAllByUserId(user_id: string): Promise<Address[]>;
     index(): Promise<Address[]>;
     save(address: Address): Promise<Address>;
     saveAll(address: Address[]): Promise<Address[]>;
