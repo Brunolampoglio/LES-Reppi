@@ -12,7 +12,7 @@ export const createUserMiddleware = celebrate({
       .required()
       .min(8)
       .label('senha')
-      .pattern(new RegExp('^[a-zA-Z0-9!@#$%&*,]{3,30}$')),
+      .pattern(/^[a-zA-Z0-9!@#$%&*,]{3,30}$/),
     cpf: JoiCpf.document().cpf().message('CPF inválido'),
     birth_date: Joi.string().required(),
     gender: Joi.string().required(),

@@ -1,14 +1,13 @@
-import { inject, injectable } from "tsyringe";
-import { Address } from "../entities/Address";
-import { IAddressRepository } from "../repositories/AddressRepository.interface";
-import { ICreateAddressDTO } from "./dto/CreateAddressDTO";
+import { inject, injectable } from 'tsyringe';
+import { Address } from '../entities/Address';
+import { IAddressRepository } from '../repositories/AddressRepository.interface';
+import { ICreateAddressDTO } from './dto/CreateAddressDTO';
 
 @injectable()
 class CreateAddressService {
   constructor(
-    @inject("AddressRepository")
+    @inject('AddressRepository')
     private addressRepository: IAddressRepository,
-    
   ) {}
 
   public async execute({
@@ -42,8 +41,6 @@ class CreateAddressService {
 
     await this.addressRepository.save(address);
     return address;
-
   }
-  
 }
 export { CreateAddressService };

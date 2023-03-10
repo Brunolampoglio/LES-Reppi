@@ -1,7 +1,12 @@
-import { Router } from "express";
-import { UserController } from "../controllers/User.controller";
-import { sessionRouter } from "./session.routes";
-import { createUserMiddleware, getUserMiddleware, updateUserMiddleware, updateUserStatusMiddleware } from "./validators/user.validation";
+import { Router } from 'express';
+import { UserController } from '../controllers/User.controller';
+import { sessionRouter } from './session.routes';
+import {
+  createUserMiddleware,
+  getUserMiddleware,
+  updateUserMiddleware,
+  updateUserStatusMiddleware,
+} from './validators/user.validation';
 
 const userRouter = Router();
 
@@ -17,7 +22,11 @@ userRouter.get('/:id', getUserMiddleware, userController.findById);
 
 userRouter.put('/:id', updateUserMiddleware, userController.update);
 
-userRouter.put('/status/:id', updateUserStatusMiddleware, userController.updateStatus);
+userRouter.put(
+  '/status/:id',
+  updateUserStatusMiddleware,
+  userController.updateStatus,
+);
 
 userRouter.delete('/:id', userController.delete);
 
