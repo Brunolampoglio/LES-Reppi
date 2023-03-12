@@ -2,6 +2,7 @@ import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 import { CreateAddressService } from '../services/CreateAddress.service';
 import { UpdateAddressService } from '../services/UpdateAddress.service';
+import { PatchAddressService } from '../services/PatchAddress.service';
 import { DeleteAddressService } from '../services/DeleteAddress.service';
 import { GetAddressService } from '../services/GetAddress.service';
 
@@ -40,6 +41,22 @@ class AddressController {
 
     return res.json(address);
   }
+
+  async patch(req: Request, res: Response) {
+    const { address_id } = req.query as {
+      [key: string]: string;
+    };
+
+    const patchAddressController = container.resolve(PatchAddressService);
+
+    const address = await patchAddressController.execute(
+      address_id,
+      req.user.id,
+    );
+
+    return res.json(address);
+  }
+
 
   async update(req: Request, res: Response) {
     const {
