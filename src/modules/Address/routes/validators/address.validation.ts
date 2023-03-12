@@ -40,9 +40,3 @@ export const updateAddressMiddleware = celebrate({
       .label('número'),
   },
 });
-
-export const deleteAddressMiddleware = celebrate({
-  [Segments.PARAMS]: {
-    address_id: Joi.string().required(),
-  },
-});
