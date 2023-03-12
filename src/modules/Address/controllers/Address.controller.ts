@@ -80,10 +80,10 @@ class AddressController {
     return res.json(address);
   }
 
-  async get(req: Request, res: Response) {
-    const getAddresController = container.resolve(GetAddressService);
+  async index(req: Request, res: Response) {
+    const getAddressController = container.resolve(GetAddressService);
 
-    const address = await getAddresController.execute(req.user.id);
+    const address = await getAddressController.execute(req.user.id);
 
     return res.json(address);
   }
@@ -97,7 +97,7 @@ class AddressController {
 
     await deleteAddressController.execute(address_id);
 
-    return res.json({ message: 'Endereço excluido com sucesso' });
+    return res.json({ message: 'Endereço excluído com sucesso' });
   }
 }
 

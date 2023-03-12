@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { CreateSessionService } from '../services/CreateSession.service';
 
-
 class SessionController {
   async create(req: Request, res: Response): Promise<Response> {
     const { email, password } = req.body;
@@ -16,7 +15,6 @@ class SessionController {
 
     return res.json(resp);
   }
-
 }
 
 export { SessionController };
