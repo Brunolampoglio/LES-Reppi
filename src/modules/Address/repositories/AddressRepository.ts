@@ -18,6 +18,14 @@ class AddressRepository implements IAddressRepository {
     return address;
   }
 
+  public async showAddressId(id: string): Promise<Address | undefined> {
+    const address = await this.ormRepository.findOne({
+      where: { id_address: id },
+    });
+
+    return address;
+  }
+
   public async getAllByUserId(user_id: string): Promise<Address[]> {
     const addresses = await this.ormRepository.find({
       where: { user_id },

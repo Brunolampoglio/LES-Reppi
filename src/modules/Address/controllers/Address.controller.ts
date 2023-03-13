@@ -5,6 +5,7 @@ import { UpdateAddressService } from '../services/UpdateAddress.service';
 import { PatchAddressService } from '../services/PatchAddress.service';
 import { DeleteAddressService } from '../services/DeleteAddress.service';
 import { GetAddressService } from '../services/GetAddress.service';
+import { ShowAddressService } from '../services/ShowAddress.service';
 
 class AddressController {
   async create(req: Request, res: Response) {
@@ -42,6 +43,18 @@ class AddressController {
     return res.json(address);
   }
 
+  async show(req: Request, res: Response) {
+    const { id } = req.query as {
+      [key: string]: string;
+    };
+
+    const showAddressService = container.resolve(ShowAddressService);
+
+    const address = await showAddressService.execute(id);
+
+    return res.json(address);
+  }
+
   async patch(req: Request, res: Response) {
     const { address_id } = req.query as {
       [key: string]: string;
@@ -56,7 +69,6 @@ class AddressController {
 
     return res.json(address);
   }
-
 
   async update(req: Request, res: Response) {
     const {
