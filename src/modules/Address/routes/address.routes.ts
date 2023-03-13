@@ -1,3 +1,4 @@
+import { verifyToken } from '@shared/middleware/verifyToken';
 import { Router } from 'express';
 import { AddressController } from '../controllers/Address.controller';
 import {
@@ -8,6 +9,8 @@ import {
 const addressRouter = Router();
 
 const addressController = new AddressController();
+
+addressRouter.use(verifyToken);
 
 addressRouter.post('/', createAddressMiddleware, addressController.create);
 
