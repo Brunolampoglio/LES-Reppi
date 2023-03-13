@@ -8,7 +8,7 @@ class PatchAddressService {
   constructor(
     @inject('AddressRepository')
     private addressRepository: IAddressRepository,
-  ) { }
+  ) {}
 
   public async execute(
     address_id: string,
