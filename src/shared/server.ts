@@ -12,6 +12,7 @@ import { globalErrorHandler } from './middleware/globalErrorHandler';
 import { router } from './routes';
 
 const app = express();
+
 app.use(
   cors({
     credentials: true,
@@ -22,6 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 
 morgan.token('body', (req: Request) => JSON.stringify(req.body));
 morgan.token('user', (req: Request) => JSON.stringify(req.user));
+
 app.use(
   morgan(
     `:remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] - "body": ':body' - ":referrer" "user: ':user' ":user-agent"`,

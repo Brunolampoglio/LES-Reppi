@@ -7,7 +7,7 @@ class GetAddressService {
   constructor(
     @inject('AddressRepository')
     private addressRepository: IAddressRepository,
-  ) {}
+  ) { }
 
   public async execute(user_id: string): Promise<Address[]> {
     const address = await this.addressRepository.getAllByUserId(user_id);
