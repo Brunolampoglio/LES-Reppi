@@ -39,7 +39,8 @@ class UserController {
   }
 
   async updateStatus(req: Request, res: Response) {
-    const { user_id, status } = req.body;
+    const { status } = req.body;
+    const { user_id } = req.params;
 
     const updateUserStatusController = container.resolve(
       UpdateUserStatusService,

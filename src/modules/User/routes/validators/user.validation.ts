@@ -49,9 +49,6 @@ export const updateUserMiddleware = celebrate({
 });
 
 export const updateUserStatusMiddleware = celebrate({
-  [Segments.PARAMS]: {
-    user_id: Joi.string().required(),
-  },
   [Segments.BODY]: {
     status: Joi.string().required(),
   },

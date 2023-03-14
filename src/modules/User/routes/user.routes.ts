@@ -22,8 +22,8 @@ userRouter.get('/:id', getUserMiddleware, userController.findById);
 
 userRouter.put('/:id', updateUserMiddleware, userController.update);
 
-userRouter.put(
-  '/status/:id',
+userRouter.patch(
+  '/status/:user_id',
   updateUserStatusMiddleware,
   userController.updateStatus,
 );
