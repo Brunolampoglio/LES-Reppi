@@ -8,7 +8,7 @@ class CreateAddressService {
   constructor(
     @inject('AddressRepository')
     private addressRepository: IAddressRepository,
-  ) {}
+  ) { }
 
   public async execute({
     city,
@@ -24,6 +24,17 @@ class CreateAddressService {
     user_id,
     zip,
   }: ICreateAddressDTO): Promise<Address> {
+    const addresses = await this.addressRepository.getAllByUserId(user_id);
+
+    if (is_default) {
+      addresses.forEach(async addressItem => {
+        await this.addressRepository.save({
+          ...addressItem,
+          is_default: false,
+        });
+      });
+    }
+
     const address = this.addressRepository.create({
       city,
       country,

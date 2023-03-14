@@ -43,9 +43,7 @@ class AddressController {
   }
 
   async patch(req: Request, res: Response) {
-    const { address_id } = req.query as {
-      [key: string]: string;
-    };
+    const { address_id } = req.params;
 
     const patchAddressController = container.resolve(PatchAddressService);
 
@@ -56,7 +54,6 @@ class AddressController {
 
     return res.json(address);
   }
-
 
   async update(req: Request, res: Response) {
     const {
@@ -73,9 +70,7 @@ class AddressController {
       country,
     } = req.body;
 
-    const { address_id } = req.query as {
-      [key: string]: string;
-    };
+    const { address_id } = req.params;
 
     const updateAddressController = container.resolve(UpdateAddressService);
 
@@ -106,9 +101,7 @@ class AddressController {
   }
 
   async delete(req: Request, res: Response) {
-    const { address_id } = req.query as {
-      [key: string]: string;
-    };
+    const { address_id } = req.params;
 
     const deleteAddressController = container.resolve(DeleteAddressService);
 
