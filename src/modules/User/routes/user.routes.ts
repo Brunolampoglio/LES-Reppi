@@ -28,6 +28,6 @@ userRouter.put(
   userController.updateStatus,
 );
 
-userRouter.delete('/:id', userController.delete);
+userRouter.delete('/:user_id', userController.delete);
 
 export { userRouter };

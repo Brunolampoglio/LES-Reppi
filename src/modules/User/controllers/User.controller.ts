@@ -96,9 +96,7 @@ class UserController {
   }
 
   async delete(req: Request, res: Response) {
-    const { user_id } = req.query as {
-      [key: string]: string;
-    };
+    const { user_id } = req.params;
 
     const deleteUserController = container.resolve(DeleteUserService);
 
