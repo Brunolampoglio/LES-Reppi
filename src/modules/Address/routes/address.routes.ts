@@ -14,6 +14,8 @@ addressRouter.use(verifyToken);
 
 addressRouter.post('/', createAddressMiddleware, addressController.create);
 
+addressRouter.get('/:id', addressController.show);
+
 addressRouter.get('/', addressController.index);
 
 addressRouter.patch('/:address_id/default', addressController.patch);
