@@ -1,11 +1,15 @@
-import { addressRouter } from '@modules/Address/routes/address.routes';
 import { Router, Request, Response, NextFunction } from 'express';
-import { userRouter } from '../modules/User/routes/user.routes';
+import { userRouter } from '@modules/User/routes/user.routes';
+import { addressRouter } from '@modules/Address/routes/address.routes';
+import { flagRouter } from '@modules/Flag/routes/flag.routes';
+import { productRouter } from '@modules/Product/routes/product.routes';
 
 const router = Router();
 
 router.use('/user', userRouter);
 router.use('/address', addressRouter);
+router.use('/flag', flagRouter);
+router.use('/product', productRouter);
 
 router.get('/', (request: Request, response: Response) =>
   response.send('Reppi - 0.0.1'),
