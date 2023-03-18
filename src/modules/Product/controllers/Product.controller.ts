@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { CreateProductService } from '../services/CreateProduct.service';
 import { DeleteProductService } from '../services/DeleteProduct.service';
+import { FindProductService } from '../services/FindProductById.service';
 import { GetProductService } from '../services/GetProduct.service';
 import { UpdateProductService } from '../services/UpdateProduct.service';
 
@@ -56,6 +57,17 @@ class ProductController {
     const getProductController = container.resolve(GetProductService);
 
     const product = await getProductController.execute();
+
+    return res.json(product);
+  }
+
+  async findById(req: Request, res: Response) {
+    const { product_id } = req.params;
+    console.log(product_id);
+
+    const FindProductController = container.resolve(FindProductService);
+
+    const product = await FindProductController.execute(product_id);
 
     return res.json(product);
   }

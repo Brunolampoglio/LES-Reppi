@@ -33,7 +33,7 @@ class UpdateProductService {
   }: IUpdateProductDTO): Promise<Product> {
     const product = await this.productRepository.findById(product_id);
 
-    if (!product) throw new Error('Usuário não encontrado');
+    if (!product) throw new Error('Livro não encontrado');
 
     Object.assign(product, {
       title,

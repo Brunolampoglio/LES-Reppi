@@ -10,6 +10,8 @@ productRouter.post('/', createProductMiddleware, productController.create);
 
 productRouter.get('/', productController.index);
 
+productRouter.get('/:product_id', productController.findById);
+
 productRouter.put('/:product_id', productController.update);
 
 productRouter.delete('/:product_id', productController.delete);
