@@ -2,7 +2,7 @@ import { celebrate, Joi, Segments } from 'celebrate';
 
 export const createProductMiddleware = celebrate({
   [Segments.BODY]: {
-    title: Joi.string().email().required(),
+    title: Joi.string().required(),
     author: Joi.string().required(),
     category: Joi.string().required(),
     image_url: Joi.string().required(),
