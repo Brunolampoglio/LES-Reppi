@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 import { CreateProductService } from '../services/CreateProduct.service';
 import { DeleteProductService } from '../services/DeleteProduct.service';
 import { GetProductService } from '../services/GetProduct.service';
+import { UpdateProductService } from '../services/UpdateProduct.service';
 
 class ProductController {
   async create(req: Request, res: Response) {
@@ -55,6 +56,51 @@ class ProductController {
     const getProductController = container.resolve(GetProductService);
 
     const product = await getProductController.execute();
+
+    return res.json(product);
+  }
+
+  async update(req: Request, res: Response) {
+    const {
+      title,
+      author,
+      category,
+      image_url,
+      language,
+      bar_code,
+      year,
+      pages_quantity,
+      isbn,
+      value,
+      publishing_company,
+      edition,
+      dimensions,
+      weight_in_grams,
+      synopsis,
+    } = req.body;
+
+    const { product_id } = req.params;
+
+    const updateProductController = container.resolve(UpdateProductService);
+
+    const product = await updateProductController.execute({
+      product_id,
+      title,
+      author,
+      category,
+      image_url,
+      language,
+      bar_code,
+      year,
+      pages_quantity,
+      isbn,
+      value,
+      publishing_company,
+      edition,
+      dimensions,
+      weight_in_grams,
+      synopsis,
+    });
 
     return res.json(product);
   }
