@@ -1,3 +1,4 @@
+import { AppError } from '@shared/error/AppError';
 import { injectable, inject } from 'tsyringe';
 import { User } from '../entities/User';
 import { IUserRepository } from '../repositories/UserRepository.interface';
@@ -13,7 +14,7 @@ class GetUserService {
     const user = await this.userRepository.index();
 
     if (!user) {
-      throw new Error('Não foi possível encontrar usuários.');
+      throw new AppError('Não foi possível encontrar usuários.');
     }
 
     return user;

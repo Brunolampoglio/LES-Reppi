@@ -8,6 +8,8 @@ import { ProductRepository } from '@modules/Product/repositories/ProductReposito
 import { IProductRepository } from '@modules/Product/repositories/ProductRepository.interface';
 import { IFlagRepository } from '@modules/Flag/repositories/FlagRepository.interface';
 import { FlagRepository } from '@modules/Flag/repositories/FlagRepository';
+import { ICardRepository } from '@modules/Cards/repositories/CardRepositories.interface';
+import { CardRepository } from '@modules/Cards/repositories/CardRepository';
 
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 container.registerSingleton<IAddressRepository>(
@@ -21,3 +23,5 @@ container.registerSingleton<IProductRepository>(
 );
 
 container.registerSingleton<IFlagRepository>('FlagRepository', FlagRepository);
+
+container.registerSingleton<ICardRepository>('CardRepository', CardRepository);

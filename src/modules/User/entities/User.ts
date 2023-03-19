@@ -1,3 +1,4 @@
+import { Card } from '@modules/Cards/entities/Card';
 import { Exclude } from 'class-transformer';
 import {
   Column,
@@ -50,6 +51,12 @@ class User {
     eager: true,
   })
   address: Address[];
+
+  @OneToMany(() => Card, card => card.user, {
+    cascade: true,
+    eager: true,
+  })
+  cards: Card[];
 
   @CreateDateColumn()
   created_at: Date;
