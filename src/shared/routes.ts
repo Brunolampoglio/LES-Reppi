@@ -4,7 +4,7 @@ import { addressRouter } from '@modules/Address/routes/address.routes';
 import { flagRouter } from '@modules/Flag/routes/flag.routes';
 import { productRouter } from '@modules/Product/routes/product.routes';
 import { cardRouter } from '@modules/Cards/routes/card.routes';
-import { cuponRouter } from '@modules/Cupon/routes/cupon.routes';
+import { couponRouter } from '@modules/Cupon/routes/coupon';
 
 const router = Router();
 
@@ -13,7 +13,7 @@ router.use('/address', addressRouter);
 router.use('/flag', flagRouter);
 router.use('/product', productRouter);
 router.use('/card', cardRouter);
-router.use('/cupon', cuponRouter);
+router.use('/coupon', couponRouter);
 
 router.get('/', (request: Request, response: Response) =>
   response.send('Reppi - 0.0.1'),

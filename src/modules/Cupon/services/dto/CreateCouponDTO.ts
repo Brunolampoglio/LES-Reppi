@@ -1,5 +1,4 @@
-export interface IUpdateCuponDTO {
-  cupon_id: string;
+export interface ICreateCouponDTO {
   name: string;
   description: string;
   value: number;

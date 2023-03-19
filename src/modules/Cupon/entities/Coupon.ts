@@ -6,8 +6,8 @@ import {
 } from 'typeorm';
 import { Entity } from 'typeorm/decorator/entity/Entity';
 
-@Entity('cupon')
-export class Cupon {
+@Entity('coupon')
+export class Coupon {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

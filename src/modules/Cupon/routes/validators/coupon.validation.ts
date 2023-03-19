@@ -1,6 +1,6 @@
 import { celebrate, Segments, Joi } from 'celebrate';
 
-export const createCuponMiddleware = celebrate({
+export const createCouponMiddleware = celebrate({
   [Segments.BODY]: {
     name: Joi.string().required(),
     description: Joi.string().required(),
@@ -9,7 +9,7 @@ export const createCuponMiddleware = celebrate({
   },
 });
 
-export const updateCuponMiddleware = celebrate({
+export const updateCouponMiddleware = celebrate({
   [Segments.BODY]: {
     name: Joi.string().required(),
     description: Joi.string().required(),
@@ -17,12 +17,12 @@ export const updateCuponMiddleware = celebrate({
     active: Joi.boolean().required(),
   },
   [Segments.PARAMS]: {
-    cupon_id: Joi.string().uuid().required(),
+    coupon_id: Joi.string().uuid().required(),
   },
 });
 
-export const deleteCuponMiddleware = celebrate({
+export const deleteCouponMiddleware = celebrate({
   [Segments.PARAMS]: {
-    cupon_id: Joi.string().uuid().required(),
+    coupon_id: Joi.string().uuid().required(),
   },
 });

@@ -10,8 +10,8 @@ import { IFlagRepository } from '@modules/Flag/repositories/FlagRepository.inter
 import { FlagRepository } from '@modules/Flag/repositories/FlagRepository';
 import { ICardRepository } from '@modules/Cards/repositories/CardRepositories.interface';
 import { CardRepository } from '@modules/Cards/repositories/CardRepository';
-import { ICuponRepository } from '@modules/Cupon/repositories/CuponRepository.interface';
-import { CuponRepository } from '@modules/Cupon/repositories/CuponRepository';
+import { CouponRepository } from '@modules/Cupon/repositories/CouponRepository';
+import { ICouponRepository } from '@modules/Cupon/repositories/CouponRepository.interface';
 
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 container.registerSingleton<IAddressRepository>(
@@ -28,7 +28,7 @@ container.registerSingleton<IFlagRepository>('FlagRepository', FlagRepository);
 
 container.registerSingleton<ICardRepository>('CardRepository', CardRepository);
 
-container.registerSingleton<ICuponRepository>(
-  'CuponRepository',
-  CuponRepository,
+container.registerSingleton<ICouponRepository>(
+  'CouponRepository',
+  CouponRepository,
 );
