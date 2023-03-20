@@ -6,6 +6,7 @@ import { UpdateCouponService } from '../services/UpdateCoupon.service';
 import { DeleteCouponService } from '../services/DeleteCoupon.service';
 import { UpdateStatusCouponService } from '../services/UpdateStatus.service';
 import { FindByIdCouponService } from '../services/FindCouponById.service';
+import { FindByNameCouponService } from '../services/FindByName.service';
 
 class CouponController {
   async create(req: Request, res: Response): Promise<Response> {
@@ -37,6 +38,18 @@ class CouponController {
     const findByIdCouponService = container.resolve(FindByIdCouponService);
 
     const coupon = await findByIdCouponService.execute(coupon_id);
+
+    return res.json(coupon);
+  }
+
+  async findByName(req: Request, res: Response): Promise<Response> {
+    const { name } = req.query as {
+      [key: string]: string;
+    };
+
+    const findByNameCouponService = container.resolve(FindByNameCouponService);
+
+    const coupon = await findByNameCouponService.execute(name);
 
     return res.json(coupon);
   }

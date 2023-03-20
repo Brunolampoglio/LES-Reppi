@@ -11,6 +11,8 @@ couponRouter.get('/', cuponController.index);
 
 couponRouter.get('/:coupon_id', cuponController.show);
 
+couponRouter.get('/show', cuponController.findByName);
+
 couponRouter.put('/:coupon_id', cuponController.update);
 
 couponRouter.patch('/status/:coupon_id', cuponController.updateStatus);
