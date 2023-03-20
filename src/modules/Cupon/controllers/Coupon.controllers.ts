@@ -42,9 +42,7 @@ class CouponController {
   }
 
   async findByName(req: Request, res: Response): Promise<Response> {
-    const { name } = req.params;
-
-    console.log(name);
+    const { name } = req.query as { name: string };
 
     const findByNameCouponService = container.resolve(FindByNameCouponService);
 
