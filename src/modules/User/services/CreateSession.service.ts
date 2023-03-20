@@ -31,7 +31,7 @@ class CreateSessionService {
       if (!passwordMatch) throw new AppError('Email ou senha inválidos', 401);
     }
 
-    if (!user?.status) {
+    if (user?.status === 'Inativo') {
       throw new AppError('Procure o administrador da plataforma', 403);
     }
 
