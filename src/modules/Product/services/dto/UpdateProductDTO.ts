@@ -16,3 +16,8 @@ export interface IUpdateProductDTO {
   weight_in_grams: number;
   synopsis: string;
 }
+
+export interface IUpdateProductStatusDTO {
+  product_id: string;
+  is_available: boolean;
+}

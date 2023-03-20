@@ -5,6 +5,7 @@ import { DeleteProductService } from '../services/DeleteProduct.service';
 import { FindProductService } from '../services/FindProductById.service';
 import { GetProductService } from '../services/GetProduct.service';
 import { UpdateProductService } from '../services/UpdateProduct.service';
+import { UpdateProductStatusService } from '../services/UpdateProductStatus.service';
 
 class ProductController {
   async create(req: Request, res: Response) {
@@ -63,7 +64,6 @@ class ProductController {
 
   async findById(req: Request, res: Response) {
     const { product_id } = req.params;
-    console.log(product_id);
 
     const FindProductController = container.resolve(FindProductService);
 
@@ -112,6 +112,22 @@ class ProductController {
       dimensions,
       weight_in_grams,
       synopsis,
+    });
+
+    return res.json(product);
+  }
+
+  async updateStatus(req: Request, res: Response) {
+    const { is_available } = req.body;
+    const { product_id } = req.params;
+
+    const updateProductStatusController = container.resolve(
+      UpdateProductStatusService,
+    );
+
+    const product = await updateProductStatusController.execute({
+      product_id,
+      is_available,
     });
 
     return res.json(product);
