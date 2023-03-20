@@ -14,13 +14,12 @@ class CreateCouponService {
     name,
     description,
     value,
-    active,
   }: ICreateCouponDTO): Promise<Coupon> {
     const coupon = this.couponRepository.create({
       name,
       description,
       value,
-      active,
+      active: true,
     });
 
     await this.couponRepository.save(coupon);

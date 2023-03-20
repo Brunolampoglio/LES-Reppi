@@ -10,7 +10,7 @@ import { FindByNameCouponService } from '../services/FindByName.service';
 
 class CouponController {
   async create(req: Request, res: Response): Promise<Response> {
-    const { name, description, value, active } = req.body;
+    const { name, description, value } = req.body;
 
     const createCouponService = container.resolve(CreateCouponService);
 
@@ -18,7 +18,6 @@ class CouponController {
       name,
       description,
       value,
-      active,
     });
 
     return res.status(201).json(coupon);
@@ -43,9 +42,9 @@ class CouponController {
   }
 
   async findByName(req: Request, res: Response): Promise<Response> {
-    const { name } = req.query as {
-      [key: string]: string;
-    };
+    const { name } = req.params;
+
+    console.log(name);
 
     const findByNameCouponService = container.resolve(FindByNameCouponService);
 

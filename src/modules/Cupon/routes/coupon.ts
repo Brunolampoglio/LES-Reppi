@@ -9,9 +9,9 @@ couponRouter.post('/', cuponController.create);
 
 couponRouter.get('/', cuponController.index);
 
-couponRouter.get('/:coupon_id', cuponController.show);
-
 couponRouter.get('/show', cuponController.findByName);
+
+couponRouter.get('/:coupon_id', cuponController.show);
 
 couponRouter.put('/:coupon_id', cuponController.update);
 
