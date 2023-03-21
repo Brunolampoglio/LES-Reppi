@@ -12,34 +12,34 @@ class CouponRepository implements ICouponRepository {
   }
 
   async findById(id: string): Promise<Coupon | undefined> {
-    const cupon = await this.ormRepository.findOne(id);
+    const coupon = await this.ormRepository.findOne(id);
 
-    return cupon;
+    return coupon;
   }
 
   async index(): Promise<Coupon[]> {
-    const cupons = await this.ormRepository.find();
+    const coupons = await this.ormRepository.find();
 
-    return cupons;
+    return coupons;
   }
 
   async findByName(name: string): Promise<Coupon | undefined> {
-    const cupon = await this.ormRepository.findOne({
+    const coupon = await this.ormRepository.findOne({
       where: { name, active: true },
     });
 
-    return cupon;
+    return coupon;
   }
 
   create({ name, description, value, active }: ICreateCuponDTO): Coupon {
-    const cupon = this.ormRepository.create({
+    const coupon = this.ormRepository.create({
       name,
       description,
       value,
       active,
     });
 
-    return cupon;
+    return coupon;
   }
 
   async save(coupon: Coupon): Promise<Coupon> {

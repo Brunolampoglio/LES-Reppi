@@ -57,7 +57,7 @@ class CouponController {
 
     const updateCouponService = container.resolve(UpdateCouponService);
 
-    const cupon = await updateCouponService.execute({
+    const coupon = await updateCouponService.execute({
       coupon_id,
       name,
       description,
@@ -65,7 +65,7 @@ class CouponController {
       active,
     });
 
-    return res.json(cupon);
+    return res.json(coupon);
   }
 
   async updateStatus(req: Request, res: Response): Promise<Response> {
@@ -75,12 +75,12 @@ class CouponController {
 
     const updateCouponService = container.resolve(UpdateStatusCouponService);
 
-    const cupon = await updateCouponService.execute({
+    const coupon = await updateCouponService.execute({
       coupon_id,
-      active: active === 'ativo',
+      active,
     });
 
-    return res.json(cupon);
+    return res.json(coupon);
   }
 
   async delete(req: Request, res: Response): Promise<Response> {

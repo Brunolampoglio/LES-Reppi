@@ -41,3 +41,9 @@ export const updateProductMiddleware = celebrate({
     synopsis: Joi.string().required(),
   },
 });
+
+export const updateAvailableProductMiddleware = celebrate({
+  [Segments.BODY]: {
+    is_available: Joi.boolean().required(),
+  },
+});
