@@ -45,12 +45,12 @@ class CardController {
 
   async update(req: Request, res: Response): Promise<Response> {
     const { card_id } = req.params;
-    const { main } = req.body;
+    console.log(card_id);
+    console.log('update card controller', req.user.id);
 
     const updateCardService = container.resolve(UpdateCardService);
 
     const card = await updateCardService.execute({
-      main,
       user_id: req.user.id,
       id: card_id,
     });

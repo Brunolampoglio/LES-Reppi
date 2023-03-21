@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { IUserRepository } from '@modules/User/repositories/UserRepository.interface';
 import { AppError } from '@shared/error/AppError';
 import { inject, injectable } from 'tsyringe';
@@ -13,7 +14,7 @@ class CreateCardService {
 
     @inject('UserRepository')
     private userRepository: IUserRepository,
-  ) {}
+  ) { }
 
   public async execute({
     first_digits,
@@ -26,8 +27,13 @@ class CreateCardService {
     user_id,
   }: ICreateCardDTO): Promise<Card> {
     const user = await this.userRepository.findById(user_id);
-
     if (!user) throw new AppError('Usuário não encontrado', 404);
+
+    const cardExists = await this.cardRepository.listBy(user_id);
+
+    cardExists.forEach(addressItem => {
+      addressItem.main = false;
+    });
 
     const card = this.cardRepository.create({
       first_digits,
@@ -40,7 +46,7 @@ class CreateCardService {
       user_id,
     });
 
-    await this.cardRepository.save(card);
+    await this.cardRepository.save([card, ...cardExists]);
 
     return card;
   }

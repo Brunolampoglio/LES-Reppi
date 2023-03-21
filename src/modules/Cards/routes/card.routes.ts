@@ -4,7 +4,6 @@ import { CardController } from '../controllers/Card.controllers';
 import {
   createCardMiddleware,
   deleteCardMiddleware,
-  updateCardMiddleware,
 } from './validators/card.validation';
 
 const cardRouter = Router();
@@ -17,8 +16,8 @@ cardRouter.post('/', createCardMiddleware, cardController.create);
 
 cardRouter.get('/', cardController.listAll);
 
-cardRouter.delete('/:card_id', deleteCardMiddleware, cardController.delete);
+cardRouter.patch('/:card_id', cardController.update);
 
-cardRouter.put(':card_id', updateCardMiddleware, cardController.update);
+cardRouter.delete('/:card_id', deleteCardMiddleware, cardController.delete);
 
 export { cardRouter };
