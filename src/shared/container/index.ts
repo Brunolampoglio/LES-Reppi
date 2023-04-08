@@ -12,6 +12,8 @@ import { ICardRepository } from '@modules/Cards/repositories/CardRepositories.in
 import { CardRepository } from '@modules/Cards/repositories/CardRepository';
 import { CouponRepository } from '@modules/Cupon/repositories/CouponRepository';
 import { ICouponRepository } from '@modules/Cupon/repositories/CouponRepository.interface';
+import { ICartRepository } from '@modules/Cart/repositories/CartRepository.interface';
+import { CartRepository } from '@modules/Cart/repositories/CartRepository';
 
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 container.registerSingleton<IAddressRepository>(
@@ -32,3 +34,5 @@ container.registerSingleton<ICouponRepository>(
   'CouponRepository',
   CouponRepository,
 );
+
+container.registerSingleton<ICartRepository>('CartRepository', CartRepository);
