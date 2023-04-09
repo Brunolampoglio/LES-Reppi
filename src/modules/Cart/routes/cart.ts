@@ -4,6 +4,7 @@ import { CartController } from '../controllers/Cart.controllers';
 import {
   createCartMiddleware,
   deleteCartMiddleware,
+  removeItemCartMiddleware,
   updateCartMiddleware,
 } from './validators/cart.validation';
 
@@ -19,11 +20,15 @@ cartRouter.get('/', cartController.index);
 
 cartRouter.put('/:cart_id', updateCartMiddleware, cartController.update);
 
+cartRouter.put(
+  '/remove-item/:cart_id',
+  removeItemCartMiddleware,
+  cartController.removeItem,
+);
+
 cartRouter.get('/show', cartController.findByName);
 
 cartRouter.get('/:cart_id', cartController.show);
-
-cartRouter.patch('/status/:cart_id', cartController.updateStatus);
 
 cartRouter.delete('/:cart_id', deleteCartMiddleware, cartController.delete);
 

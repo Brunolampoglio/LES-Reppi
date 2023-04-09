@@ -16,6 +16,15 @@ export const updateCartMiddleware = celebrate({
   },
 });
 
+export const removeItemCartMiddleware = celebrate({
+  [Segments.BODY]: {
+    product_id: Joi.string().uuid().required(),
+  },
+  [Segments.PARAMS]: {
+    cart_id: Joi.string().uuid().required(),
+  },
+});
+
 export const deleteCartMiddleware = celebrate({
   [Segments.PARAMS]: {
     cart_id: Joi.string().uuid().required(),

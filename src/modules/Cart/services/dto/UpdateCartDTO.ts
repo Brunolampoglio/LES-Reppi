@@ -4,7 +4,7 @@ export interface IUpdateCartDTO {
   is_subtract?: boolean;
 }
 
-export interface IUpdateStatusCartDTO {
+export interface IRemoveItemCartDTO {
   cart_id: string;
-  active: boolean;
+  product_id: string;
 }

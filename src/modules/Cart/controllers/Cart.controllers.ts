@@ -4,7 +4,7 @@ import { CreateCartService } from '../services/CreateCart.service';
 import { IndexCartService } from '../services/IndexCart.service';
 import { UpdateCartService } from '../services/UpdateCart.service';
 import { DeleteCartService } from '../services/DeleteCart.service';
-import { UpdateStatusCartService } from '../services/UpdateStatus.service';
+import { RemoveItemCartService } from '../services/RemoveItemCart.service';
 import { FindByIdCartService } from '../services/FindCouponById.service';
 import { FindByNameCartService } from '../services/FindByName.service';
 
@@ -65,16 +65,16 @@ class CartController {
     return res.json(coupon);
   }
 
-  async updateStatus(req: Request, res: Response): Promise<Response> {
+  async removeItem(req: Request, res: Response): Promise<Response> {
     const { cart_id } = req.params;
 
-    const { active } = req.body;
+    const { product_id } = req.body;
 
-    const updateCouponService = container.resolve(UpdateStatusCartService);
+    const removeItemCartService = container.resolve(RemoveItemCartService);
 
-    const cart = await updateCouponService.execute({
+    const cart = await removeItemCartService.execute({
       cart_id,
-      active,
+      product_id,
     });
 
     return res.json(cart);
