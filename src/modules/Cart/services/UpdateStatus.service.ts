@@ -2,19 +2,19 @@ import { AppError } from '@shared/error/AppError';
 import { injectable, inject } from 'tsyringe';
 import { Cart } from '../entities/Cart';
 import { ICartRepository } from '../repositories/CartRepository.interface';
-import { IRemoveItemCartDTO } from './dto/UpdateCartDTO';
+import { IUpdateStatusCartDTO } from './dto/UpdateCartDTO';
 
 @injectable()
 class UpdateStatusCartService {
   constructor(
     @inject('CartRepository')
     private cartRepository: ICartRepository,
-  ) { }
+  ) {}
 
   public async execute({
     active,
     cart_id,
-  }: IRemoveItemCartDTO): Promise<Cart> {
+  }: IUpdateStatusCartDTO): Promise<Cart> {
     const cart = await this.cartRepository.findById(cart_id);
 
     if (!cart) {

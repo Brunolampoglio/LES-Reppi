@@ -6,7 +6,9 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
+import { Invoice } from '@modules/Invoice/entities/Invoice';
 import { User } from '../../User/entities/User';
 
 @Entity('address')
@@ -56,6 +58,12 @@ class Address {
   })
   @JoinColumn({ name: 'user_id' })
   user: User;
+
+  @OneToMany(() => Invoice, invoice => invoice.address, {
+    cascade: true,
+    eager: true,
+  })
+  invoice: Invoice[];
 
   @CreateDateColumn()
   created_at: Date;

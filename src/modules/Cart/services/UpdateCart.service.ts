@@ -14,7 +14,7 @@ class UpdateCartService {
 
     @inject('ProductRepository')
     private productRepository: IProductRepository,
-  ) { }
+  ) {}
 
   public async execute({
     cart_id,

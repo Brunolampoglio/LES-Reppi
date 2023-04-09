@@ -11,9 +11,10 @@ class CreateCartService {
   constructor(
     @inject('CartRepository')
     private cartRepository: ICartRepository,
+
     @inject('ProductRepository')
     private productRepository: IProductRepository,
-  ) { }
+  ) {}
 
   public async execute({ product_id, user_id }: ICreateCartDTO): Promise<Cart> {
     const product = await this.productRepository.findById(product_id);
