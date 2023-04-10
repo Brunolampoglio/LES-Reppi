@@ -37,6 +37,7 @@ class InvoiceRepository implements IInvoiceRepository {
   index(id: string): Promise<Invoice[]> {
     return this.ormRepository.find({
       where: { user_id: id },
+      relations: ['user', 'address', 'cart'],
     });
   }
 
