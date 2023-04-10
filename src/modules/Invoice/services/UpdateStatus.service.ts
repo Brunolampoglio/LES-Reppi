@@ -7,9 +7,9 @@ import { IUpdateStatusInvoiceDTO } from './dto/UpdateStatusDTO';
 @injectable()
 class UpdateInvoiceStatusService {
   constructor(
-    @inject('InvoicesRepository')
+    @inject('InvoiceRepository')
     private invoicesRepository: IInvoiceRepository,
-  ) {}
+  ) { }
 
   public async execute({
     invoice_id,

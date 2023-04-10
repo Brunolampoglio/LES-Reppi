@@ -6,9 +6,9 @@ import { IIndexInvoiceDTO } from './dto/IndexInvoiceDTO';
 @injectable()
 class IndexInvoiceService {
   constructor(
-    @inject('InvoicesRepository')
+    @inject('InvoiceRepository')
     private invoicesRepository: IInvoiceRepository,
-  ) {}
+  ) { }
 
   public async execute({ user_id }: IIndexInvoiceDTO): Promise<Invoice[]> {
     const invoices = await this.invoicesRepository.index(user_id);

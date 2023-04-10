@@ -6,7 +6,6 @@ export const createInvoiceMiddleware = celebrate({
     cart_id: Joi.string().required(),
     discount: Joi.number().required(),
     freight: Joi.number().required(),
-    status: Joi.string().required(),
   },
 });
 
@@ -22,11 +21,5 @@ export const updateInvoiceMiddleware = celebrate({
 export const showInvoiceMiddleware = celebrate({
   [Segments.PARAMS]: {
     invoice_id: Joi.string().required(),
-  },
-});
-
-export const indexInvoiceMiddleware = celebrate({
-  [Segments.PARAMS]: {
-    id: Joi.string().required(),
   },
 });

@@ -8,12 +8,12 @@ import { IInvoiceRepository } from '../repositories/InvoiceRepository.interface'
 @injectable()
 class CreateInvoiceService {
   constructor(
-    @inject('InvoicesRepository')
+    @inject('InvoiceRepository')
     private invoicesRepository: IInvoiceRepository,
 
     @inject('CartRepository')
     private cartRepository: ICartRepository,
-  ) {}
+  ) { }
 
   public async execute({
     address_id,
@@ -40,6 +40,8 @@ class CreateInvoiceService {
       total: cart.total,
       user_id,
     });
+
+    await this.invoicesRepository.save(invoice);
 
     return invoice;
   }
