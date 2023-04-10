@@ -2,33 +2,27 @@ import { AppError } from '@shared/error/AppError';
 import { injectable, inject } from 'tsyringe';
 import { Coupon } from '../entities/Coupon';
 import { ICouponRepository } from '../repositories/CouponRepository.interface';
-import { IUpdateCouponDTO } from './dto/UpdateCouponDTO';
+import { IUpdateStatusCouponDTO } from './dto/UpdateCouponDTO';
 
 @injectable()
-class UpdateCouponService {
+class UpdateStatusCouponService {
   constructor(
     @inject('CouponRepository')
     private couponRepository: ICouponRepository,
-  ) {}
+  ) { }
 
   public async execute({
     active,
     coupon_id,
-    description,
-    name,
-    value,
-  }: IUpdateCouponDTO): Promise<Coupon> {
+  }: IUpdateStatusCouponDTO): Promise<Coupon> {
     const coupon = await this.couponRepository.findById(coupon_id);
 
     if (!coupon) {
-      throw new AppError('Cupon não encontrado!', 404);
+      throw new AppError('Cupom não encontrado!', 404);
     }
 
     Object.assign(coupon, {
       active,
-      description,
-      name,
-      value,
     });
 
     await this.couponRepository.save(coupon);
@@ -36,4 +30,4 @@ class UpdateCouponService {
     return coupon;
   }
 }
-export { UpdateCouponService };
+export { UpdateStatusCouponService };

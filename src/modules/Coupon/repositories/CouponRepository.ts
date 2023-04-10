@@ -2,7 +2,7 @@ import { Repository, getRepository } from 'typeorm';
 import { Coupon } from '../entities/Coupon';
 import { ICouponRepository } from './CouponRepository.interface';
 
-import { ICreateCuponDTO } from './dto/CouponRepositoryDTO';
+import { ICreateCouponDTO } from './dto/CouponRepositoryDTO';
 
 class CouponRepository implements ICouponRepository {
   private ormRepository: Repository<Coupon>;
@@ -31,7 +31,7 @@ class CouponRepository implements ICouponRepository {
     return coupon;
   }
 
-  create({ name, description, value, active }: ICreateCuponDTO): Coupon {
+  create({ name, description, value, active }: ICreateCouponDTO): Coupon {
     const coupon = this.ormRepository.create({
       name,
       description,

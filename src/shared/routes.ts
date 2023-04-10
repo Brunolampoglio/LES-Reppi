@@ -4,7 +4,7 @@ import { addressRouter } from '@modules/Address/routes/address.routes';
 import { flagRouter } from '@modules/Flag/routes/flag.routes';
 import { productRouter } from '@modules/Product/routes/product.routes';
 import { cardRouter } from '@modules/Cards/routes/card.routes';
-import { couponRouter } from '@modules/Cupon/routes/coupon';
+import { couponRouter } from '@modules/Coupon/routes/coupon';
 import { cartRouter } from '@modules/Cart/routes/cart';
 import { invoiceRouter } from '@modules/Invoice/routes/invoice.routes';
 

@@ -1,4 +1,4 @@
-export interface ICreateCuponDTO {
+export interface ICreateCouponDTO {
   name: string;
   description: string;
   value: number;

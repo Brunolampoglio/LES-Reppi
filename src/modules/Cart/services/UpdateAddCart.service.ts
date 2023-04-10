@@ -7,20 +7,16 @@ import { IUpdateCartDTO } from './dto/UpdateCartDTO';
 import { CartProducts } from '../entities/CartProduct';
 
 @injectable()
-class UpdateCartService {
+class UpdateAddCartService {
   constructor(
     @inject('CartRepository')
     private cartRepository: ICartRepository,
 
     @inject('ProductRepository')
     private productRepository: IProductRepository,
-  ) {}
+  ) { }
 
-  public async execute({
-    cart_id,
-    product_id,
-    is_subtract = false,
-  }: IUpdateCartDTO): Promise<Cart> {
+  public async execute({ cart_id, product_id }: IUpdateCartDTO): Promise<Cart> {
     const cart = await this.cartRepository.findById(cart_id);
 
     if (!cart) {
@@ -32,17 +28,11 @@ class UpdateCartService {
     const hasProduct = cart.products.find(
       prod => prod.product_id === product_id,
     );
+
     if (hasProduct) {
       cart.products = cart.products.map(prod => {
         if (prod.product_id === product_id) {
-          if (is_subtract) {
-            if (prod.quantity === 1) {
-              throw new AppError('Quantidade mínima atingida!', 400);
-            }
-            prod.quantity -= 1;
-          } else {
-            prod.quantity += 1;
-          }
+          prod.quantity += 1;
         }
         return prod;
       });
@@ -78,4 +68,4 @@ class UpdateCartService {
     return cart;
   }
 }
-export { UpdateCartService };
+export { UpdateAddCartService };

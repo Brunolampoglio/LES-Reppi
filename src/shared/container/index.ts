@@ -10,8 +10,8 @@ import { IFlagRepository } from '@modules/Flag/repositories/FlagRepository.inter
 import { FlagRepository } from '@modules/Flag/repositories/FlagRepository';
 import { ICardRepository } from '@modules/Cards/repositories/CardRepositories.interface';
 import { CardRepository } from '@modules/Cards/repositories/CardRepository';
-import { CouponRepository } from '@modules/Cupon/repositories/CouponRepository';
-import { ICouponRepository } from '@modules/Cupon/repositories/CouponRepository.interface';
+import { CouponRepository } from '@modules/Coupon/repositories/CouponRepository';
+import { ICouponRepository } from '@modules/Coupon/repositories/CouponRepository.interface';
 import { ICartRepository } from '@modules/Cart/repositories/CartRepository.interface';
 import { CartRepository } from '@modules/Cart/repositories/CartRepository';
 import { InvoiceRepository } from '@modules/Invoice/repositories/InvoiceRepository';

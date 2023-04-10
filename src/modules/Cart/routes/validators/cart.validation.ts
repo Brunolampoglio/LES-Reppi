@@ -24,9 +24,3 @@ export const removeItemCartMiddleware = celebrate({
     cart_id: Joi.string().uuid().required(),
   },
 });
-
-export const deleteCartMiddleware = celebrate({
-  [Segments.PARAMS]: {
-    cart_id: Joi.string().uuid().required(),
-  },
-});

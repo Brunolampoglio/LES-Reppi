@@ -8,13 +8,13 @@ class DeleteCouponService {
   constructor(
     @inject('CouponRepository')
     private couponRepository: ICouponRepository,
-  ) {}
+  ) { }
 
   public async execute({ coupon_id }: IDeleteCouponDTO): Promise<void> {
     const coupon = await this.couponRepository.findById(coupon_id);
 
     if (!coupon) {
-      throw new AppError('Cupon não encontrado!', 404);
+      throw new AppError('Cupom não encontrado!', 404);
     }
 
     await this.couponRepository.remove(coupon);
