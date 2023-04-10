@@ -40,6 +40,10 @@ class InvoiceRepository implements IInvoiceRepository {
     });
   }
 
+  indexAll(): Promise<Invoice[]> {
+    return this.ormRepository.find();
+  }
+
   async save(invoice: Invoice): Promise<Invoice> {
     const newInvoice = await this.ormRepository.save(invoice);
 

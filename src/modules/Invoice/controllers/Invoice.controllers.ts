@@ -4,6 +4,7 @@ import { CreateInvoiceService } from '../services/CreateInvoice.service';
 import { IndexInvoiceService } from '../services/IndexInvoice.service';
 import { ShowInvoiceService } from '../services/ShowInvoice.service';
 import { UpdateInvoiceStatusService } from '../services/UpdateStatus.service';
+import { IndexAllInvoiceService } from '../services/indexAllInvoice.service';
 
 class InvoiceController {
   async create(req: Request, res: Response): Promise<Response> {
@@ -30,6 +31,14 @@ class InvoiceController {
     const invoice = await indexInvoiceService.execute({
       user_id,
     });
+
+    return res.json(invoice);
+  }
+
+  async indexAll(req: Request, res: Response): Promise<Response> {
+    const indexInvoiceService = container.resolve(IndexAllInvoiceService);
+
+    const invoice = await indexInvoiceService.execute();
 
     return res.json(invoice);
   }
