@@ -6,6 +6,7 @@ import { productRouter } from '@modules/Product/routes/product.routes';
 import { cardRouter } from '@modules/Cards/routes/card.routes';
 import { couponRouter } from '@modules/Cupon/routes/coupon';
 import { cartRouter } from '@modules/Cart/routes/cart';
+import { invoiceRouter } from '@modules/Invoice/routes/invoice.routes';
 
 const router = Router();
 
@@ -16,6 +17,7 @@ router.use('/product', productRouter);
 router.use('/card', cardRouter);
 router.use('/coupon', couponRouter);
 router.use('/cart', cartRouter);
+router.use('/invoice', invoiceRouter);
 
 router.get('/', (request: Request, response: Response) =>
   response.send('Reppi - 0.0.1'),

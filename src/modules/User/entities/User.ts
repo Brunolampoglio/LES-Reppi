@@ -1,4 +1,5 @@
 import { Card } from '@modules/Cards/entities/Card';
+import { Invoice } from '@modules/Invoice/entities/Invoice';
 import { Exclude } from 'class-transformer';
 import {
   Column,
@@ -57,6 +58,12 @@ class User {
     eager: true,
   })
   cards: Card[];
+
+  @OneToMany(() => Invoice, invoice => invoice.user, {
+    cascade: true,
+    eager: true,
+  })
+  invoice: Invoice[];
 
   @CreateDateColumn()
   created_at: Date;

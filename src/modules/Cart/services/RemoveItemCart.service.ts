@@ -9,7 +9,7 @@ class RemoveItemCartService {
   constructor(
     @inject('CartRepository')
     private cartRepository: ICartRepository,
-  ) { }
+  ) {}
 
   public async execute({
     cart_id,

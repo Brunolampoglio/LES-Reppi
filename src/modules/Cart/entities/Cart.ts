@@ -1,3 +1,4 @@
+import { Invoice } from '@modules/Invoice/entities/Invoice';
 import {
   PrimaryGeneratedColumn,
   Column,
@@ -21,6 +22,12 @@ export class Cart {
     eager: true,
   })
   products: CartProducts[];
+
+  @OneToMany(() => Invoice, invoice => invoice.cart, {
+    cascade: true,
+    eager: true,
+  })
+  invoice: Invoice[];
 
   @Column()
   total: number;

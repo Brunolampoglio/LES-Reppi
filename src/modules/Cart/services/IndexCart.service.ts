@@ -8,7 +8,7 @@ class IndexCartService {
   constructor(
     @inject('CartRepository')
     private cartRepository: ICartRepository,
-  ) { }
+  ) {}
 
   public async execute(user_id: string): Promise<Cart> {
     const cart = await this.cartRepository.findByUser(user_id);
