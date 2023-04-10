@@ -15,6 +15,8 @@ invoiceRouter.use(verifyToken);
 
 invoiceRouter.post('/', createInvoiceMiddleware, invoiceController.create);
 
+invoiceRouter.get('/all', invoiceController.indexAll);
+
 invoiceRouter.get('/:id', showInvoiceMiddleware, invoiceController.show);
 
 invoiceRouter.get('/', invoiceController.index);

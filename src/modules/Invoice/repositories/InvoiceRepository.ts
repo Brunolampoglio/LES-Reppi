@@ -37,7 +37,12 @@ class InvoiceRepository implements IInvoiceRepository {
   index(id: string): Promise<Invoice[]> {
     return this.ormRepository.find({
       where: { user_id: id },
+      relations: ['user', 'address', 'cart'],
     });
+  }
+
+  indexAll(): Promise<Invoice[]> {
+    return this.ormRepository.find();
   }
 
   async save(invoice: Invoice): Promise<Invoice> {
