@@ -47,6 +47,10 @@ class CartRepository implements ICartRepository {
   async remove(cart: Cart): Promise<void> {
     await this.ormRepository.remove(cart);
   }
+
+  async delete(cart_id: string): Promise<void> {
+    await this.ormRepository.delete(cart_id);
+  }
 }
 
 export { CartRepository };

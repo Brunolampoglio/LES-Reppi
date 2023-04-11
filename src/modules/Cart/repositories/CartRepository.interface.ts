@@ -8,4 +8,5 @@ export interface ICartRepository {
   create(cart: ICreateCartDTO): Cart;
   save(cart: Cart): Promise<Cart>;
   remove(cart: Cart): Promise<void>;
+  delete(cart_id: string): Promise<void>;
 }

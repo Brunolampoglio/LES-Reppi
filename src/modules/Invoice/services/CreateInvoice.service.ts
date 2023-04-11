@@ -13,7 +13,7 @@ class CreateInvoiceService {
 
     @inject('CartRepository')
     private cartRepository: ICartRepository,
-  ) {}
+  ) { }
 
   public async execute({
     address_id,
@@ -46,6 +46,8 @@ class CreateInvoiceService {
     });
 
     await this.invoicesRepository.save(invoice);
+
+    // await this.cartRepository.delete(cart_id);
 
     return invoice;
   }
