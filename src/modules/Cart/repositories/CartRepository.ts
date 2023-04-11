@@ -12,7 +12,10 @@ class CartRepository implements ICartRepository {
   }
 
   async findById(id: string): Promise<Cart | undefined> {
-    const cart = await this.ormRepository.findOne(id);
+    const cart = await this.ormRepository.findOne({
+      where: { id },
+      relations: ['products'],
+    });
 
     return cart;
   }

@@ -13,7 +13,7 @@ class CreateInvoiceService {
 
     @inject('CartRepository')
     private cartRepository: ICartRepository,
-  ) { }
+  ) {}
 
   public async execute({
     address_id,
@@ -28,6 +28,10 @@ class CreateInvoiceService {
       throw new AppError('Carrinho não encontrado!', 404);
     }
 
+    const totalProducts = cart.products.reduce((total, product) => {
+      return total + product.value * product.quantity;
+    }, 0);
+
     const token = Math.floor(Math.random() * 9000 + 1000);
 
     const invoice = this.invoicesRepository.create({
@@ -37,7 +41,7 @@ class CreateInvoiceService {
       freight,
       order_number: token.toString(),
       status: 'Em análise',
-      total: cart.total,
+      total: totalProducts + freight - discount,
       user_id,
     });
 

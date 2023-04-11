@@ -42,7 +42,9 @@ class InvoiceRepository implements IInvoiceRepository {
   }
 
   indexAll(): Promise<Invoice[]> {
-    return this.ormRepository.find();
+    return this.ormRepository.find({
+      relations: ['user', 'address', 'cart'],
+    });
   }
 
   async save(invoice: Invoice): Promise<Invoice> {
