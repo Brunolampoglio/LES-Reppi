@@ -35,10 +35,12 @@ class InvoiceRepository implements IInvoiceRepository {
   }
 
   index(id: string): Promise<Invoice[]> {
-    return this.ormRepository.find({
-      where: { user_id: id },
-      relations: ['user', 'address', 'cart'],
-    });
+    return this.ormRepository
+      .createQueryBuilder('invoice')
+      .leftJoinAndSelect('invoice.cart', 'cart')
+      .leftJoinAndSelect('cart.products', 'products')
+      .where('invoice.user_id = :id', { id })
+      .getMany();
   }
 
   indexAll(): Promise<Invoice[]> {
