@@ -1,5 +1,5 @@
 import { Address } from '@modules/Address/entities/Address';
-import { Cart } from '@modules/Cart/entities/Cart';
+import { InvoiceProduct } from '@modules/Invoice/entities/InvoiceProduct';
 import { User } from '@modules/User/entities/User';
 import {
   Column,
@@ -7,6 +7,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -29,12 +30,11 @@ class Invoice {
   @Column()
   cart_id: string;
 
-  @ManyToOne(() => Cart, cart => cart.invoice, {
-    orphanedRowAction: 'delete',
-    onDelete: 'CASCADE',
+  @OneToMany(() => InvoiceProduct, invoice => invoice.products, {
+    cascade: true,
+    eager: true,
   })
-  @JoinColumn({ name: 'cart_id' })
-  cart: Cart;
+  products: InvoiceProduct[];
 
   @Column()
   order_number: string;
@@ -54,10 +54,7 @@ class Invoice {
   @Column()
   address_id: string;
 
-  @ManyToOne(() => Address, address => address.invoice, {
-    orphanedRowAction: 'delete',
-    onDelete: 'CASCADE',
-  })
+  @ManyToOne(() => Address, address => address.invoice)
   @JoinColumn({ name: 'address_id' })
   address: Address;
 
@@ -66,6 +63,8 @@ class Invoice {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  invoice: InvoiceProduct;
 }
 
 export { Invoice };
