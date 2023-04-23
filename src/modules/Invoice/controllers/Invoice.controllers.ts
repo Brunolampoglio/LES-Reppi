@@ -8,7 +8,7 @@ import { IndexAllInvoiceService } from '../services/indexAllInvoice.service';
 
 class InvoiceController {
   async create(req: Request, res: Response): Promise<Response> {
-    const { address_id, cart_id, discount, freight } = req.body;
+    const { address_id, cart_id, freight, card_ids, coupon_ids } = req.body;
     const user_id = req.user.id;
 
     const createInvoiceService = container.resolve(CreateInvoiceService);
@@ -16,9 +16,10 @@ class InvoiceController {
     const invoice = await createInvoiceService.execute({
       address_id,
       cart_id,
-      discount,
       freight,
       user_id,
+      card_ids,
+      coupon_ids,
     });
     return res.status(201).json(invoice);
   }

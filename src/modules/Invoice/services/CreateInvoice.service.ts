@@ -24,15 +24,15 @@ class CreateInvoiceService {
 
     @inject('CouponRepository')
     private couponRepository: ICouponRepository,
-  ) {}
+  ) { }
 
   public async execute({
     address_id,
     cart_id,
-    discount_coupons,
+    coupon_ids,
     freight,
     user_id,
-    cards,
+    card_ids,
   }: ICreateInvoiceDTO): Promise<Invoice> {
     const cart = await this.cartRepository.findById(cart_id);
 
@@ -61,19 +61,21 @@ class CreateInvoiceService {
       user_id,
     });
 
-    discount_coupons.forEach(async coupon => {
-      const coupondisc = await this.couponRepository.findById(coupon);
+    // const invoiceWithId = await this.invoicesRepository.save(invoice);
 
-      if (!coupondisc) {
+    coupon_ids.forEach(async coupon => {
+      const couponDisc = await this.couponRepository.findById(coupon);
+
+      if (!couponDisc) {
         throw new AppError('Cupom não encontrado!', 404);
       }
 
-      discountCoupons += coupondisc.value;
+      discountCoupons += couponDisc.value;
 
       const couponFormatted = {
-        name: coupondisc.name,
-        description: coupondisc.description,
-        value: coupondisc.value,
+        name: couponDisc.name,
+        description: couponDisc.description,
+        value: couponDisc.value,
       };
 
       Object.assign(couponsInstance, {
@@ -91,7 +93,7 @@ class CreateInvoiceService {
         value: product.value,
         quantity: 1,
         image_url: product.image_url,
-        exchange_status: 'EM PROCESSAMENTO',
+        exchange_status: 'Em processamento',
         product_id: product.product_id,
       };
 
@@ -103,7 +105,7 @@ class CreateInvoiceService {
       invoice.products = [productInstance];
     });
 
-    cards.forEach(async card => {
+    card_ids.forEach(async card => {
       const cardFormatted = await this.cardRepository.show(card);
 
       if (!cardFormatted) {

@@ -4,7 +4,8 @@ export const createInvoiceMiddleware = celebrate({
   [Segments.BODY]: {
     address_id: Joi.string().required(),
     cart_id: Joi.string().required(),
-    discount: Joi.number().required(),
+    coupon_ids: Joi.array().items(Joi.string()),
+    card_ids: Joi.array().items(Joi.string()),
     freight: Joi.number().required(),
   },
 });
