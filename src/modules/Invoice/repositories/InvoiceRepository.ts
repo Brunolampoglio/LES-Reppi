@@ -12,7 +12,6 @@ class InvoiceRepository implements IInvoiceRepository {
 
   create({
     address_id,
-    cart_id,
     discount,
     freight,
     order_number,
@@ -22,7 +21,6 @@ class InvoiceRepository implements IInvoiceRepository {
   }: ICreateInvoiceRepositoryDTO): Invoice {
     const invoice = this.ormRepository.create({
       address_id,
-      cart_id,
       discount,
       freight,
       order_number,
@@ -37,8 +35,7 @@ class InvoiceRepository implements IInvoiceRepository {
   index(id: string): Promise<Invoice[]> {
     return this.ormRepository
       .createQueryBuilder('invoice')
-      .leftJoinAndSelect('invoice.cart', 'cart')
-      .leftJoinAndSelect('cart.products', 'products')
+      .leftJoinAndSelect('invoice.products', 'products')
       .where('invoice.user_id = :id', { id })
       .getMany();
   }

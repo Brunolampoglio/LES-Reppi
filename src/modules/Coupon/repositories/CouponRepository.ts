@@ -31,12 +31,19 @@ class CouponRepository implements ICouponRepository {
     return coupon;
   }
 
-  create({ name, description, value, active }: ICreateCouponDTO): Coupon {
+  create({
+    name,
+    description,
+    value,
+    active,
+    quantity,
+  }: ICreateCouponDTO): Coupon {
     const coupon = this.ormRepository.create({
       name,
       description,
       value,
       active,
+      quantity,
     });
 
     return coupon;

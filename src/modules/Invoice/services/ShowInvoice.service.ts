@@ -9,7 +9,7 @@ class ShowInvoiceService {
   constructor(
     @inject('InvoiceRepository')
     private invoicesRepository: IInvoiceRepository,
-  ) { }
+  ) {}
 
   public async execute({ invoice_id }: IShowInvoiceDTO): Promise<Invoice> {
     const invoice = await this.invoicesRepository.findById(invoice_id);

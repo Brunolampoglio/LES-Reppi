@@ -1,46 +1,37 @@
 import {
+  PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
   UpdateDateColumn,
+  ManyToOne,
   JoinColumn,
 } from 'typeorm';
+import { Entity } from 'typeorm/decorator/entity/Entity';
 import { Invoice } from './Invoice';
 
-@Entity('invoiceProducts')
-class InvoiceProduct {
+@Entity('discount_cupons')
+export class DiscountCoupons {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  title: string;
-
-  @Column({ nullable: true })
-  product_id: string;
+  name: string;
 
   @Column()
-  author: string;
-
-  @Column()
-  image_url: string;
+  description: string;
 
   @Column()
   value: number;
 
   @Column()
-  exchange_status: string;
-
-  @Column()
   invoice_id: string;
 
-  @ManyToOne(() => Invoice, invoice => invoice.products, {
+  @ManyToOne(() => Invoice, invoice => invoice.coupons, {
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'invoice_id' })
-  products: Invoice;
+  invoice: Invoice;
 
   @CreateDateColumn()
   created_at: Date;
@@ -48,5 +39,3 @@ class InvoiceProduct {
   @UpdateDateColumn()
   updated_at: Date;
 }
-
-export { InvoiceProduct };

@@ -9,7 +9,7 @@ class UpdateInvoiceStatusService {
   constructor(
     @inject('InvoiceRepository')
     private invoicesRepository: IInvoiceRepository,
-  ) { }
+  ) {}
 
   public async execute({
     invoice_id,

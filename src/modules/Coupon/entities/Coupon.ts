@@ -23,6 +23,9 @@ export class Coupon {
   @Column()
   active: boolean;
 
+  @Column({ nullable: true })
+  quantity: number;
+
   @CreateDateColumn()
   created_at: Date;
 

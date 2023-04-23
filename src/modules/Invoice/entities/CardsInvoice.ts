@@ -9,38 +9,38 @@ import {
 } from 'typeorm';
 import { Invoice } from './Invoice';
 
-@Entity('invoiceProducts')
-class InvoiceProduct {
+@Entity('cardProducts')
+export class Cards {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  title: string;
-
-  @Column({ nullable: true })
-  product_id: string;
+  last_digits: string;
 
   @Column()
-  author: string;
+  first_digits: string;
 
   @Column()
-  image_url: string;
+  brand: string;
 
   @Column()
-  value: number;
+  holder_name: string;
 
   @Column()
-  exchange_status: string;
+  expiration_month: number;
+
+  @Column()
+  expiration_year: number;
 
   @Column()
   invoice_id: string;
 
-  @ManyToOne(() => Invoice, invoice => invoice.products, {
+  @ManyToOne(() => Invoice, invoice => invoice.cards, {
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'invoice_id' })
-  products: Invoice;
+  invoice: Invoice;
 
   @CreateDateColumn()
   created_at: Date;
@@ -48,5 +48,3 @@ class InvoiceProduct {
   @UpdateDateColumn()
   updated_at: Date;
 }
-
-export { InvoiceProduct };

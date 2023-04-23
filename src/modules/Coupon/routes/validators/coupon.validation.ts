@@ -5,6 +5,7 @@ export const createCouponMiddleware = celebrate({
     name: Joi.string().required(),
     description: Joi.string().required(),
     value: Joi.number().required(),
+    quantity: Joi.number().required(),
   },
 });
 

@@ -3,4 +3,5 @@ export interface ICreateCouponDTO {
   description: string;
   value: number;
   active: boolean;
+  quantity: number;
 }

@@ -12,7 +12,6 @@ class IndexInvoiceService {
 
   public async execute({ user_id }: IIndexInvoiceDTO): Promise<Invoice[]> {
     const invoices = await this.invoicesRepository.index(user_id);
-
     return invoices;
   }
 }

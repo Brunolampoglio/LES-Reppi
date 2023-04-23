@@ -11,6 +11,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Cards } from './CardsInvoice';
+import { DiscountCoupons } from './DiscountCoupons';
 
 @Entity('invoices')
 class Invoice {
@@ -32,6 +34,18 @@ class Invoice {
     eager: true,
   })
   products: InvoiceProduct[];
+
+  @OneToMany(() => Cards, cards => cards.invoice, {
+    cascade: true,
+    eager: true,
+  })
+  cards: Cards[];
+
+  @OneToMany(() => DiscountCoupons, coupons => coupons.invoice, {
+    cascade: true,
+    eager: true,
+  })
+  coupons: DiscountCoupons[];
 
   @Column()
   order_number: string;
@@ -60,8 +74,6 @@ class Invoice {
 
   @UpdateDateColumn()
   updated_at: Date;
-
-  invoice: InvoiceProduct;
 }
 
 export { Invoice };
