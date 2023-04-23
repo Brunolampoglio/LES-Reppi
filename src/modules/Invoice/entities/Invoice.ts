@@ -27,9 +27,6 @@ class Invoice {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
-  @Column()
-  cart_id: string;
-
   @OneToMany(() => InvoiceProduct, invoice => invoice.products, {
     cascade: true,
     eager: true,
