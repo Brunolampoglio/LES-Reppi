@@ -5,6 +5,7 @@ import { IndexInvoiceService } from '../services/IndexInvoice.service';
 import { ShowInvoiceService } from '../services/ShowInvoice.service';
 import { UpdateInvoiceStatusService } from '../services/UpdateStatus.service';
 import { IndexAllInvoiceService } from '../services/indexAllInvoice.service';
+import { RequestExchangeService } from '../services/RequestExchange.service';
 
 class InvoiceController {
   async create(req: Request, res: Response): Promise<Response> {
@@ -22,6 +23,17 @@ class InvoiceController {
       coupon_ids,
     });
     return res.status(201).json(invoice);
+  }
+
+  async requestExchange(req: Request, res: Response): Promise<Response> {
+    const { product_id } = req.params;
+    const { reason } = req.body;
+
+    const requestExchangeService = container.resolve(RequestExchangeService);
+
+    const invoice = await requestExchangeService.execute(product_id, reason);
+
+    return res.json(invoice);
   }
 
   async index(req: Request, res: Response): Promise<Response> {

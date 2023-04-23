@@ -19,6 +19,15 @@ export const updateInvoiceMiddleware = celebrate({
   },
 });
 
+export const requestExchangeMiddleware = celebrate({
+  [Segments.PARAMS]: {
+    product_id: Joi.string().required(),
+  },
+  [Segments.BODY]: {
+    reason: Joi.string().required(),
+  },
+});
+
 export const showInvoiceMiddleware = celebrate({
   [Segments.PARAMS]: {
     invoice_id: Joi.string().required(),

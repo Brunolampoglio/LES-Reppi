@@ -61,8 +61,6 @@ class CreateInvoiceService {
       user_id,
     });
 
-    // const invoiceWithId = await this.invoicesRepository.save(invoice);
-
     coupon_ids.forEach(async coupon => {
       const couponDisc = await this.couponRepository.findById(coupon);
 
@@ -130,6 +128,7 @@ class CreateInvoiceService {
     });
 
     invoice.discount = discountCoupons;
+    console.log(discountCoupons);
 
     invoice.total = totalProducts + freight - discountCoupons;
 

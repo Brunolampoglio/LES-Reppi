@@ -16,6 +16,8 @@ import { ICartRepository } from '@modules/Cart/repositories/CartRepository.inter
 import { CartRepository } from '@modules/Cart/repositories/CartRepository';
 import { InvoiceRepository } from '@modules/Invoice/repositories/InvoiceRepository';
 import { IInvoiceRepository } from '@modules/Invoice/repositories/InvoiceRepository.interface';
+import { IInvoiceProductRepository } from '@modules/Invoice/repositories/InvoiceProductRepository.interface';
+import { InvoiceProductRepository } from '@modules/Invoice/repositories/InvoiceProductRepository';
 
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 container.registerSingleton<IAddressRepository>(
@@ -42,4 +44,9 @@ container.registerSingleton<ICartRepository>('CartRepository', CartRepository);
 container.registerSingleton<IInvoiceRepository>(
   'InvoiceRepository',
   InvoiceRepository,
+);
+
+container.registerSingleton<IInvoiceProductRepository>(
+  'InvoiceProductRepository',
+  InvoiceProductRepository,
 );

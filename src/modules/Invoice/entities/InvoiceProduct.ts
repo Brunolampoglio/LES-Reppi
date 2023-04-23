@@ -32,6 +32,9 @@ class InvoiceProduct {
   @Column()
   exchange_status: string;
 
+  @Column({ nullable: true })
+  exchange_reason: string;
+
   @Column()
   invoice_id: string;
 
