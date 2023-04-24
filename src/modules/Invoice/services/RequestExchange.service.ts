@@ -8,7 +8,7 @@ class RequestExchangeService {
   constructor(
     @inject('InvoiceProductRepository')
     private invoiceProductRepository: IInvoiceProductRepository,
-  ) { }
+  ) {}
 
   public async execute(
     product_id: string,

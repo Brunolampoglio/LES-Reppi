@@ -118,8 +118,6 @@ class CreateInvoiceService {
 
     invoice.total -= invoice.discount;
 
-    console.log(invoice);
-
     await this.invoicesRepository.save(invoice);
 
     await this.cartRepository.delete(cart_id);

@@ -17,6 +17,25 @@ class InvoiceProductRepository implements IInvoiceProductRepository {
     return invoiceProduct;
   }
 
+  FindExchangeRequest(): Promise<InvoiceProduct[]> {
+    const products = this.ormRepository
+      .createQueryBuilder('invoiceProducts')
+      .leftJoinAndSelect('invoiceProducts.products', 'invoice')
+      .leftJoinAndSelect('invoice.user', 'user')
+      .where(
+        'invoiceProducts.exchange_status = :status OR invoiceProducts.exchange_status = :status2 OR invoiceProducts.exchange_status = :status3 OR invoiceProducts.exchange_status = :status4',
+        {
+          status: 'Troca Aprovada',
+          status2: 'Troca não Aprovada',
+          status3: 'Produto Recebido',
+          status4: 'Troca Finalizada',
+        },
+      )
+      .getMany();
+
+    return products;
+  }
+
   async save(invoiceProduct: InvoiceProduct): Promise<InvoiceProduct> {
     const newInvoiceProduct = await this.ormRepository.save(invoiceProduct);
 

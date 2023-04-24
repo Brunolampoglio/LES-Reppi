@@ -28,6 +28,15 @@ export const requestExchangeMiddleware = celebrate({
   },
 });
 
+export const requestExchangeStatusMiddleware = celebrate({
+  [Segments.PARAMS]: {
+    product_id: Joi.string().required(),
+  },
+  [Segments.BODY]: {
+    status: Joi.string().required(),
+  },
+});
+
 export const showInvoiceMiddleware = celebrate({
   [Segments.PARAMS]: {
     invoice_id: Joi.string().required(),

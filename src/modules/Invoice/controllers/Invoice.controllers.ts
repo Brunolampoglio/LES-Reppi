@@ -6,6 +6,8 @@ import { ShowInvoiceService } from '../services/ShowInvoice.service';
 import { UpdateInvoiceStatusService } from '../services/UpdateStatus.service';
 import { IndexAllInvoiceService } from '../services/indexAllInvoice.service';
 import { RequestExchangeService } from '../services/RequestExchange.service';
+import { FindRequestExchangeService } from '../services/FindRequestExchange.service';
+import { UpdateStatusExchangeService } from '../services/UpdateStatusExchange.service';
 
 class InvoiceController {
   async create(req: Request, res: Response): Promise<Response> {
@@ -32,6 +34,22 @@ class InvoiceController {
     const requestExchangeService = container.resolve(RequestExchangeService);
 
     const invoice = await requestExchangeService.execute(product_id, reason);
+
+    return res.json(invoice);
+  }
+
+  async requestExchangeStatus(req: Request, res: Response): Promise<Response> {
+    const { product_id } = req.params;
+    const { status } = req.body;
+
+    const updateStatusExchangeService = container.resolve(
+      UpdateStatusExchangeService,
+    );
+
+    const invoice = await updateStatusExchangeService.execute(
+      product_id,
+      status,
+    );
 
     return res.json(invoice);
   }
@@ -64,6 +82,14 @@ class InvoiceController {
     const invoice = await showInvoiceService.execute({
       invoice_id: id,
     });
+
+    return res.json(invoice);
+  }
+
+  async showExchangeRequest(req: Request, res: Response): Promise<Response> {
+    const showExchangeRequest = container.resolve(FindRequestExchangeService);
+
+    const invoice = await showExchangeRequest.execute();
 
     return res.json(invoice);
   }

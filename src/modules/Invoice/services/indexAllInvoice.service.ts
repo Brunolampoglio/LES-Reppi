@@ -1,3 +1,4 @@
+import { instanceToInstance } from 'class-transformer';
 import { inject, injectable } from 'tsyringe';
 import { Invoice } from '../entities/Invoice';
 import { IInvoiceRepository } from '../repositories/InvoiceRepository.interface';
@@ -12,7 +13,7 @@ class IndexAllInvoiceService {
   public async execute(): Promise<Invoice[]> {
     const invoices = await this.invoicesRepository.indexAll();
 
-    return invoices;
+    return instanceToInstance(invoices);
   }
 }
 export { IndexAllInvoiceService };

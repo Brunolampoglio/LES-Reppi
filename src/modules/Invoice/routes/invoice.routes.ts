@@ -4,6 +4,7 @@ import { InvoiceController } from '../controllers/Invoice.controllers';
 import {
   createInvoiceMiddleware,
   requestExchangeMiddleware,
+  requestExchangeStatusMiddleware,
   showInvoiceMiddleware,
   updateInvoiceMiddleware,
 } from './validators/invoice.validation';
@@ -13,6 +14,16 @@ const invoiceRouter = Router();
 const invoiceController = new InvoiceController();
 
 invoiceRouter.get('/all', invoiceController.indexAll);
+
+invoiceRouter.put('/:id', updateInvoiceMiddleware, invoiceController.update);
+
+invoiceRouter.get('/exchange-request', invoiceController.showExchangeRequest);
+
+invoiceRouter.patch(
+  '/exchange/:product_id',
+  requestExchangeStatusMiddleware,
+  invoiceController.requestExchangeStatus,
+);
 
 invoiceRouter.use(verifyToken);
 
@@ -27,7 +38,5 @@ invoiceRouter.patch(
 );
 
 invoiceRouter.get('/', invoiceController.index);
-
-invoiceRouter.put('/:id', updateInvoiceMiddleware, invoiceController.update);
 
 export { invoiceRouter };
