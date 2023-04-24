@@ -6,9 +6,6 @@ import { ICouponRepository } from '@modules/Coupon/repositories/CouponRepository
 import { ICreateInvoiceDTO } from './dto/CreateInvoiceDTO';
 import { Invoice } from '../entities/Invoice';
 import { IInvoiceRepository } from '../repositories/InvoiceRepository.interface';
-import { InvoiceProduct } from '../entities/InvoiceProduct';
-import { Cards } from '../entities/CardsInvoice';
-import { DiscountCoupons } from '../entities/DiscountCoupons';
 
 @injectable()
 class CreateInvoiceService {
@@ -24,7 +21,7 @@ class CreateInvoiceService {
 
     @inject('CouponRepository')
     private couponRepository: ICouponRepository,
-  ) { }
+  ) {}
 
   public async execute({
     address_id,
@@ -36,6 +33,10 @@ class CreateInvoiceService {
   }: ICreateInvoiceDTO): Promise<Invoice> {
     const cart = await this.cartRepository.findById(cart_id);
 
+    const cupom = await this.couponRepository.findByIds(coupon_ids);
+
+    const cards = await this.cardRepository.findByIds(card_ids);
+
     if (!cart) {
       throw new AppError('Carrinho não encontrado!', 404);
     }
@@ -44,9 +45,6 @@ class CreateInvoiceService {
       return total + product.value * product.quantity;
     }, 0);
 
-    const productInstance = new InvoiceProduct();
-    const cardsProductsInstance = new Cards();
-    const couponsInstance = new DiscountCoupons();
     const token = Math.floor(Math.random() * 9000 + 1000);
 
     let discountCoupons = 0;
@@ -61,30 +59,27 @@ class CreateInvoiceService {
       user_id,
     });
 
-    coupon_ids.forEach(async coupon => {
-      const couponDisc = await this.couponRepository.findById(coupon);
+    const invoiceWithId = await this.invoicesRepository.save(invoice);
 
-      if (!couponDisc) {
-        throw new AppError('Cupom não encontrado!', 404);
-      }
-
-      discountCoupons += couponDisc.value;
-
+    const cupomFormat = cupom.map(coupon => {
       const couponFormatted = {
-        name: couponDisc.name,
-        description: couponDisc.description,
-        value: couponDisc.value,
+        name: coupon.name,
+        description: coupon.description,
+        value: coupon.value,
+        active: coupon.active,
+        quantity: coupon.quantity,
       };
 
-      Object.assign(couponsInstance, {
-        ...couponFormatted,
-        invoice_id: invoice.id,
-      });
+      discountCoupons += couponFormatted.value;
+      invoice.discount = discountCoupons;
 
-      invoice.coupons = [couponsInstance];
+      return {
+        ...couponFormatted,
+        invoice_id: invoiceWithId.id,
+      };
     });
 
-    cart.products.forEach(product => {
+    const productsFormat = cart.products.map(product => {
       const productFormatted = {
         title: product.title,
         author: product.author,
@@ -95,42 +90,35 @@ class CreateInvoiceService {
         product_id: product.product_id,
       };
 
-      Object.assign(productInstance, {
+      return {
         ...productFormatted,
-        invoice_id: invoice.id,
-      });
-
-      invoice.products = [productInstance];
+        invoice_id: invoiceWithId.id,
+      };
     });
 
-    card_ids.forEach(async card => {
-      const cardFormatted = await this.cardRepository.show(card);
-
-      if (!cardFormatted) {
-        throw new AppError('Cartão não encontrado!', 404);
-      }
-
-      const cardProduct = {
-        last_digits: cardFormatted.last_digits,
-        first_digits: cardFormatted.first_digits,
-        brand: cardFormatted.brand,
-        holder_name: cardFormatted.holder_name,
-        expiration_month: cardFormatted.expiration_month,
-        expiration_year: cardFormatted.expiration_year,
+    const cardsFormat = cards.map(card => {
+      const cardFormatted = {
+        last_digits: card.last_digits,
+        first_digits: card.first_digits,
+        brand: card.brand,
+        holder_name: card.holder_name,
+        expiration_month: card.expiration_month,
+        expiration_year: card.expiration_year,
       };
 
-      Object.assign(cardsProductsInstance, {
-        ...cardProduct,
-        invoice_id: invoice.id,
-      });
-
-      invoice.cards = [cardsProductsInstance];
+      return {
+        ...cardFormatted,
+        invoice_id: invoiceWithId.id,
+      };
     });
 
-    invoice.discount = discountCoupons;
-    console.log(discountCoupons);
+    invoice.cards = cardsFormat;
+    invoice.coupons = cupomFormat;
+    invoice.products = productsFormat;
 
-    invoice.total = totalProducts + freight - discountCoupons;
+    invoice.total -= invoice.discount;
+
+    console.log(invoice);
 
     await this.invoicesRepository.save(invoice);
 

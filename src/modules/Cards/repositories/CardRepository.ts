@@ -24,6 +24,12 @@ class CardRepository implements ICardRepository {
     return card;
   }
 
+  async findByIds(ids: string[]): Promise<Card[]> {
+    const cards = await this.ormRepository.findByIds(ids);
+
+    return cards;
+  }
+
   create({
     first_digits,
     last_digits,

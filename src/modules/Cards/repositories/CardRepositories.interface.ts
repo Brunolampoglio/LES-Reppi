@@ -7,5 +7,6 @@ interface ICardRepository {
   create(card: ICardCreate): Card;
   save(card: Card | Card[]): Promise<Card>;
   remove(card: Card): Promise<void>;
+  findByIds(ids: string[]): Promise<Card[]>;
 }
 export { ICardRepository };

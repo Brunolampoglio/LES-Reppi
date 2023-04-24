@@ -48,7 +48,6 @@ class InvoiceRepository implements IInvoiceRepository {
 
   async save(invoice: Invoice): Promise<Invoice> {
     const newInvoice = await this.ormRepository.save(invoice);
-
     return newInvoice;
   }
 

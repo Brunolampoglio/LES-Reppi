@@ -31,6 +31,12 @@ class CouponRepository implements ICouponRepository {
     return coupon;
   }
 
+  findByIds(ids: string[]): Promise<Coupon[]> {
+    const coupons = this.ormRepository.findByIds(ids);
+
+    return coupons;
+  }
+
   create({
     name,
     description,
