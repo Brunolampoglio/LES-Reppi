@@ -22,7 +22,7 @@ class RequestExchangeService {
       throw new AppError('Produto não encontrado!', 404);
     }
 
-    invoiceProduct.exchange_status = 'Troca solicitada';
+    invoiceProduct.exchange_status = 'Troca Solicitada';
     invoiceProduct.exchange_reason = reason;
 
     const newInvoiceProduct = await this.invoiceProductRepository.save(

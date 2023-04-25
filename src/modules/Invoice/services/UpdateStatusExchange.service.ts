@@ -33,7 +33,7 @@ class UpdateStatusExchangeService {
     if (status === 'Troca Finalizada') {
       const token = Math.floor(Math.random() * 9000 + 1000);
       const coupon = this.couponRepository.create({
-        name: `TRO-${token} - ${invoiceProduct.value}`,
+        name: `TRO-${token}-${invoiceProduct.value}`,
         description: `TROCA ${token}`,
         value: invoiceProduct.value,
         active: true,

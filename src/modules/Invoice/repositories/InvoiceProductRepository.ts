@@ -23,8 +23,9 @@ class InvoiceProductRepository implements IInvoiceProductRepository {
       .leftJoinAndSelect('invoiceProducts.products', 'invoice')
       .leftJoinAndSelect('invoice.user', 'user')
       .where(
-        'invoiceProducts.exchange_status = :status OR invoiceProducts.exchange_status = :status2 OR invoiceProducts.exchange_status = :status3 OR invoiceProducts.exchange_status = :status4',
+        'invoiceProducts.exchange_status = :status OR invoiceProducts.exchange_status = :status2 OR invoiceProducts.exchange_status = :status3 OR invoiceProducts.exchange_status = :status4 OR invoiceProducts.exchange_status = :status5',
         {
+          status5: 'Troca Solicitada',
           status: 'Troca Aprovada',
           status2: 'Troca não Aprovada',
           status3: 'Produto Recebido',
