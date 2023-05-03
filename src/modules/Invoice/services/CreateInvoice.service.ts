@@ -79,21 +79,44 @@ class CreateInvoiceService {
       };
     });
 
-    const productsFormat = cart.products.map(product => {
-      const productFormatted = {
-        title: product.title,
-        author: product.author,
-        value: product.value,
-        quantity: 1,
-        image_url: product.image_url,
-        exchange_status: 'Em processamento',
-        product_id: product.product_id,
-      };
+    const itens: {
+      title: string;
+      author: string;
+      value: number;
+      quantity: number;
+      image_url: string;
+      exchange_status: string;
+      product_id: string;
+      invoice_id: string;
+    }[] = [];
 
-      return {
-        ...productFormatted,
-        invoice_id: invoiceWithId.id,
-      };
+    cart.products.forEach(product => {
+      if (product.quantity > 1) {
+        for (let i = 0; i < product.quantity; i++) {
+          // ignora o erro pois de colocar i + 1, estoura memoria do node
+          itens.push({
+            title: product.title,
+            author: product.author,
+            value: product.value,
+            quantity: 1,
+            image_url: product.image_url,
+            exchange_status: 'Em processamento',
+            product_id: product.product_id,
+            invoice_id: invoiceWithId.id,
+          });
+        }
+      } else {
+        itens.push({
+          title: product.title,
+          author: product.author,
+          value: product.value,
+          quantity: 1,
+          image_url: product.image_url,
+          exchange_status: 'Em processamento',
+          product_id: product.product_id,
+          invoice_id: invoiceWithId.id,
+        });
+      }
     });
 
     const cardsFormat = cards.map(card => {
@@ -114,7 +137,7 @@ class CreateInvoiceService {
 
     invoice.cards = cardsFormat;
     invoice.coupons = cupomFormat;
-    invoice.products = productsFormat;
+    invoice.products = itens;
 
     invoice.total -= invoice.discount;
 
