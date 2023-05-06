@@ -5,7 +5,10 @@ export const createInvoiceMiddleware = celebrate({
     address_id: Joi.string().required(),
     cart_id: Joi.string().required(),
     coupon_ids: Joi.array().items(Joi.string()),
-    card_ids: Joi.array().items(Joi.string()),
+    card_ids: Joi.array().items({
+      card_id: Joi.string().required(),
+      value: Joi.number().required(),
+    }),
     freight: Joi.number().required(),
   },
 });

@@ -21,7 +21,7 @@ class CreateInvoiceService {
 
     @inject('CouponRepository')
     private couponRepository: ICouponRepository,
-  ) {}
+  ) { }
 
   public async execute({
     address_id,
@@ -33,13 +33,35 @@ class CreateInvoiceService {
   }: ICreateInvoiceDTO): Promise<Invoice> {
     const cart = await this.cartRepository.findById(cart_id);
 
-    const cupom = await this.couponRepository.findByIds(coupon_ids);
-
-    const cards = await this.cardRepository.findByIds(card_ids);
-
     if (!cart) {
       throw new AppError('Carrinho não encontrado!', 404);
     }
+
+    const cupom = await this.couponRepository.findByIds(coupon_ids);
+
+    if (card_ids.length > 1) {
+      card_ids.forEach(card => {
+        if (card.value < 10) {
+          throw new AppError(
+            'Valor mínimo de compra é R$10,00 em cada cartão',
+            400,
+          );
+        }
+      });
+      const cardsTotalValue = card_ids.reduce((total, card) => {
+        return total + card.value;
+      }, 0);
+      if (cardsTotalValue !== cart.total + freight) {
+        throw new AppError(
+          'Valor total dos cartões deve ser igual ao valor total do carrinho',
+          400,
+        );
+      }
+    }
+
+    const cards = await this.cardRepository.findByIds(
+      card_ids.map(card => card.card_id),
+    );
 
     const totalProducts = cart.products.reduce((total, product) => {
       return total + product.value * product.quantity;

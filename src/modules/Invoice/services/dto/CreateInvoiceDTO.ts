@@ -3,6 +3,9 @@ export interface ICreateInvoiceDTO {
   cart_id: string;
   freight: number;
   user_id: string;
-  card_ids: string[];
+  card_ids: {
+    card_id: string;
+    value: number;
+  }[];
   coupon_ids: string[];
 }
