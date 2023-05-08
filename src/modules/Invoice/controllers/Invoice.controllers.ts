@@ -8,6 +8,7 @@ import { IndexAllInvoiceService } from '../services/indexAllInvoice.service';
 import { RequestExchangeService } from '../services/RequestExchange.service';
 import { FindRequestExchangeService } from '../services/FindRequestExchange.service';
 import { UpdateStatusExchangeService } from '../services/UpdateStatusExchange.service';
+import { IndexAllInvoiceProductsService } from '../services/indexAllInvoiceProducts.service';
 
 class InvoiceController {
   async create(req: Request, res: Response): Promise<Response> {
@@ -68,6 +69,16 @@ class InvoiceController {
 
   async indexAll(req: Request, res: Response): Promise<Response> {
     const indexInvoiceService = container.resolve(IndexAllInvoiceService);
+
+    const invoice = await indexInvoiceService.execute();
+
+    return res.json(invoice);
+  }
+
+  async indexAllProducts(req: Request, res: Response): Promise<Response> {
+    const indexInvoiceService = container.resolve(
+      IndexAllInvoiceProductsService,
+    );
 
     const invoice = await indexInvoiceService.execute();
 

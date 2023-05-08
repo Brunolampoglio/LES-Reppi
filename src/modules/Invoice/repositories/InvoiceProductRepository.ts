@@ -37,6 +37,12 @@ class InvoiceProductRepository implements IInvoiceProductRepository {
     return products;
   }
 
+  async IndexAll(): Promise<InvoiceProduct[]> {
+    const products = await this.ormRepository.find();
+
+    return products;
+  }
+
   async save(invoiceProduct: InvoiceProduct): Promise<InvoiceProduct> {
     const newInvoiceProduct = await this.ormRepository.save(invoiceProduct);
 

@@ -15,6 +15,8 @@ const invoiceController = new InvoiceController();
 
 invoiceRouter.get('/all', invoiceController.indexAll);
 
+invoiceRouter.get('/all-products', invoiceController.indexAllProducts);
+
 invoiceRouter.put('/:id', updateInvoiceMiddleware, invoiceController.update);
 
 invoiceRouter.get('/exchange-request', invoiceController.showExchangeRequest);

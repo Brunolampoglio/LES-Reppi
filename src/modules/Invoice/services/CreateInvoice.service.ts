@@ -21,7 +21,7 @@ class CreateInvoiceService {
 
     @inject('CouponRepository')
     private couponRepository: ICouponRepository,
-  ) { }
+  ) {}
 
   public async execute({
     address_id,
