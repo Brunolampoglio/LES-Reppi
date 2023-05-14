@@ -70,6 +70,12 @@ class ProductRepository implements IProductRepository {
     return product;
   }
 
+  findByIds(ids: string[]): Promise<Product[]> {
+    const products = this.ormRepository.findByIds(ids);
+
+    return products;
+  }
+
   async delete(product: Product): Promise<void> {
     await this.ormRepository.delete(product.id);
   }

@@ -3,6 +3,7 @@ import { ICartRepository } from '@modules/Cart/repositories/CartRepository.inter
 import { AppError } from '@shared/error/AppError';
 import { ICardRepository } from '@modules/Cards/repositories/CardRepositories.interface';
 import { ICouponRepository } from '@modules/Coupon/repositories/CouponRepository.interface';
+import { IProductRepository } from '@modules/Product/repositories/ProductRepository.interface';
 import { ICreateInvoiceDTO } from './dto/CreateInvoiceDTO';
 import { Invoice } from '../entities/Invoice';
 import { IInvoiceRepository } from '../repositories/InvoiceRepository.interface';
@@ -21,7 +22,10 @@ class CreateInvoiceService {
 
     @inject('CouponRepository')
     private couponRepository: ICouponRepository,
-  ) {}
+
+    @inject('ProductRepository')
+    private productRepository: IProductRepository,
+  ) { }
 
   public async execute({
     address_id,
@@ -31,13 +35,41 @@ class CreateInvoiceService {
     user_id,
     card_ids,
   }: ICreateInvoiceDTO): Promise<Invoice> {
-    const cart = await this.cartRepository.findById(cart_id);
-
+    const [cart, cupom, cards] = await Promise.all([
+      this.cartRepository.findById(cart_id),
+      this.couponRepository.findByIds(coupon_ids),
+      this.cardRepository.findByIds(card_ids.map(card => card.card_id)),
+    ]);
     if (!cart) {
       throw new AppError('Carrinho não encontrado!', 404);
     }
+    const products = await this.productRepository.findByIds(
+      cart.products.map(product => product.product_id),
+    );
 
-    const cupom = await this.couponRepository.findByIds(coupon_ids);
+    products.forEach(product => {
+      const productInCart = cart.products.find(
+        item => item.product_id === product.id,
+      );
+      if (productInCart) {
+        if (productInCart.quantity > product.stock_units) {
+          throw new AppError(
+            `Quantidade de ${product.title} indisponível no estoque`,
+            400,
+          );
+        }
+      }
+    });
+
+    products.forEach(async product => {
+      const productInCart = cart.products.find(
+        item => item.product_id === product.id,
+      );
+      if (productInCart) {
+        product.stock_units -= productInCart.quantity;
+        await this.productRepository.save(product);
+      }
+    });
 
     if (card_ids.length > 1) {
       card_ids.forEach(card => {
@@ -58,10 +90,6 @@ class CreateInvoiceService {
         );
       }
     }
-
-    const cards = await this.cardRepository.findByIds(
-      card_ids.map(card => card.card_id),
-    );
 
     const totalProducts = cart.products.reduce((total, product) => {
       return total + product.value * product.quantity;
