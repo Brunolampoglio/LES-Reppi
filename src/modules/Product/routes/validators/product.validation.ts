@@ -37,6 +37,7 @@ export const updateProductMiddleware = celebrate({
     publishing_company: Joi.string().required(),
     edition: Joi.string().required(),
     dimensions: Joi.string().required(),
+    stock_units: Joi.number().required(),
     weight_in_grams: Joi.number().required(),
     synopsis: Joi.string().required(),
   },
