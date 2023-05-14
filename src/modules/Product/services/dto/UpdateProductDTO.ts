@@ -14,6 +14,7 @@ export interface IUpdateProductDTO {
   edition: string;
   dimensions: string;
   weight_in_grams: number;
+  stock_units: number;
   synopsis: string;
 }
 

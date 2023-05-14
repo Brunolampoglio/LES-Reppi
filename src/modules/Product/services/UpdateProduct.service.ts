@@ -29,6 +29,7 @@ class UpdateProductService {
     edition,
     dimensions,
     weight_in_grams,
+    stock_units,
     synopsis,
   }: IUpdateProductDTO): Promise<Product> {
     const product = await this.productRepository.findById(product_id);
@@ -50,6 +51,7 @@ class UpdateProductService {
       edition,
       dimensions,
       weight_in_grams,
+      stock_units,
       synopsis,
     });
 

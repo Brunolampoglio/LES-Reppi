@@ -88,6 +88,7 @@ class ProductController {
       edition,
       dimensions,
       weight_in_grams,
+      stock_units,
       synopsis,
     } = req.body;
 
@@ -111,6 +112,7 @@ class ProductController {
       edition,
       dimensions,
       weight_in_grams,
+      stock_units,
       synopsis,
     });
 
