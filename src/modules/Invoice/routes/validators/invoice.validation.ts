@@ -45,3 +45,10 @@ export const showInvoiceMiddleware = celebrate({
     invoice_id: Joi.string().required(),
   },
 });
+
+export const allProductsMiddleware = celebrate({
+  [Segments.PARAMS]: {
+    start_date: Joi.string(),
+    final_date: Joi.string(),
+  },
+});

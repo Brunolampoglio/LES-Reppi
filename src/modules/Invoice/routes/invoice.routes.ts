@@ -7,6 +7,7 @@ import {
   requestExchangeStatusMiddleware,
   showInvoiceMiddleware,
   updateInvoiceMiddleware,
+  allProductsMiddleware,
 } from './validators/invoice.validation';
 
 const invoiceRouter = Router();
@@ -15,7 +16,11 @@ const invoiceController = new InvoiceController();
 
 invoiceRouter.get('/all', invoiceController.indexAll);
 
-invoiceRouter.get('/all-products', invoiceController.indexAllProducts);
+invoiceRouter.get(
+  '/all-products',
+  allProductsMiddleware,
+  invoiceController.indexAllProducts,
+);
 
 invoiceRouter.put('/:id', updateInvoiceMiddleware, invoiceController.update);
 

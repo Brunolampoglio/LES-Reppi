@@ -76,11 +76,15 @@ class InvoiceController {
   }
 
   async indexAllProducts(req: Request, res: Response): Promise<Response> {
+    console.log(req.query, req.params);
     const indexInvoiceService = container.resolve(
       IndexAllInvoiceProductsService,
     );
 
-    const invoice = await indexInvoiceService.execute();
+    const invoice = await indexInvoiceService.execute({
+      start_date: req.query.start_date as string,
+      final_date: req.query.final_date as string,
+    });
 
     return res.json(invoice);
   }

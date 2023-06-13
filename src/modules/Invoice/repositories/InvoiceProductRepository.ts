@@ -1,6 +1,7 @@
 import { Repository, getRepository } from 'typeorm';
 import { InvoiceProduct } from '../entities/InvoiceProduct';
 import { IInvoiceProductRepository } from './InvoiceProductRepository.interface';
+import { IAllInvoicesRepositoryDTO } from './dto/AllInvoicesRepositoryDTO';
 
 class InvoiceProductRepository implements IInvoiceProductRepository {
   private ormRepository: Repository<InvoiceProduct>;
@@ -37,8 +38,22 @@ class InvoiceProductRepository implements IInvoiceProductRepository {
     return products;
   }
 
-  async IndexAll(): Promise<InvoiceProduct[]> {
-    const products = await this.ormRepository.find();
+  async IndexAll({
+    start_date,
+    final_date,
+  }: IAllInvoicesRepositoryDTO): Promise<InvoiceProduct[]> {
+    const query = this.ormRepository.createQueryBuilder('invoiceProducts');
+    if (final_date && start_date) {
+      query.andWhere(
+        'invoiceProducts.created_at BETWEEN :start_date AND :final_date',
+        {
+          start_date,
+          final_date,
+        },
+      );
+    }
+
+    const products = await query.getMany();
 
     return products;
   }
