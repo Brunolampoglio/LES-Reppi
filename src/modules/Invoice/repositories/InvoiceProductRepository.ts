@@ -41,6 +41,8 @@ class InvoiceProductRepository implements IInvoiceProductRepository {
   async IndexAll({
     start_date,
     final_date,
+    filter_by,
+    filter_value,
   }: IAllInvoicesRepositoryDTO): Promise<InvoiceProduct[]> {
     const query = this.ormRepository.createQueryBuilder('invoiceProducts');
     if (final_date && start_date) {
@@ -51,6 +53,12 @@ class InvoiceProductRepository implements IInvoiceProductRepository {
           final_date,
         },
       );
+    }
+
+    if (filter_by && filter_value) {
+      query.andWhere(`invoiceProducts.${filter_by} = :filter_value`, {
+        filter_value,
+      });
     }
 
     const products = await query.getMany();

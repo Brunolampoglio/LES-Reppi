@@ -50,5 +50,7 @@ export const allProductsMiddleware = celebrate({
   [Segments.PARAMS]: {
     start_date: Joi.string(),
     final_date: Joi.string(),
+    filter_by: Joi.string(),
+    filter_value: Joi.string(),
   },
 });

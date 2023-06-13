@@ -13,10 +13,14 @@ class IndexAllInvoiceProductsService {
   public async execute({
     start_date,
     final_date,
+    filter_by,
+    filter_value,
   }: IAllInvoicesDTO): Promise<InvoiceProduct[]> {
     const invoices = await this.invoiceProductRepository.IndexAll({
       start_date,
       final_date,
+      filter_by,
+      filter_value,
     });
 
     return invoices;
