@@ -55,8 +55,6 @@ class InvoiceProductRepository implements IInvoiceProductRepository {
       );
     }
 
-    console.log('OIIII', filter_by, filter_value);
-
     if (filter_by && filter_value) {
       query.andWhere(`invoiceProducts.${filter_by} = :filter_value`, {
         filter_value,
